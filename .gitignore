@@ -30,3 +30,20 @@
 *.exe
 *.out
 *.app
+
+# Builds
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+CTestTestfile.cmake
+build
+cmake-build-*
+.idea
+.idea/*
+Index
+Build
+Pods
+Podfile.lock
+*.xcworkspacedata
+.version
+.vscode
