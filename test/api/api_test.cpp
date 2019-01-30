@@ -127,3 +127,15 @@ BOOST_AUTO_TEST_CASE( validate_base58 ) {
         BOOST_TEST_MESSAGE("Validate private from empty: " + pvk);
 
 }
+
+BOOST_AUTO_TEST_CASE( signature ) {
+        auto secret_pair = ed25519::keys::Pair::WithSecret("some secret phrase");
+        auto secret_pair2 = ed25519::keys::Pair::WithSecret("some secret other phrase");
+
+        std::string message = "some messge or token string";
+
+        auto signature = secret_pair->sign(message);
+
+        BOOST_CHECK(signature->verify(message, secret_pair->get_public_key()));
+        BOOST_CHECK(!signature->verify(message,secret_pair2->get_public_key()));
+}

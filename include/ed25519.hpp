@@ -243,6 +243,25 @@ namespace ed25519 {
         }
     };
 
+    /**
+     * Digest hash class
+     */
+    struct Digest :public Data<size::digest>{};
+
+    namespace keys {
+        class Public;
+    }
+
+    /**
+     * Sigature hash class
+     */
+    class Signature : public Data<size::signature> {
+    public:
+        bool verify(const std::vector<unsigned char>& message, const keys::Public& key) const ;
+        bool verify(const std::string& message, const keys::Public& key) const ;
+        bool verify(const Digest& digest, const keys::Public& key) const ;
+    };
+
     namespace keys {
 
         /**
@@ -321,6 +340,27 @@ namespace ed25519 {
              * @return validation result
              */
             bool validate();
+
+            /**
+             * Sign a message
+             * @param message data
+             * @return signature hash
+             */
+            std::unique_ptr<Signature> sign(const std::vector<unsigned char>& message);
+
+            /**
+             * Sign a message
+             * @param message string
+             * @return signature hash
+             */
+            std::unique_ptr<Signature> sign(const std::string &message);
+
+            /**
+             * Sign a digest
+             * @param digest data
+             * @return signature hash
+             */
+            std::unique_ptr<Signature> sign(const Digest& digest);
 
             ~Pair() {
                 clean();

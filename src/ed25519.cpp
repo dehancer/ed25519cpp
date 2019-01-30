@@ -80,6 +80,48 @@ namespace ed25519 {
         bool Pair::validate() {
             return publicKey_.validate() && privateKey_.validate();
         }
+
+        std::unique_ptr<Signature> Pair::sign(const std::vector<unsigned char>& message){
+
+            auto signature = std::unique_ptr<Signature>{new Signature()};
+
+            ed25519_sign(signature->data(),
+                    message.data(), message.size(),
+                    publicKey_.data(),
+                    privateKey_.data());
+
+            return signature;
+        }
+
+        std::unique_ptr<Signature> Pair::sign(const std::string &message){
+            std::vector<unsigned char> v(message.begin(), message.end());
+            return std::move(sign(v));
+        }
+
+        std::unique_ptr<Signature> Pair::sign(const Digest& digest){
+
+            auto signature = std::unique_ptr<Signature>{new Signature()};
+
+            ed25519_sign(signature->data(),
+                         digest.data(), digest.size(),
+                         publicKey_.data(),
+                         privateKey_.data());
+
+            return signature;
+        }
+    }
+
+    bool Signature::verify(const ed25519::Digest &digest, const ed25519::keys::Public &key) const {
+        return ed25519_verify(data(), digest.data(), digest.size(), key.data()) == 1;
+    }
+
+    bool Signature::verify(const std::string &message, const ed25519::keys::Public &key) const {
+        std::vector<unsigned char> v(message.begin(), message.end());
+        return verify(v,key);
+    }
+
+    bool Signature::verify(const std::vector<unsigned char> &message, const ed25519::keys::Public &key) const {
+        return ed25519_verify(data(), message.data(), message.size(), key.data()) == 1;
     }
 
 }
