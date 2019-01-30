@@ -269,8 +269,21 @@ namespace ed25519 {
 
         typedef std::function<void(Calculator &)> context;
 
+        /**
+         * Create new digest from variant types
+         * @param handler - calculator handler
+         */
         Digest(context handler);
+
         Digest();
+
+        /**
+       * Restore digest from base58-encoded string
+       * @param base58 encoded signature
+       * @param error handler
+       * @return nullopt or new digest hash object
+       */
+        static  std::optional<Digest> Decode(const std::string &base58, const ErrorHandler &error = default_error_handler);
     };
 
     namespace keys {

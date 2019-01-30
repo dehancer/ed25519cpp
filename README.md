@@ -155,6 +155,11 @@ auto digest = Digest([pair](auto &calculator) {
     });
 
 //
+// Encode to base58
+//
+auto base58 = digest.encode();
+
+//
 // Sign digest
 //
 auto siganture = pair->sign(digest);
@@ -165,4 +170,14 @@ if (siganture->verify(digest, pair->get_public_key())) {
     //
 }
 
+//
+// Restore from base58-encded string
+//
+auto digest_restored = Digest::Decode(digest.encode(), error_handler);
+
+if (digest_restored && siganture->verify(*digest_restored, pair->get_public_key())) {
+    //
+    // handle restored and verified
+    //     
+}
 ```
