@@ -10,17 +10,17 @@
 
 namespace ed25519 {
 
+    Seed::Seed(const std::string &phrase) {
+        fill(0);
+        sha3_256((const unsigned char*) phrase.c_str(), phrase.length(), this->data());
+    }
+
+    Seed::Seed():seed_data() {
+        fill(0);
+        ed25519_create_seed(this->data());
+    }
+
     namespace keys {
-
-        Seed::Seed(const std::string &phrase) {
-            fill(0);
-            sha3_256((const unsigned char*) phrase.c_str(), phrase.length(), this->data());
-        }
-
-        Seed::Seed():seed_data() {
-            fill(0);
-            ed25519_create_seed(this->data());
-        }
 
         Pair::Pair() {
             clean();

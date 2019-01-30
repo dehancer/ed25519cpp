@@ -180,6 +180,13 @@ namespace ed25519 {
         virtual bool validate() const = 0;
     };
 
+    namespace keys {
+        class Public;
+        class Pair;
+    }
+
+    class Digest;
+
     /**
      * Base58 binary data structure
      * @tparam N
@@ -187,8 +194,23 @@ namespace ed25519 {
     template <size_t N>
     class Data: public std::array<unsigned char, N>, public Base58 {
         typedef std::array<unsigned char, N> binary_data;
+
     public:
         using binary_data::binary_data;
+
+        /**
+        * Restore data from base58-encoded string
+        * @param base58 encoded signature
+        * @param error handler
+        * @return nullopt or new data hash object
+        */
+        inline static  std::optional<Data<N>> Decode(const std::string &base58, const ErrorHandler &error = default_error_handler) {
+            auto s = Data<N>();
+            if (s.decode(base58,error)){
+                return std::make_optional(s);
+            }
+            return std::nullopt;
+        }
 
         Data():binary_data() { clean(); }
 
@@ -238,6 +260,19 @@ namespace ed25519 {
         }
     };
 
+
+    template <size_t N>
+    class ProtectedData: public Data<N> {
+        public:
+        inline const unsigned char* data() const { return Data<N>::data();};
+    protected:
+        inline unsigned char* data() { return Data<N>::data();};
+        bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override {
+            return Data<N>::decode(base58, error);
+        }
+        friend class keys::Pair;
+    };
+
     /**
      * Digest hash class
      */
@@ -265,10 +300,14 @@ namespace ed25519 {
             virtual void append(const variant_t &value) = 0;
             virtual void set_endian(endian) = 0;
             virtual endian get_endian() = 0;
+
+            friend class keys::Pair;
         };
 
         typedef std::function<void(Calculator &)> context;
 
+        friend class Digest::Calculator;
+        friend class keys::Public;
         /**
          * Create new digest from variant types
          * @param handler - calculator handler
@@ -286,15 +325,11 @@ namespace ed25519 {
         static  std::optional<Digest> Decode(const std::string &base58, const ErrorHandler &error = default_error_handler);
     };
 
-    namespace keys {
-        class Public;
-        class Pair;
-    }
 
     /**
      * Sigature hash class
      */
-    class Signature : public Data<size::signature> {
+    class Signature : public ProtectedData<size::signature> {
     public:
 
         /**
@@ -329,50 +364,52 @@ namespace ed25519 {
          */
         bool verify(const Digest& digest, const keys::Public& key) const ;
 
-        friend class keys::Pair;
-
     protected:
-        Signature():Data<size::signature>(){};
-
-    private:
-        bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override {
-            return Data<size::signature>::decode(base58, error);
-        }
+        Signature():ProtectedData<size::signature>(){};
+        friend class keys::Pair;
     };
 
-    namespace keys {
+    /**
+     * Seed generator
+     */
+    class Seed: public Data<size::seed>{
+
+        typedef Data<size::seed> seed_data;
+
+    public:
+        using seed_data::seed_data;
 
         /**
-         * Seed data
+         * Create seed from secret phrase
+         * @param phrase
          */
-        class Seed: public Data<size::seed>{
+        Seed(const std::string &phrase);
 
-            typedef Data<size::seed> seed_data;
+        /**
+         * Create random seed
+         */
+        Seed();
+    };
+    namespace keys {
 
-        public:
-            using seed_data::seed_data;
-
-            /**
-             * Create seed from secret phrase
-             * @param phrase
-             */
-            Seed(const std::string &phrase);
-
-            /**
-             * Create random seed
-             */
-            Seed();
-        };
+        template <size_t N>
+        class Key: public ProtectedData<N> {};
 
         /**
          * Public key representaion
          */
-        class Public: public Data<size::public_key>{};
+        class Public: public Key<size::public_key>{};
 
         /**
          * Private key representation
          */
-        class Private: public Data<size::private_key>{};
+        class Private: public Key<size::private_key>{
+        private:
+            bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override {
+                return Data<size::signature>::decode(base58, error);
+            }
+            friend class keys::Pair;
+        };
 
         /**
          * Pair key representation

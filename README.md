@@ -33,7 +33,7 @@ on the SUPERCOP "ref10" implementation. The ed25519cpp wraps c-based implementin
 #include "ed25519.hpp"
 
 
-ed25519::keys::Seed seed;
+ed25519::Seed seed;
 std::cout << "Seed base58 string: "<< seed.encode() << std::endl;
 
 ```

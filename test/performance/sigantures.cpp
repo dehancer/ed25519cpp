@@ -16,14 +16,14 @@ using namespace ed25519;
 
 BOOST_AUTO_TEST_CASE( siganture_rate ){
 
-    auto pair = ed25519::keys::Pair::WithSecret("some secret phrase");
+    auto pair = keys::Pair::WithSecret("some secret phrase");
     std::string message;
     auto tests = {256, 4096, 60000};
     int nc = 1000;
 
     for(auto i: tests ) {
         for (int j = 0; j < i/size::seed; ++j) {
-            message.append(keys::Seed().encode());
+            message.append(Seed().encode());
         }
 
         auto signature = pair->sign(message);
