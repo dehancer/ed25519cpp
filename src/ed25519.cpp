@@ -111,6 +111,14 @@ namespace ed25519 {
         }
     }
 
+    std::optional<Signature> Signature::Decode(const std::string &base58, const ErrorHandler &error){
+        auto s = Signature();
+        if (s.decode(base58,error)){
+            return std::make_optional(s);
+        }
+        return std::nullopt;
+    }
+
     bool Signature::verify(const ed25519::Digest &digest, const ed25519::keys::Public &key) const {
         return ed25519_verify(data(), digest.data(), digest.size(), key.data()) == 1;
     }

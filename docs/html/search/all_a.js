@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['random',['Random',['../classed25519_1_1keys_1_1_pair.html#a56deb8f1bf6d1a51313abebd5a41d6fc',1,'ed25519::keys::Pair']]],
-  ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]]
+  ['pair',['Pair',['../classed25519_1_1keys_1_1_pair.html',1,'ed25519::keys']]],
+  ['private',['Private',['../classed25519_1_1keys_1_1_private.html',1,'ed25519::keys']]],
+  ['private_5fkey',['private_key',['../namespaceed25519_1_1size.html#a2e21f8a4af0331d49145f1893a441eed',1,'ed25519::size']]],
+  ['public',['Public',['../classed25519_1_1keys_1_1_public.html',1,'ed25519::keys']]],
+  ['public_5fkey',['public_key',['../namespaceed25519_1_1size.html#a8f8f1706b7e101ddc858ad26bdc010eb',1,'ed25519::size']]]
 ];
