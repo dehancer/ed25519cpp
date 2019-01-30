@@ -3,7 +3,7 @@
 //
 
 
-#define BOOST_TEST_MODULE api_test
+#define BOOST_TEST_MODULE signature_test
 
 #include "ed25519.hpp"
 #include <boost/test/included/unit_test.hpp>

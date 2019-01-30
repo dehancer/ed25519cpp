@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['unexpected_5fsize',['UNEXPECTED_SIZE',['../namespaceed25519.html#ac93d0b5156eaca22197055e902920bc4a4a6895889f9590d64f64599b968a48b0',1,'ed25519']]]
+  ['random',['Random',['../classed25519_1_1keys_1_1_pair.html#a56deb8f1bf6d1a51313abebd5a41d6fc',1,'ed25519::keys::Pair']]],
+  ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]]
 ];

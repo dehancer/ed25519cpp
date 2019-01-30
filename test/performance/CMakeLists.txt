@@ -4,7 +4,7 @@ file (GLOB TESTS_SOURCES ${TESTS_SOURCES}
         ./*.cpp
         )
 
-set (TEST performans_${PROJECT_LIB})
+set (TEST performance_${PROJECT_LIB})
 
 add_executable(${TEST} ${TESTS_SOURCES})
 

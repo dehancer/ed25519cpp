@@ -12,6 +12,7 @@
 #include <optional>
 #include <cerrno>
 #include <system_error>
+#include <variant>
 
 namespace ed25519 {
 
@@ -137,7 +138,6 @@ namespace ed25519 {
             std::vector<unsigned char> vch;
             vch.assign(data.begin(), data.end());
 
-
             uint_least32_t crc32_ = crc32(&vch[0], vch.size());
 
             // little endian
@@ -241,7 +241,37 @@ namespace ed25519 {
     /**
      * Digest hash class
      */
-    struct Digest :public Data<size::digest>{};
+    class Digest :public Data<size::digest>{
+    public:
+
+        struct Calculator{
+
+            enum endian {
+                little = 0,
+                big = 1
+            };
+
+            typedef std::variant<
+                    bool,
+                    unsigned char,
+                    short int,
+                    int,
+                    std::string,
+                    std::vector<unsigned char>,
+                    Data<size::hash>,
+                    Data<size::double_hash>
+                    > variant_t;
+
+            virtual void append(const variant_t &value) = 0;
+            virtual void set_endian(endian) = 0;
+            virtual endian get_endian() = 0;
+        };
+
+        typedef std::function<void(Calculator &)> context;
+
+        Digest(context handler);
+        Digest();
+    };
 
     namespace keys {
         class Public;

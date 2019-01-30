@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['message',['message',['../classed25519_1_1error__category.html#a202bf6ba84147b563f630c8f52c723ef',1,'ed25519::error_category']]]
+  ['pair',['Pair',['../classed25519_1_1_signature.html#ad89670fe663c8c8526b69b1bc6a87c19',1,'ed25519::Signature']]]
 ];

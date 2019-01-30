@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['errorhandler',['ErrorHandler',['../namespaceed25519.html#a6ba572942b3c18591fc869d52a6b16e6',1,'ed25519']]]
+  ['context',['context',['../classed25519_1_1_digest.html#ae086cdedc0e704dd1d869138648b2d1a',1,'ed25519::Digest']]]
 ];
