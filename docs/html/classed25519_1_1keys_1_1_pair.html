@@ -84,6 +84,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:add9c9587c53dff8b1d5bc69a7a97f837"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae803e41096e0f6edb030e48713515aa2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1keys_1_1_pair.html#ae803e41096e0f6edb030e48713515aa2">clean</a> ()</td></tr>
 <tr class="separator:ae803e41096e0f6edb030e48713515aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36436b3c74b785a8ef2a712525761044"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1keys_1_1_pair.html#a36436b3c74b785a8ef2a712525761044">validate</a> ()</td></tr>
+<tr class="separator:a36436b3c74b785a8ef2a712525761044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad92702362f23ad3d55e2d226e056c742"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classed25519_1_1_signature.html">Signature</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1keys_1_1_pair.html#ad92702362f23ad3d55e2d226e056c742">sign</a> (const std::vector&lt; unsigned char &gt; &amp;message)</td></tr>
+<tr class="separator:ad92702362f23ad3d55e2d226e056c742"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c53cc9aff7f89d8cefc27eb99d42f8d"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classed25519_1_1_signature.html">Signature</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1keys_1_1_pair.html#a1c53cc9aff7f89d8cefc27eb99d42f8d">sign</a> (const std::string &amp;message)</td></tr>
+<tr class="separator:a1c53cc9aff7f89d8cefc27eb99d42f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1c7387192283f87fc16acf53eb9c313"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classed25519_1_1_signature.html">Signature</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1keys_1_1_pair.html#ac1c7387192283f87fc16acf53eb9c313">sign</a> (const <a class="el" href="structed25519_1_1_digest.html">Digest</a> &amp;digest)</td></tr>
+<tr class="separator:ac1c7387192283f87fc16acf53eb9c313"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23edc59bc943684eadbdae8ffd6c8a42"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1keys_1_1_pair.html#a23edc59bc943684eadbdae8ffd6c8a42">~Pair</a> ()</td></tr>
 <tr class="separator:a23edc59bc943684eadbdae8ffd6c8a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -130,9 +138,6 @@ Static Public Member Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void ed25519::keys::Pair::clean </td>
@@ -141,11 +146,6 @@ Static Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Clean pair </p>
 
@@ -262,6 +262,99 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Create random pair </p><dl class="section return"><dt>Returns</dt><dd>always exists private key </dd></dl>
+
+</div>
+</div>
+<a id="ad92702362f23ad3d55e2d226e056c742"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad92702362f23ad3d55e2d226e056c742">&#9670;&nbsp;</a></span>sign() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classed25519_1_1_signature.html">Signature</a>&gt; ed25519::keys::Pair::sign </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; unsigned char &gt; &amp;&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sign a message </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>signature hash </dd></dl>
+
+</div>
+</div>
+<a id="a1c53cc9aff7f89d8cefc27eb99d42f8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c53cc9aff7f89d8cefc27eb99d42f8d">&#9670;&nbsp;</a></span>sign() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classed25519_1_1_signature.html">Signature</a>&gt; ed25519::keys::Pair::sign </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sign a message </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>signature hash </dd></dl>
+
+</div>
+</div>
+<a id="ac1c7387192283f87fc16acf53eb9c313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1c7387192283f87fc16acf53eb9c313">&#9670;&nbsp;</a></span>sign() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classed25519_1_1_signature.html">Signature</a>&gt; ed25519::keys::Pair::sign </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structed25519_1_1_digest.html">Digest</a> &amp;&#160;</td>
+          <td class="paramname"><em>digest</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sign a digest </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">digest</td><td>data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>signature hash </dd></dl>
+
+</div>
+</div>
+<a id="a36436b3c74b785a8ef2a712525761044"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36436b3c74b785a8ef2a712525761044">&#9670;&nbsp;</a></span>validate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ed25519::keys::Pair::validate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Vlidate pair </p><dl class="section return"><dt>Returns</dt><dd>validation result </dd></dl>
 
 </div>
 </div>

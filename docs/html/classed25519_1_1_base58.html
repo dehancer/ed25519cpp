@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classed25519_1_1_base58-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ed25519::Base58 Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -81,13 +80,17 @@ Inheritance diagram for ed25519::Base58:</div>
  <div class="center">
   <img src="classed25519_1_1_base58.png" usemap="#ed25519::Base58_map" alt=""/>
   <map id="ed25519::Base58_map" name="ed25519::Base58_map">
-<area href="classed25519_1_1_data.html" alt="ed25519::Data&lt; size::private_key &gt;" shape="rect" coords="0,56,211,80"/>
-<area href="classed25519_1_1_data.html" alt="ed25519::Data&lt; size::public_key &gt;" shape="rect" coords="221,56,432,80"/>
-<area href="classed25519_1_1_data.html" alt="ed25519::Data&lt; size::seed &gt;" shape="rect" coords="442,56,653,80"/>
-<area href="classed25519_1_1_data.html" alt="ed25519::Data&lt; N &gt;" shape="rect" coords="663,56,874,80"/>
-<area href="classed25519_1_1keys_1_1_private.html" alt="ed25519::keys::Private" shape="rect" coords="0,112,211,136"/>
-<area href="classed25519_1_1keys_1_1_public.html" alt="ed25519::keys::Public" shape="rect" coords="221,112,432,136"/>
-<area href="classed25519_1_1keys_1_1_seed.html" alt="ed25519::keys::Seed" shape="rect" coords="442,112,653,136"/>
+<area href="classed25519_1_1_data.html" alt="ed25519::Data&lt; size::digest &gt;" shape="rect" coords="0,56,211,80"/>
+<area href="classed25519_1_1_data.html" alt="ed25519::Data&lt; size::private_key &gt;" shape="rect" coords="221,56,432,80"/>
+<area href="classed25519_1_1_data.html" alt="ed25519::Data&lt; size::public_key &gt;" shape="rect" coords="442,56,653,80"/>
+<area href="classed25519_1_1_data.html" alt="ed25519::Data&lt; size::seed &gt;" shape="rect" coords="663,56,874,80"/>
+<area href="classed25519_1_1_data.html" alt="ed25519::Data&lt; size::signature &gt;" shape="rect" coords="884,56,1095,80"/>
+<area href="classed25519_1_1_data.html" alt="ed25519::Data&lt; N &gt;" shape="rect" coords="1105,56,1316,80"/>
+<area href="structed25519_1_1_digest.html" alt="ed25519::Digest" shape="rect" coords="0,112,211,136"/>
+<area href="classed25519_1_1keys_1_1_private.html" alt="ed25519::keys::Private" shape="rect" coords="221,112,432,136"/>
+<area href="classed25519_1_1keys_1_1_public.html" alt="ed25519::keys::Public" shape="rect" coords="442,112,653,136"/>
+<area href="classed25519_1_1keys_1_1_seed.html" alt="ed25519::keys::Seed" shape="rect" coords="663,112,874,136"/>
+<area href="classed25519_1_1_signature.html" alt="ed25519::Signature" shape="rect" coords="884,112,1095,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -99,11 +102,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1b52a018a5215e2dcf2aa388b0fe06bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cb74be32923dcfb03a24b65015bee84"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_base58.html#a3cb74be32923dcfb03a24b65015bee84">decode</a> (const std::string &amp;base58_string, const <a class="el" href="namespaceed25519.html#a6ba572942b3c18591fc869d52a6b16e6">ErrorHandler</a> &amp;<a class="el" href="namespaceed25519.html#ac93d0b5156eaca22197055e902920bc4">error</a>=<a class="el" href="namespaceed25519.html#a7c7bb6ed17541162959c33ed3e3b15fb">default_error_handler</a>)=0</td></tr>
 <tr class="separator:a3cb74be32923dcfb03a24b65015bee84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a269a450fc48ef8f77435fdb31b534fb4"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_base58.html#a269a450fc48ef8f77435fdb31b534fb4">validate</a> (const std::string &amp;base58)</td></tr>
-<tr class="separator:a269a450fc48ef8f77435fdb31b534fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addfdb1d6d0f7e7f0cd0cf5dd2ee193bb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_base58.html#addfdb1d6d0f7e7f0cd0cf5dd2ee193bb">validate</a> () const =0</td></tr>
+<tr class="separator:addfdb1d6d0f7e7f0cd0cf5dd2ee193bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Common <a class="el" href="namespaceed25519_1_1base58.html">base58</a> encoding/decoding protocol </p>
@@ -132,7 +132,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Clear key data </p>
 
-<p>Implemented in <a class="el" href="classed25519_1_1_data.html#a22626c9e5a951dd673bfda8e78bf14fc">ed25519::Data&lt; N &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a22626c9e5a951dd673bfda8e78bf14fc">ed25519::Data&lt; size::public_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a22626c9e5a951dd673bfda8e78bf14fc">ed25519::Data&lt; size::private_key &gt;</a>, and <a class="el" href="classed25519_1_1_data.html#a22626c9e5a951dd673bfda8e78bf14fc">ed25519::Data&lt; size::seed &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classed25519_1_1_data.html#a22626c9e5a951dd673bfda8e78bf14fc">ed25519::Data&lt; N &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a22626c9e5a951dd673bfda8e78bf14fc">ed25519::Data&lt; size::signature &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a22626c9e5a951dd673bfda8e78bf14fc">ed25519::Data&lt; size::public_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a22626c9e5a951dd673bfda8e78bf14fc">ed25519::Data&lt; size::private_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a22626c9e5a951dd673bfda8e78bf14fc">ed25519::Data&lt; size::seed &gt;</a>, and <a class="el" href="classed25519_1_1_data.html#a22626c9e5a951dd673bfda8e78bf14fc">ed25519::Data&lt; size::digest &gt;</a>.</p>
 
 </div>
 </div>
@@ -179,7 +179,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true or false </dd></dl>
 
-<p>Implemented in <a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">ed25519::Data&lt; N &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">ed25519::Data&lt; size::public_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">ed25519::Data&lt; size::private_key &gt;</a>, and <a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">ed25519::Data&lt; size::seed &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">ed25519::Data&lt; N &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">ed25519::Data&lt; size::signature &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">ed25519::Data&lt; size::public_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">ed25519::Data&lt; size::private_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">ed25519::Data&lt; size::seed &gt;</a>, and <a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">ed25519::Data&lt; size::digest &gt;</a>.</p>
 
 </div>
 </div>
@@ -207,12 +207,12 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Encode key data to <a class="el" href="namespaceed25519_1_1base58.html">base58</a> string </p><dl class="section return"><dt>Returns</dt><dd>encoded <a class="el" href="namespaceed25519_1_1base58.html">base58</a> string </dd></dl>
 
-<p>Implemented in <a class="el" href="classed25519_1_1_data.html#a2dc2e23b950a10b168d7509a63ffca53">ed25519::Data&lt; N &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a2dc2e23b950a10b168d7509a63ffca53">ed25519::Data&lt; size::public_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a2dc2e23b950a10b168d7509a63ffca53">ed25519::Data&lt; size::private_key &gt;</a>, and <a class="el" href="classed25519_1_1_data.html#a2dc2e23b950a10b168d7509a63ffca53">ed25519::Data&lt; size::seed &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classed25519_1_1_data.html#a2dc2e23b950a10b168d7509a63ffca53">ed25519::Data&lt; N &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a2dc2e23b950a10b168d7509a63ffca53">ed25519::Data&lt; size::signature &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a2dc2e23b950a10b168d7509a63ffca53">ed25519::Data&lt; size::public_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a2dc2e23b950a10b168d7509a63ffca53">ed25519::Data&lt; size::private_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#a2dc2e23b950a10b168d7509a63ffca53">ed25519::Data&lt; size::seed &gt;</a>, and <a class="el" href="classed25519_1_1_data.html#a2dc2e23b950a10b168d7509a63ffca53">ed25519::Data&lt; size::digest &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a269a450fc48ef8f77435fdb31b534fb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a269a450fc48ef8f77435fdb31b534fb4">&#9670;&nbsp;</a></span>validate()</h2>
+<a id="addfdb1d6d0f7e7f0cd0cf5dd2ee193bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addfdb1d6d0f7e7f0cd0cf5dd2ee193bb">&#9670;&nbsp;</a></span>validate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,16 +221,15 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool ed25519::Base58::validate </td>
+          <td class="memname">virtual bool ed25519::Base58::validate </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>base58</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -241,6 +240,8 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if string is <a class="el" href="namespaceed25519_1_1base58.html">base58</a> encoded </dd></dl>
+
+<p>Implemented in <a class="el" href="classed25519_1_1_data.html#ac365c9862b45379c677449b622c74da5">ed25519::Data&lt; N &gt;</a>, <a class="el" href="classed25519_1_1_data.html#ac365c9862b45379c677449b622c74da5">ed25519::Data&lt; size::signature &gt;</a>, <a class="el" href="classed25519_1_1_data.html#ac365c9862b45379c677449b622c74da5">ed25519::Data&lt; size::public_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#ac365c9862b45379c677449b622c74da5">ed25519::Data&lt; size::private_key &gt;</a>, <a class="el" href="classed25519_1_1_data.html#ac365c9862b45379c677449b622c74da5">ed25519::Data&lt; size::seed &gt;</a>, and <a class="el" href="classed25519_1_1_data.html#ac365c9862b45379c677449b622c74da5">ed25519::Data&lt; size::digest &gt;</a>.</p>
 
 </div>
 </div>

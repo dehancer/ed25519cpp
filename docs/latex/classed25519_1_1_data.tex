@@ -20,11 +20,13 @@ void \mbox{\hyperlink{classed25519_1_1_data_a22626c9e5a951dd673bfda8e78bf14fc}{c
 const std\+::string \mbox{\hyperlink{classed25519_1_1_data_a2dc2e23b950a10b168d7509a63ffca53}{encode}} () const override
 \item 
 bool \mbox{\hyperlink{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}{decode}} (const std\+::string \&base58, const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&\mbox{\hyperlink{namespaceed25519_ac93d0b5156eaca22197055e902920bc4}{error}}=\mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}}) override
+\item 
+bool \mbox{\hyperlink{classed25519_1_1_data_ac365c9862b45379c677449b622c74da5}{validate}} () const override
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static bool \mbox{\hyperlink{classed25519_1_1_data_a02609da44dcd8f0fa5812ecca0b84d21}{validate}} (const std\+::string \&check)
+static bool \mbox{\hyperlink{classed25519_1_1_data_ade9c93cb08f9d60aa45e75821ed1bcbe}{validate}} (const std\+::string \&string)
 \end{DoxyCompactItemize}
 
 
@@ -96,13 +98,40 @@ encoded string
 
 Implements \mbox{\hyperlink{classed25519_1_1_base58_a1b52a018a5215e2dcf2aa388b0fe06bf}{ed25519\+::\+Base58}}.
 
-\mbox{\Hypertarget{classed25519_1_1_data_a02609da44dcd8f0fa5812ecca0b84d21}\label{classed25519_1_1_data_a02609da44dcd8f0fa5812ecca0b84d21}} 
+\mbox{\Hypertarget{classed25519_1_1_data_ac365c9862b45379c677449b622c74da5}\label{classed25519_1_1_data_ac365c9862b45379c677449b622c74da5}} 
 \index{ed25519\+::\+Data@{ed25519\+::\+Data}!validate@{validate}}
 \index{validate@{validate}!ed25519\+::\+Data@{ed25519\+::\+Data}}
-\subsubsection{\texorpdfstring{validate()}{validate()}}
+\subsubsection{\texorpdfstring{validate()}{validate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
-static bool \mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data}}$<$ N $>$\+::validate (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{check }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+bool \mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data}}$<$ N $>$\+::validate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
+Validate \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} string without creating object instance 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}}} & string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if string is \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} encoded 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classed25519_1_1_base58_addfdb1d6d0f7e7f0cd0cf5dd2ee193bb}{ed25519\+::\+Base58}}.
+
+\mbox{\Hypertarget{classed25519_1_1_data_ade9c93cb08f9d60aa45e75821ed1bcbe}\label{classed25519_1_1_data_ade9c93cb08f9d60aa45e75821ed1bcbe}} 
+\index{ed25519\+::\+Data@{ed25519\+::\+Data}!validate@{validate}}
+\index{validate@{validate}!ed25519\+::\+Data@{ed25519\+::\+Data}}
+\subsubsection{\texorpdfstring{validate()}{validate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
+static bool \mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data}}$<$ N $>$\+::validate (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{string }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Validate string before create encoded data. 
+\begin{DoxyParams}{Parameters}
+{\em string} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+validation result 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

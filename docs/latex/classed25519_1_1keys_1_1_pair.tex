@@ -13,6 +13,14 @@ const \mbox{\hyperlink{classed25519_1_1keys_1_1_private}{Private}} \& \mbox{\hyp
 \item 
 void \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_ae803e41096e0f6edb030e48713515aa2}{clean}} ()
 \item 
+bool \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_a36436b3c74b785a8ef2a712525761044}{validate}} ()
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classed25519_1_1_signature}{Signature}} $>$ \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_ad92702362f23ad3d55e2d226e056c742}{sign}} (const std\+::vector$<$ unsigned char $>$ \&message)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classed25519_1_1_signature}{Signature}} $>$ \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_a1c53cc9aff7f89d8cefc27eb99d42f8d}{sign}} (const std\+::string \&message)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classed25519_1_1_signature}{Signature}} $>$ \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_ac1c7387192283f87fc16acf53eb9c313}{sign}} (const \mbox{\hyperlink{structed25519_1_1_digest}{Digest}} \&digest)
+\item 
 \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_a23edc59bc943684eadbdae8ffd6c8a42}{$\sim$\+Pair}} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
@@ -43,7 +51,7 @@ static std\+::optional$<$ \mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{Pair}}
 \index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!clean@{clean}}
 \index{clean@{clean}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
 \subsubsection{\texorpdfstring{clean()}{clean()}}
-{\footnotesize\ttfamily void ed25519\+::keys\+::\+Pair\+::clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void ed25519\+::keys\+::\+Pair\+::clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 Clean pair \mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_aa4b34f7823cbba1e4243b9fbf2745e1e}\label{classed25519_1_1keys_1_1_pair_aa4b34f7823cbba1e4243b9fbf2745e1e}} 
 \index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!From\+Private\+Key@{From\+Private\+Key}}
@@ -77,6 +85,57 @@ copy of public key
 
 Create random pair \begin{DoxyReturn}{Returns}
 always exists private key 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_ad92702362f23ad3d55e2d226e056c742}\label{classed25519_1_1keys_1_1_pair_ad92702362f23ad3d55e2d226e056c742}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!sign@{sign}}
+\index{sign@{sign}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{sign()}{sign()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classed25519_1_1_signature}{Signature}}$>$ ed25519\+::keys\+::\+Pair\+::sign (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ unsigned char $>$ \&}]{message }\end{DoxyParamCaption})}
+
+Sign a message 
+\begin{DoxyParams}{Parameters}
+{\em message} & data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+signature hash 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_a1c53cc9aff7f89d8cefc27eb99d42f8d}\label{classed25519_1_1keys_1_1_pair_a1c53cc9aff7f89d8cefc27eb99d42f8d}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!sign@{sign}}
+\index{sign@{sign}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{sign()}{sign()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classed25519_1_1_signature}{Signature}}$>$ ed25519\+::keys\+::\+Pair\+::sign (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message }\end{DoxyParamCaption})}
+
+Sign a message 
+\begin{DoxyParams}{Parameters}
+{\em message} & string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+signature hash 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_ac1c7387192283f87fc16acf53eb9c313}\label{classed25519_1_1keys_1_1_pair_ac1c7387192283f87fc16acf53eb9c313}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!sign@{sign}}
+\index{sign@{sign}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{sign()}{sign()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classed25519_1_1_signature}{Signature}}$>$ ed25519\+::keys\+::\+Pair\+::sign (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structed25519_1_1_digest}{Digest}} \&}]{digest }\end{DoxyParamCaption})}
+
+Sign a digest 
+\begin{DoxyParams}{Parameters}
+{\em digest} & data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+signature hash 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_a36436b3c74b785a8ef2a712525761044}\label{classed25519_1_1keys_1_1_pair_a36436b3c74b785a8ef2a712525761044}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!validate@{validate}}
+\index{validate@{validate}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily bool ed25519\+::keys\+::\+Pair\+::validate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Vlidate pair \begin{DoxyReturn}{Returns}
+validation result 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_a3d7457b834d7e8091a61272f20132d01}\label{classed25519_1_1keys_1_1_pair_a3d7457b834d7e8091a61272f20132d01}} 
 \index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!With\+Secret@{With\+Secret}}

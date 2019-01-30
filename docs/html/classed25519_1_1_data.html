@@ -95,14 +95,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2dc2e23b950a10b168d7509a63ffca53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a281d932d3c3fe7fd40ce86ea7eff559b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_data.html#a281d932d3c3fe7fd40ce86ea7eff559b">decode</a> (const std::string &amp;base58, const <a class="el" href="namespaceed25519.html#a6ba572942b3c18591fc869d52a6b16e6">ErrorHandler</a> &amp;<a class="el" href="namespaceed25519.html#ac93d0b5156eaca22197055e902920bc4">error</a>=<a class="el" href="namespaceed25519.html#a7c7bb6ed17541162959c33ed3e3b15fb">default_error_handler</a>) override</td></tr>
 <tr class="separator:a281d932d3c3fe7fd40ce86ea7eff559b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac365c9862b45379c677449b622c74da5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_data.html#ac365c9862b45379c677449b622c74da5">validate</a> () const override</td></tr>
+<tr class="separator:ac365c9862b45379c677449b622c74da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a02609da44dcd8f0fa5812ecca0b84d21"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_data.html#a02609da44dcd8f0fa5812ecca0b84d21">validate</a> (const std::string &amp;check)</td></tr>
-<tr class="separator:a02609da44dcd8f0fa5812ecca0b84d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_static_methods_classed25519_1_1_base58"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classed25519_1_1_base58')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classed25519_1_1_base58.html">ed25519::Base58</a></td></tr>
-<tr class="memitem:a269a450fc48ef8f77435fdb31b534fb4 inherit pub_static_methods_classed25519_1_1_base58"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_base58.html#a269a450fc48ef8f77435fdb31b534fb4">validate</a> (const std::string &amp;base58)</td></tr>
-<tr class="separator:a269a450fc48ef8f77435fdb31b534fb4 inherit pub_static_methods_classed25519_1_1_base58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9c93cb08f9d60aa45e75821ed1bcbe"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_data.html#ade9c93cb08f9d60aa45e75821ed1bcbe">validate</a> (const std::string &amp;string)</td></tr>
+<tr class="separator:ade9c93cb08f9d60aa45e75821ed1bcbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;size_t N&gt;<br />
@@ -251,8 +250,44 @@ template&lt;size_t N&gt; </div>
 
 </div>
 </div>
-<a id="a02609da44dcd8f0fa5812ecca0b84d21"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02609da44dcd8f0fa5812ecca0b84d21">&#9670;&nbsp;</a></span>validate()</h2>
+<a id="ac365c9862b45379c677449b622c74da5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac365c9862b45379c677449b622c74da5">&#9670;&nbsp;</a></span>validate() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classed25519_1_1_data.html">ed25519::Data</a>&lt; N &gt;::validate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Validate <a class="el" href="namespaceed25519_1_1base58.html">base58</a> string without creating object instance </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="namespaceed25519_1_1base58.html">base58</a></td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if string is <a class="el" href="namespaceed25519_1_1base58.html">base58</a> encoded </dd></dl>
+
+<p>Implements <a class="el" href="classed25519_1_1_base58.html#addfdb1d6d0f7e7f0cd0cf5dd2ee193bb">ed25519::Base58</a>.</p>
+
+</div>
+</div>
+<a id="ade9c93cb08f9d60aa45e75821ed1bcbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade9c93cb08f9d60aa45e75821ed1bcbe">&#9670;&nbsp;</a></span>validate() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +301,7 @@ template&lt;size_t N&gt; </div>
           <td class="memname">static bool <a class="el" href="classed25519_1_1_data.html">ed25519::Data</a>&lt; N &gt;::validate </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>check</em></td><td>)</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -276,6 +311,13 @@ template&lt;size_t N&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Validate string before create encoded data. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>validation result </dd></dl>
 
 </div>
 </div>
