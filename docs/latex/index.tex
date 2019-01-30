@@ -186,6 +186,11 @@ auto digest = Digest([pair](auto &calculator) \{
     \});
 
 //
+// Encode to base58
+//
+auto base58 = digest.encode();
+
+//
 // Sign digest
 //
 auto siganture = pair->sign(digest);
@@ -194,6 +199,17 @@ if (siganture->verify(digest, pair->get\_public\_key())) \{
     //
     // handle verified digest
     //
+\}
+
+//
+// Restore from base58-encded string
+//
+auto digest\_restored = Digest::Decode(digest.encode(), error\_handler);
+
+if (digest\_restored && siganture->verify(*digest\_restored, pair->get\_public\_key())) \{
+    //
+    // handle restored and verified
+    //     
 \}
 \end{DoxyCode}
  
