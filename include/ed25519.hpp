@@ -157,11 +157,6 @@ namespace ed25519 {
     public:
 
         /**
-         * Clear key data
-         */
-        virtual void clean() = 0;
-
-        /**
          * Encode key data to base58 string
          * @return encoded base58 string
          */
@@ -182,7 +177,7 @@ namespace ed25519 {
          * @param base58 string
          * @return true if string is base58 encoded
          */
-        static bool validate(const std::string &base58);
+        virtual bool validate() const = 0;
     };
 
     /**
@@ -200,7 +195,7 @@ namespace ed25519 {
         /**
          * Clean data memory
          */
-        void clean() override { binary_data::fill(0); }
+        void clean() { binary_data::fill(0); }
 
         /**
          * Encode from binary to base58 encoded string
@@ -216,12 +211,89 @@ namespace ed25519 {
          * @param error - error handler
          * @return false if decoding is failed
          */
-        bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override{
+        bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override {
             return base58::decode(base58, *this, error);
         }
 
-        static bool validate(const std::string &check) {
-            return  base58::validate(check);
+        bool validate() const override {
+            if (N == this->size()) {
+
+                if (encode().empty())
+                    return  false;
+
+                return base58::validate(encode());
+            }
+            else {
+                return false;
+            }
+        }
+
+        /**
+         * Validate string before create encoded data.
+         * @param string
+         * @return validation result
+         */
+        static bool validate(const std::string &string) {
+            return base58::validate(string);
+        }
+    };
+
+    /**
+     * Digest hash class
+     */
+    struct Digest :public Data<size::digest>{};
+
+    namespace keys {
+        class Public;
+        class Pair;
+    }
+
+    /**
+     * Sigature hash class
+     */
+    class Signature : public Data<size::signature> {
+    public:
+
+        /**
+         * Restore signature from base58-encoded string
+         * @param base58 encoded signature
+         * @param error handler
+         * @return nullopt or new signature hash object
+         */
+        static  std::optional<Signature> Decode(const std::string &base58, const ErrorHandler &error = default_error_handler);
+
+        /**
+         * Verify message with public key
+         * @param message data
+         * @param key public key
+         * @return true if message was signed by private key of the pair
+         */
+        bool verify(const std::vector<unsigned char>& message, const keys::Public& key) const ;
+
+        /**
+         * Verify message with public key
+         * @param message string
+         * @param key public key
+         * @return true if message was signed by private key of the pair
+         */
+        bool verify(const std::string& message, const keys::Public& key) const ;
+
+        /**
+         * Verify message with public key
+         * @param digest data
+         * @param key public key
+         * @return true if message was signed by private key of the pair
+         */
+        bool verify(const Digest& digest, const keys::Public& key) const ;
+
+        friend class keys::Pair;
+
+    protected:
+        Signature():Data<size::signature>(){};
+
+    private:
+        bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override {
+            return Data<size::signature>::decode(base58, error);
         }
     };
 
@@ -296,10 +368,34 @@ namespace ed25519 {
             /**
              * Clean pair
              */
-            void clean() {
-                publicKey_.clean();
-                privateKey_.clean();
-            }
+            void clean();
+
+            /**
+             * Vlidate pair
+             * @return validation result
+             */
+            bool validate();
+
+            /**
+             * Sign a message
+             * @param message data
+             * @return signature hash
+             */
+            std::unique_ptr<Signature> sign(const std::vector<unsigned char>& message);
+
+            /**
+             * Sign a message
+             * @param message string
+             * @return signature hash
+             */
+            std::unique_ptr<Signature> sign(const std::string &message);
+
+            /**
+             * Sign a digest
+             * @param digest data
+             * @return signature hash
+             */
+            std::unique_ptr<Signature> sign(const Digest& digest);
 
             ~Pair() {
                 clean();

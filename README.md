@@ -23,7 +23,7 @@ on the SUPERCOP "ref10" implementation. The ed25519cpp wraps c-based implementin
 1. Ubuntu 18.04
 1. OSX 10.13, XCode10
 
-## [API](https://github.com/dnevera/ed25519cpp/docs/html/namespaces.html)
+## [API](https://htmlpreview.github.io/?https://github.com/dnevera/ed25519cpp/blob/master/docs/html/namespaces.html)
 
 
 ## Examples
@@ -35,5 +35,90 @@ on the SUPERCOP "ref10" implementation. The ed25519cpp wraps c-based implementin
 
 ed25519::keys::Seed seed;
 std::cout << "Seed base58 string: "<< seed.encode() << std::endl;
+
+```
+
+### Create random keys pair
+
+```c++
+#include "ed25519.hpp"
+
+if (auto pair = ed25519::keys::Pair::Random()){
+    std::cout << "ed25519 random keys pair: "<< pair->get_public_key.encode() << "/" <<  pair->get_private_key().encode() << std::endl;
+}
+
+
+```
+
+### Create keys pair from private key
+
+```c++
+#include "ed25519.hpp"
+
+auto error_handler = [](const std::error_code code){
+    BOOST_TEST_MESSAGE("Test error: " + ed25519::StringFormat("code: %i, message: %s", code.value(), + code.message().c_str()));
+};
+
+if (auto pair = ed25519::keys::Pair::FromPrivateKey(secret_pair->get_private_key().encode(), error_handler)){
+    std::cout << "ed25519 random keys pair: "<< pair->get_public_key.encode() << "/" <<  pair->get_private_key().encode() << std::endl;
+}
+else{
+    // handling error
+}
+
+
+```
+
+### Create keys pair with secret phrase
+
+```c++
+#include "ed25519.hpp"
+
+
+if (auto pair = ed25519::keys::Pair::WithSecret("some secret phrase", error_handler)){
+    std::cout << "ed25519 random keys pair: "<< pair->get_public_key.encode() << "/" <<  pair->get_private_key().encode() << std::endl;
+}
+else{
+    // handling error
+}
+
+
+```
+
+### Sign message
+
+```c++
+#include "ed25519.hpp"
+
+// create pair
+auto pair           = ed25519::keys::Pair::WithSecret("some secret phrase");
+
+// some message 
+std::string message = "some message or token string";
+
+// sign message return uniq_ptr siganture
+auto signature      = pair->sign(message);
+
+if (signature->verify(message, pair->get_public_key())) {
+   // handle verified
+}
+
+//
+// It is not available to create empty signature:
+// auto signature = ed25519::keys::Pair::Siganture()
+// only copy operations or restore from base58-encoded string 
+//
+auto another_signature = ed25519::Signature::Decode(signature->encode());
+
+//
+// Handle errors when restoration
+//
+
+if (auto signature = ed25519::Signature::Decode("...some wrong encoded string ...", error_handler)){
+    // handle verified
+}
+else {
+    // handle error
+}
 
 ```

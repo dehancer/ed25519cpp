@@ -40,7 +40,7 @@ This is a portable implementation of \href{http://ed25519.cr.yp.to/}{\tt Ed25519
 \item O\+SX 10.\+13, X\+Code10
 \end{DoxyEnumerate}
 
-\subsection*{\href{https://github.com/dnevera/ed25519cpp/docs/html/namespaces.html}{\tt A\+PI}}
+\subsection*{\href{https://htmlpreview.github.io/?https://github.com/dnevera/ed25519cpp/blob/master/docs/html/namespaces.html}{\tt A\+PI}}
 
 \subsection*{Examples}
 
@@ -54,5 +54,100 @@ This is a portable implementation of \href{http://ed25519.cr.yp.to/}{\tt Ed25519
 
 ed25519::keys::Seed seed;
 std::cout << "Seed base58 string: "<< seed.encode() << std::endl;
+\end{DoxyCode}
+
+
+\subsubsection*{Create random keys pair}
+
+
+\begin{DoxyCode}
+\{c++\}
+#include "ed25519.hpp"
+
+if (auto pair = ed25519::keys::Pair::Random())\{
+    std::cout << "ed25519 random keys pair: "<< pair->get\_public\_key.encode() << "/" << 
+       pair->get\_private\_key().encode() << std::endl;
+\}
+\end{DoxyCode}
+
+
+\subsubsection*{Create keys pair from private key}
+
+
+\begin{DoxyCode}
+\{c++\}
+#include "ed25519.hpp"
+
+auto error\_handler = [](const std::error\_code code)\{
+    BOOST\_TEST\_MESSAGE("Test error: " + ed25519::StringFormat("code: %i, message: %s", code.value(), +
+       code.message().c\_str()));
+\};
+
+if (auto pair = ed25519::keys::Pair::FromPrivateKey(secret\_pair->get\_private\_key().encode(),
+       error\_handler))\{
+    std::cout << "ed25519 random keys pair: "<< pair->get\_public\_key.encode() << "/" << 
+       pair->get\_private\_key().encode() << std::endl;
+\}
+else\{
+    // handling error
+\}
+\end{DoxyCode}
+
+
+\subsubsection*{Create keys pair with secret phrase}
+
+
+\begin{DoxyCode}
+\{c++\}
+#include "ed25519.hpp"
+
+
+if (auto pair = ed25519::keys::Pair::WithSecret("some secret phrase", error\_handler))\{
+    std::cout << "ed25519 random keys pair: "<< pair->get\_public\_key.encode() << "/" << 
+       pair->get\_private\_key().encode() << std::endl;
+\}
+else\{
+    // handling error
+\}
+\end{DoxyCode}
+
+
+\subsubsection*{Sign message}
+
+
+\begin{DoxyCode}
+\{c++\}
+#include "ed25519.hpp"
+
+// create pair
+auto pair           = ed25519::keys::Pair::WithSecret("some secret phrase");
+
+// some message 
+std::string message = "some message or token string";
+
+// sign message return uniq\_ptr siganture
+auto signature      = pair->sign(message);
+
+if (signature->verify(message, pair->get\_public\_key())) \{
+   // handle verified
+\}
+
+//
+// It is not available to create empty signature:
+// auto signature = ed25519::keys::Pair::Siganture()
+// only copy operations or restore from base58-encoded string 
+//
+auto another\_signature = ed25519::Signature::Decode(signature->encode());
+
+//
+// Handle errors when restoration
+//
+
+if (auto signature = ed25519::Signature::Decode("...some wrong encoded string ...", error\_handler))\{
+    // handle verified
+\}
+else \{
+    // handle error
+\}
 \end{DoxyCode}
  
