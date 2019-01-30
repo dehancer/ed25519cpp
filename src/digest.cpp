@@ -45,6 +45,14 @@ namespace ed25519 {
 
     Digest::Digest():Data<size::digest>() {}
 
+    std::optional<Digest> Digest::Decode(const std::string &base58, const ed25519::ErrorHandler &error) {
+        auto s = Digest();
+        if (s.decode(base58,error)){
+            return std::make_optional(s);
+        }
+        return std::nullopt;
+    }
+
     void CalculatorImpl::set_endian(Digest::Calculator::endian e) {
         endian_ = e;
     }

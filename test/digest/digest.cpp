@@ -14,6 +14,10 @@
 
 using namespace ed25519;
 
+auto error_handler = [](const std::error_code code){
+    BOOST_TEST_MESSAGE("Test error: " + ed25519::StringFormat("code: %i, message: %s", code.value(), + code.message().c_str()));
+};
+
 BOOST_AUTO_TEST_CASE( digest_calculator ) {
     auto pair = keys::Pair::WithSecret("some secret phrase");
 
@@ -45,7 +49,9 @@ BOOST_AUTO_TEST_CASE( digest_calculator ) {
 
     auto siganture = pair->sign(digest);
 
-    BOOST_TEST_MESSAGE("Digest signature: " + siganture->encode() );
+    auto digest_restored = Digest::Decode(digest.encode(), error_handler);
 
-    BOOST_CHECK(siganture->verify(digest, pair->get_public_key()));
+    if (digest_restored && siganture->verify(*digest_restored, pair->get_public_key())) {
+        BOOST_TEST_MESSAGE("Digest signature: " + siganture->encode() );
+    }
 }
