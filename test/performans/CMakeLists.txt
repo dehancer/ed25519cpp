@@ -1,11 +1,14 @@
 
+
 file (GLOB TESTS_SOURCES ${TESTS_SOURCES}
         ./*.cpp
         )
 
-set (TEST api_${PROJECT_LIB})
+set (TEST performans_${PROJECT_LIB})
 
 add_executable(${TEST} ${TESTS_SOURCES})
+
+find_package (Boost REQUIRED COMPONENTS system)
 
 target_link_libraries (
         ${TEST}

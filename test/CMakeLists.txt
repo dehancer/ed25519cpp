@@ -13,4 +13,5 @@ include_directories(
 find_package (Boost REQUIRED COMPONENTS ${BOOST_COMPONENTS})
 
 add_subdirectory(api)
+add_subdirectory(performans)
 enable_testing ()
