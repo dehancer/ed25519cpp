@@ -35,6 +35,7 @@ namespace ed25519 {
         sha3_context ctx_;
         Digest *digest_;
         Digest::Calculator::endian endian_;
+
     };
 
 

@@ -7,7 +7,7 @@
 Inheritance diagram for ed25519\+:\+:Data$<$ N $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{classed25519_1_1_data}
+\includegraphics[height=2.702703cm]{classed25519_1_1_data}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -25,6 +25,8 @@ bool \mbox{\hyperlink{classed25519_1_1_data_ac365c9862b45379c677449b622c74da5}{v
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+static std\+::optional$<$ \mbox{\hyperlink{classed25519_1_1_data}{Data}}$<$ N $>$ $>$ \mbox{\hyperlink{classed25519_1_1_data_a289015b1f2c8c57fed156d0f18059968}{Decode}} (const std\+::string \&base58, const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&\mbox{\hyperlink{namespaceed25519_ac93d0b5156eaca22197055e902920bc4}{error}}=\mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}})
 \item 
 static bool \mbox{\hyperlink{classed25519_1_1_data_ade9c93cb08f9d60aa45e75821ed1bcbe}{validate}} (const std\+::string \&string)
 \end{DoxyCompactItemize}
@@ -59,7 +61,24 @@ class ed25519\+::\+Data$<$ N $>$}
 {\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
 void \mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data}}$<$ N $>$\+::clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Clean data memory \mbox{\Hypertarget{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}\label{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}} 
+Clean data memory \mbox{\Hypertarget{classed25519_1_1_data_a289015b1f2c8c57fed156d0f18059968}\label{classed25519_1_1_data_a289015b1f2c8c57fed156d0f18059968}} 
+\index{ed25519\+::\+Data@{ed25519\+::\+Data}!Decode@{Decode}}
+\index{Decode@{Decode}!ed25519\+::\+Data@{ed25519\+::\+Data}}
+\subsubsection{\texorpdfstring{Decode()}{Decode()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
+static std\+::optional$<$\mbox{\hyperlink{classed25519_1_1_data}{Data}}$<$N$>$ $>$ \mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data}}$<$ N $>$\+::Decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base58,  }\item[{const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&}]{error = {\ttfamily \mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Restore data from base58-\/encoded string 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}}} & encoded signature \\
+\hline
+{\em error} & handler \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nullopt or new data hash object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}\label{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}} 
 \index{ed25519\+::\+Data@{ed25519\+::\+Data}!decode@{decode}}
 \index{decode@{decode}!ed25519\+::\+Data@{ed25519\+::\+Data}}
 \subsubsection{\texorpdfstring{decode()}{decode()}}
@@ -79,6 +98,10 @@ false if decoding is failed
 
 
 Implements \mbox{\hyperlink{classed25519_1_1_base58_a3cb74be32923dcfb03a24b65015bee84}{ed25519\+::\+Base58}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classed25519_1_1_protected_data_a708852546126e7d19229e247b92a98f6}{ed25519\+::\+Protected\+Data$<$ N $>$}}, and \mbox{\hyperlink{classed25519_1_1_protected_data_a708852546126e7d19229e247b92a98f6}{ed25519\+::\+Protected\+Data$<$ size\+::signature $>$}}.
 
 \mbox{\Hypertarget{classed25519_1_1_data_a2dc2e23b950a10b168d7509a63ffca53}\label{classed25519_1_1_data_a2dc2e23b950a10b168d7509a63ffca53}} 
 \index{ed25519\+::\+Data@{ed25519\+::\+Data}!encode@{encode}}

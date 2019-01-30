@@ -14,14 +14,14 @@ auto error_handler = [](const std::error_code code){
 
 BOOST_AUTO_TEST_CASE( ed25519_api ){
 
-    ed25519::keys::Seed seed;
+    ed25519::Seed seed;
 
     std::string ssed = ed25519::base58::encode(seed).c_str();
 
     BOOST_TEST_MESSAGE("Seed   : ");
     BOOST_TEST_MESSAGE(ssed.c_str());
 
-    ed25519::keys::Seed data2;
+    ed25519::Seed data2;
 
     BOOST_CHECK_EQUAL(true,ed25519::base58::decode(ssed, data2));
     BOOST_TEST_MESSAGE(ssed.c_str());
@@ -33,8 +33,8 @@ BOOST_AUTO_TEST_CASE( ed25519_api ){
 
 BOOST_AUTO_TEST_CASE( keys_seed ) {
 
-    ed25519::keys::Seed seed;
-    ed25519::keys::Seed secret("some secret prase");
+    ed25519::Seed seed;
+    ed25519::Seed secret("some secret prase");
 
     BOOST_TEST_MESSAGE("Random seed   : ");
     BOOST_TEST_MESSAGE(seed.encode());
@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE( keys_seed ) {
     BOOST_TEST_MESSAGE(secret.encode());
 
 
-    ed25519::keys::Seed from_secret(seed);
+    ed25519::Seed from_secret(seed);
 
     BOOST_TEST_MESSAGE("From seed   : ");
     BOOST_TEST_MESSAGE(from_secret.encode());
@@ -138,14 +138,15 @@ BOOST_AUTO_TEST_CASE( signature ) {
 
     BOOST_TEST_MESSAGE("Signature: " + signature->encode());
 
-    auto pp = ed25519::keys::Public();
-    pp.decode(secret_pair2->get_public_key().encode());
+    auto pp = ed25519::keys::Public::Decode(secret_pair->get_public_key().encode());
 
-    auto ppp = secret_pair->get_public_key();
+    BOOST_TEST_MESSAGE("Signature 1 ppp : " + pp->encode());
 
-    BOOST_TEST_MESSAGE("Signature 1 ppp : " + ppp.encode());
-
-    ppp.decode(secret_pair2->get_public_key().encode());
+    auto ppp = secret_pair2->get_public_key();
+    //
+    // This is not permitted
+    //
+    // ppp.decode(secret_pair2->get_public_key().encode());
 
     BOOST_TEST_MESSAGE("Signature 2 ppp : " + ppp.encode());
 

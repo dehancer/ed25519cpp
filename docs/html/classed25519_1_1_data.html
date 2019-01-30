@@ -81,7 +81,15 @@ Inheritance diagram for ed25519::Data&lt; N &gt;:</div>
  <div class="center">
   <img src="classed25519_1_1_data.png" usemap="#ed25519::Data_3C_20N_20_3E_map" alt=""/>
   <map id="ed25519::Data_3C_20N_20_3E_map" name="ed25519::Data_3C_20N_20_3E_map">
-<area href="classed25519_1_1_base58.html" alt="ed25519::Base58" shape="rect" coords="199,0,388,24"/>
+<area href="classed25519_1_1_base58.html" alt="ed25519::Base58" shape="rect" coords="652,0,903,24"/>
+<area href="classed25519_1_1_protected_data.html" alt="ed25519::ProtectedData&lt; N &gt;" shape="rect" coords="261,112,512,136"/>
+<area href="classed25519_1_1_protected_data.html" alt="ed25519::ProtectedData&lt; size::signature &gt;" shape="rect" coords="783,112,1034,136"/>
+<area href="classed25519_1_1keys_1_1_key.html" alt="ed25519::keys::Key&lt; N &gt;" shape="rect" coords="0,168,251,192"/>
+<area href="classed25519_1_1keys_1_1_key.html" alt="ed25519::keys::Key&lt; size::private_key &gt;" shape="rect" coords="261,168,512,192"/>
+<area href="classed25519_1_1keys_1_1_key.html" alt="ed25519::keys::Key&lt; size::public_key &gt;" shape="rect" coords="522,168,773,192"/>
+<area href="classed25519_1_1_signature.html" alt="ed25519::Signature" shape="rect" coords="783,168,1034,192"/>
+<area href="classed25519_1_1keys_1_1_private.html" alt="ed25519::keys::Private" shape="rect" coords="261,224,512,248"/>
+<area href="classed25519_1_1keys_1_1_public.html" alt="ed25519::keys::Public" shape="rect" coords="522,224,773,248"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -100,6 +108,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a289015b1f2c8c57fed156d0f18059968"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="classed25519_1_1_data.html">Data</a>&lt; N &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_data.html#a289015b1f2c8c57fed156d0f18059968">Decode</a> (const std::string &amp;base58, const <a class="el" href="namespaceed25519.html#a6ba572942b3c18591fc869d52a6b16e6">ErrorHandler</a> &amp;<a class="el" href="namespaceed25519.html#ac93d0b5156eaca22197055e902920bc4">error</a>=<a class="el" href="namespaceed25519.html#a7c7bb6ed17541162959c33ed3e3b15fb">default_error_handler</a>)</td></tr>
+<tr class="separator:a289015b1f2c8c57fed156d0f18059968"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade9c93cb08f9d60aa45e75821ed1bcbe"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_data.html#ade9c93cb08f9d60aa45e75821ed1bcbe">validate</a> (const std::string &amp;string)</td></tr>
 <tr class="separator:ade9c93cb08f9d60aa45e75821ed1bcbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -170,6 +180,52 @@ template&lt;size_t N&gt; </div>
 
 </div>
 </div>
+<a id="a289015b1f2c8c57fed156d0f18059968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a289015b1f2c8c57fed156d0f18059968">&#9670;&nbsp;</a></span>Decode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::optional&lt;<a class="el" href="classed25519_1_1_data.html">Data</a>&lt;N&gt; &gt; <a class="el" href="classed25519_1_1_data.html">ed25519::Data</a>&lt; N &gt;::Decode </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>base58</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespaceed25519.html#a6ba572942b3c18591fc869d52a6b16e6">ErrorHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>error</em> = <code><a class="el" href="namespaceed25519.html#a7c7bb6ed17541162959c33ed3e3b15fb">default_error_handler</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Restore data from base58-encoded string </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="namespaceed25519_1_1base58.html">base58</a></td><td>encoded signature </td></tr>
+    <tr><td class="paramname">error</td><td>handler </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>nullopt or new data hash object </dd></dl>
+
+</div>
+</div>
 <a id="a281d932d3c3fe7fd40ce86ea7eff559b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a281d932d3c3fe7fd40ce86ea7eff559b">&#9670;&nbsp;</a></span>decode()</h2>
 
@@ -215,6 +271,8 @@ template&lt;size_t N&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>false if decoding is failed </dd></dl>
 
 <p>Implements <a class="el" href="classed25519_1_1_base58.html#a3cb74be32923dcfb03a24b65015bee84">ed25519::Base58</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classed25519_1_1_protected_data.html#a708852546126e7d19229e247b92a98f6">ed25519::ProtectedData&lt; N &gt;</a>, and <a class="el" href="classed25519_1_1_protected_data.html#a708852546126e7d19229e247b92a98f6">ed25519::ProtectedData&lt; size::signature &gt;</a>.</p>
 
 </div>
 </div>

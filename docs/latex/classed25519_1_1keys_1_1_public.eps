@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 140.186916
+%%BoundingBox: 0 0 500 206.611570
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 3.566667 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 2.420000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 3 def
+/rows 5 def
 /cols 2 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -174,7 +174,9 @@
 boxfont setfont
 1 boundaspect scale
 (ed25519::keys::Public) cw
-(ed25519::Data< size::public_key >) cw
+(ed25519::keys::Key< size::public_key >) cw
+(ed25519::ProtectedData< N >) cw
+(ed25519::Data< N >) cw
 (std::array< unsigned char, N >) cw
 (ed25519::Base58) cw
 /boxwidth boxwidth marginwidth 2 mul add def
@@ -189,9 +191,11 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- classes -----
 
  (ed25519::keys::Public) 0.500000 0.000000 box
- (ed25519::Data< size::public_key >) 0.500000 1.000000 box
- (std::array< unsigned char, N >) 0.000000 2.000000 box
- (ed25519::Base58) 1.000000 2.000000 box
+ (ed25519::keys::Key< size::public_key >) 0.500000 1.000000 box
+ (ed25519::ProtectedData< N >) 0.500000 2.000000 box
+ (ed25519::Data< N >) 0.500000 3.000000 box
+ (std::array< unsigned char, N >) 0.000000 4.000000 box
+ (ed25519::Base58) 1.000000 4.000000 box
 
 % ----- relations -----
 
@@ -202,8 +206,16 @@ solid
 solid
 0 0.500000 1.000000 out
 solid
-0.000000 1.000000 2.000000 conn
+1 0.500000 2.000000 in
 solid
-1 0.000000 2.000000 in
+0 0.500000 2.000000 out
 solid
-1 1.000000 2.000000 in
+1 0.500000 3.000000 in
+solid
+0 0.500000 3.000000 out
+solid
+0.000000 1.000000 4.000000 conn
+solid
+1 0.000000 4.000000 in
+solid
+1 1.000000 4.000000 in

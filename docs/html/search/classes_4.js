@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pair',['Pair',['../classed25519_1_1keys_1_1_pair.html',1,'ed25519::keys']]],
-  ['private',['Private',['../classed25519_1_1keys_1_1_private.html',1,'ed25519::keys']]],
-  ['public',['Public',['../classed25519_1_1keys_1_1_public.html',1,'ed25519::keys']]]
+  ['key',['Key',['../classed25519_1_1keys_1_1_key.html',1,'ed25519::keys']]],
+  ['key_3c_20size_3a_3aprivate_5fkey_20_3e',['Key&lt; size::private_key &gt;',['../classed25519_1_1keys_1_1_key.html',1,'ed25519::keys']]],
+  ['key_3c_20size_3a_3apublic_5fkey_20_3e',['Key&lt; size::public_key &gt;',['../classed25519_1_1keys_1_1_key.html',1,'ed25519::keys']]]
 ];

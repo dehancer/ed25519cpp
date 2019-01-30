@@ -70,6 +70,7 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classed25519_1_1_digest-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ed25519::Digest Class Reference</div>  </div>
@@ -121,8 +122,17 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3e74ff17e4b4540bdca27cf1914a4641"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="classed25519_1_1_digest.html">Digest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_digest.html#a3e74ff17e4b4540bdca27cf1914a4641">Decode</a> (const std::string &amp;base58, const <a class="el" href="namespaceed25519.html#a6ba572942b3c18591fc869d52a6b16e6">ErrorHandler</a> &amp;<a class="el" href="namespaceed25519.html#ac93d0b5156eaca22197055e902920bc4">error</a>=<a class="el" href="namespaceed25519.html#a7c7bb6ed17541162959c33ed3e3b15fb">default_error_handler</a>)</td></tr>
 <tr class="separator:a3e74ff17e4b4540bdca27cf1914a4641"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_classed25519_1_1_data"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classed25519_1_1_data')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classed25519_1_1_data.html">ed25519::Data&lt; size::digest &gt;</a></td></tr>
+<tr class="memitem:a289015b1f2c8c57fed156d0f18059968 inherit pub_static_methods_classed25519_1_1_data"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="classed25519_1_1_data.html">Data</a>&lt; N &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_data.html#a289015b1f2c8c57fed156d0f18059968">Decode</a> (const std::string &amp;base58, const <a class="el" href="namespaceed25519.html#a6ba572942b3c18591fc869d52a6b16e6">ErrorHandler</a> &amp;<a class="el" href="namespaceed25519.html#ac93d0b5156eaca22197055e902920bc4">error</a>=default_error_handler)</td></tr>
+<tr class="separator:a289015b1f2c8c57fed156d0f18059968 inherit pub_static_methods_classed25519_1_1_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade9c93cb08f9d60aa45e75821ed1bcbe inherit pub_static_methods_classed25519_1_1_data"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_data.html#ade9c93cb08f9d60aa45e75821ed1bcbe">validate</a> (const std::string &amp;string)</td></tr>
 <tr class="separator:ade9c93cb08f9d60aa45e75821ed1bcbe inherit pub_static_methods_classed25519_1_1_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a27f0effdfdf5c477d7471486da0e67a6"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_digest.html#a27f0effdfdf5c477d7471486da0e67a6">Digest::Calculator</a></td></tr>
+<tr class="separator:a27f0effdfdf5c477d7471486da0e67a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb2790f4039920f65160ef1e580122be"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classed25519_1_1_digest.html#aeb2790f4039920f65160ef1e580122be">keys::Public</a></td></tr>
+<tr class="separator:aeb2790f4039920f65160ef1e580122be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classed25519_1_1_digest.html">Digest</a> hash class </p>
@@ -225,6 +235,51 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>nullopt or new digest hash object </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a27f0effdfdf5c477d7471486da0e67a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27f0effdfdf5c477d7471486da0e67a6">&#9670;&nbsp;</a></span>Digest::Calculator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="structed25519_1_1_digest_1_1_calculator.html">Digest::Calculator</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb2790f4039920f65160ef1e580122be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb2790f4039920f65160ef1e580122be">&#9670;&nbsp;</a></span>keys::Public</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classed25519_1_1keys_1_1_public.html">keys::Public</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
