@@ -122,3 +122,47 @@ else {
 }
 
 ```
+
+### Create digest hash from variant types 
+
+```c++
+
+auto digest = Digest([pair](auto &calculator) {
+
+        //
+        // set big endian 
+        // little endian is default
+        //
+        
+        calculator.set_endian(Digest::Calculator::endian::big);
+        
+        std::cout << "Calculator endian: " << calculator.get_endian() << std::endl;
+
+        calculator.append(true);
+
+        calculator.append(1);
+
+        calculator.append((int)(1.12f * 100));
+
+        std::string title = "123";
+
+        calculator.append(title);
+
+        std::vector<unsigned char> v(title.begin(), title.end());
+
+        calculator.append(v);
+
+    });
+
+//
+// Sign digest
+//
+auto siganture = pair->sign(digest);
+
+if (siganture->verify(digest, pair->get_public_key())) {
+    //
+    // handle verified digest
+    //
+}
+
+```

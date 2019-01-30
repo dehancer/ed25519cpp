@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pair',['Pair',['../classed25519_1_1_signature.html#ad89670fe663c8c8526b69b1bc6a87c19',1,'ed25519::Signature']]]
+  ['hash',['hash',['../namespaceed25519_1_1size.html#a0c20525cc9711076ec093177a8e36c25',1,'ed25519::size']]]
 ];

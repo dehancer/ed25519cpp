@@ -1,8 +1,4 @@
 
-include_directories(
-        ../../external/ed25519/include
-)
-
 file (GLOB TESTS_SOURCES ${TESTS_SOURCES}
         ./*.cpp
         )
