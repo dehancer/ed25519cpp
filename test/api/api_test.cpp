@@ -90,3 +90,40 @@ BOOST_AUTO_TEST_CASE( pair_key_from_private ) {
                 BOOST_CHECK(false);
         }
 }
+
+BOOST_AUTO_TEST_CASE( validate_public ) {
+    auto secret_pair = ed25519::keys::Pair::WithSecret("some secret phrase");
+    auto pk = ed25519::keys::Public();
+
+    BOOST_CHECK(secret_pair->get_public_key().validate());
+    BOOST_TEST_MESSAGE("Validate public from secret: " + secret_pair->get_public_key().encode());
+
+    BOOST_CHECK(pk.validate());
+    BOOST_TEST_MESSAGE("Validate public from empty: " + pk.encode());
+}
+
+BOOST_AUTO_TEST_CASE( validate_private ) {
+        auto secret_pair = ed25519::keys::Pair::WithSecret("some secret phrase");
+        auto pvk = ed25519::keys::Private();
+
+        BOOST_CHECK(secret_pair->get_private_key().validate());
+        BOOST_TEST_MESSAGE("Validate private from secret: " + secret_pair->get_private_key().encode());
+
+        BOOST_CHECK(pvk.validate());
+        BOOST_TEST_MESSAGE("Validate private from empty: " + pvk.encode());
+}
+
+BOOST_AUTO_TEST_CASE( validate_base58 ) {
+        auto secret_pair = ed25519::keys::Pair::WithSecret("some secret phrase");
+        auto pvk = std::string("....");
+
+        BOOST_CHECK(ed25519::base58::validate(secret_pair->get_private_key().encode()));
+        BOOST_TEST_MESSAGE("Validate base58 private from secret: " + secret_pair->get_private_key().encode());
+
+        BOOST_CHECK(!ed25519::base58::validate(pvk));
+        BOOST_TEST_MESSAGE("Validate private from empty: " + pvk);
+
+        BOOST_CHECK(!ed25519::keys::Private::validate(pvk));
+        BOOST_TEST_MESSAGE("Validate private from empty: " + pvk);
+
+}

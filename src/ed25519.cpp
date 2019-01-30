@@ -71,6 +71,15 @@ namespace ed25519 {
 
             return std::make_optional(pair);
         }
+
+        void  Pair::clean() {
+            publicKey_.clean();
+            privateKey_.clean();
+        }
+
+        bool Pair::validate() {
+            return publicKey_.validate() && privateKey_.validate();
+        }
     }
 
 }

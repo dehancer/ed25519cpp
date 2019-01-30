@@ -23,7 +23,7 @@ on the SUPERCOP "ref10" implementation. The ed25519cpp wraps c-based implementin
 1. Ubuntu 18.04
 1. OSX 10.13, XCode10
 
-## [API](https://github.com/dnevera/ed25519cpp/docs/html/namespaces.html)
+## [API](https://htmlpreview.github.io/?https://github.com/dnevera/ed25519cpp/blob/master/docs/html/namespaces.html)
 
 
 ## Examples

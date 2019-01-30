@@ -182,7 +182,7 @@ namespace ed25519 {
          * @param base58 string
          * @return true if string is base58 encoded
          */
-        static bool validate(const std::string &base58);
+        virtual bool validate() const = 0;
     };
 
     /**
@@ -216,12 +216,30 @@ namespace ed25519 {
          * @param error - error handler
          * @return false if decoding is failed
          */
-        bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override{
+        bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override {
             return base58::decode(base58, *this, error);
         }
 
-        static bool validate(const std::string &check) {
-            return  base58::validate(check);
+        bool validate() const override {
+            if (N == this->size()) {
+
+                if (encode().empty())
+                    return  false;
+
+                return base58::validate(encode());
+            }
+            else {
+                return false;
+            }
+        }
+
+        /**
+         * Validate string before create encoded data.
+         * @param string
+         * @return validation result
+         */
+        static bool validate(const std::string &string) {
+            return base58::validate(string);
         }
     };
 
@@ -296,10 +314,13 @@ namespace ed25519 {
             /**
              * Clean pair
              */
-            void clean() {
-                publicKey_.clean();
-                privateKey_.clean();
-            }
+            void clean();
+
+            /**
+             * Vlidate pair
+             * @return validation result
+             */
+            bool validate();
 
             ~Pair() {
                 clean();
