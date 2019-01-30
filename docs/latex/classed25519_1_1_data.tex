@@ -1,0 +1,110 @@
+\hypertarget{classed25519_1_1_data}{}\section{ed25519\+:\+:Data$<$ N $>$ Class Template Reference}
+\label{classed25519_1_1_data}\index{ed25519\+::\+Data$<$ N $>$@{ed25519\+::\+Data$<$ N $>$}}
+
+
+{\ttfamily \#include $<$ed25519.\+hpp$>$}
+
+Inheritance diagram for ed25519\+:\+:Data$<$ N $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classed25519_1_1_data}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classed25519_1_1_data_a2c637587095d6527cd4136926fb8b452}{Data}} ()
+\item 
+void \mbox{\hyperlink{classed25519_1_1_data_a22626c9e5a951dd673bfda8e78bf14fc}{clean}} () override
+\item 
+const std\+::string \mbox{\hyperlink{classed25519_1_1_data_a2dc2e23b950a10b168d7509a63ffca53}{encode}} () const override
+\item 
+bool \mbox{\hyperlink{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}{decode}} (const std\+::string \&base58, const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&\mbox{\hyperlink{namespaceed25519_ac93d0b5156eaca22197055e902920bc4}{error}}=\mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}}) override
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classed25519_1_1_data_a02609da44dcd8f0fa5812ecca0b84d21}{validate}} (const std\+::string \&check)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$size\+\_\+t N$>$\newline
+class ed25519\+::\+Data$<$ N $>$}
+
+\mbox{\hyperlink{classed25519_1_1_base58}{Base58}} binary data structure 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em N} & \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classed25519_1_1_data_a2c637587095d6527cd4136926fb8b452}\label{classed25519_1_1_data_a2c637587095d6527cd4136926fb8b452}} 
+\index{ed25519\+::\+Data@{ed25519\+::\+Data}!Data@{Data}}
+\index{Data@{Data}!ed25519\+::\+Data@{ed25519\+::\+Data}}
+\subsubsection{\texorpdfstring{Data()}{Data()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
+\mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data}}$<$ N $>$\+::\mbox{\hyperlink{classed25519_1_1_data}{Data}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classed25519_1_1_data_a22626c9e5a951dd673bfda8e78bf14fc}\label{classed25519_1_1_data_a22626c9e5a951dd673bfda8e78bf14fc}} 
+\index{ed25519\+::\+Data@{ed25519\+::\+Data}!clean@{clean}}
+\index{clean@{clean}!ed25519\+::\+Data@{ed25519\+::\+Data}}
+\subsubsection{\texorpdfstring{clean()}{clean()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
+void \mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data}}$<$ N $>$\+::clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Clean data memory 
+
+Implements \mbox{\hyperlink{classed25519_1_1_base58_aed901927e6a283e0c4d3fb13745233dc}{ed25519\+::\+Base58}}.
+
+\mbox{\Hypertarget{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}\label{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}} 
+\index{ed25519\+::\+Data@{ed25519\+::\+Data}!decode@{decode}}
+\index{decode@{decode}!ed25519\+::\+Data@{ed25519\+::\+Data}}
+\subsubsection{\texorpdfstring{decode()}{decode()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
+bool \mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data}}$<$ N $>$\+::decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base58,  }\item[{const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&}]{error = {\ttfamily \mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Decode \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} encoded string to binary represenation 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}}} & encoded string \\
+\hline
+{\em error} & -\/ error handler \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if decoding is failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classed25519_1_1_base58_a3cb74be32923dcfb03a24b65015bee84}{ed25519\+::\+Base58}}.
+
+\mbox{\Hypertarget{classed25519_1_1_data_a2dc2e23b950a10b168d7509a63ffca53}\label{classed25519_1_1_data_a2dc2e23b950a10b168d7509a63ffca53}} 
+\index{ed25519\+::\+Data@{ed25519\+::\+Data}!encode@{encode}}
+\index{encode@{encode}!ed25519\+::\+Data@{ed25519\+::\+Data}}
+\subsubsection{\texorpdfstring{encode()}{encode()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
+const std\+::string \mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data}}$<$ N $>$\+::encode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Encode from binary to \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} encoded string \begin{DoxyReturn}{Returns}
+encoded string 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classed25519_1_1_base58_a1b52a018a5215e2dcf2aa388b0fe06bf}{ed25519\+::\+Base58}}.
+
+\mbox{\Hypertarget{classed25519_1_1_data_a02609da44dcd8f0fa5812ecca0b84d21}\label{classed25519_1_1_data_a02609da44dcd8f0fa5812ecca0b84d21}} 
+\index{ed25519\+::\+Data@{ed25519\+::\+Data}!validate@{validate}}
+\index{validate@{validate}!ed25519\+::\+Data@{ed25519\+::\+Data}}
+\subsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
+static bool \mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data}}$<$ N $>$\+::validate (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{check }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/denn/\+Development/\+Dehancer/\+Dehancer-\/\+Services/ed25519cpp/include/\mbox{\hyperlink{ed25519_8hpp}{ed25519.\+hpp}}\end{DoxyCompactItemize}

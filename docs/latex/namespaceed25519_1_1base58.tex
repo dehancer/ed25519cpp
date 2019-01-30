@@ -1,0 +1,107 @@
+\hypertarget{namespaceed25519_1_1base58}{}\section{ed25519\+:\+:base58 Namespace Reference}
+\label{namespaceed25519_1_1base58}\index{ed25519\+::base58@{ed25519\+::base58}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint\+\_\+least32\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1base58_abd4c654a7eba31c01eef529e26a8c364}{crc32}} (unsigned char $\ast$buf, size\+\_\+t len)
+\item 
+std\+::string \mbox{\hyperlink{namespaceed25519_1_1base58_a857764be1561c5e59bab056d771f22a1}{encode}} (const std\+::vector$<$ unsigned char $>$ \&data)
+\item 
+bool \mbox{\hyperlink{namespaceed25519_1_1base58_ac8132589f5098b8de74d2dfb72f7bf65}{decode}} (const std\+::string \&str, std\+::vector$<$ unsigned char $>$ \&data)
+\item 
+bool \mbox{\hyperlink{namespaceed25519_1_1base58_a2b3ccbfdccfbcc3125de0070e5b37e67}{validate}} (const std\+::string \&str)
+\item 
+{\footnotesize template$<$size\+\_\+t N$>$ }\\bool \mbox{\hyperlink{namespaceed25519_1_1base58_a97f34fe5ffdd0da677a4cef6be3a5a60}{decode}} (const std\+::string \&base58, std\+::array$<$ unsigned char, N $>$ \&data, const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&\mbox{\hyperlink{namespaceed25519_ac93d0b5156eaca22197055e902920bc4}{error}}=\mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}})
+\item 
+{\footnotesize template$<$size\+\_\+t N$>$ }\\std\+::string \mbox{\hyperlink{namespaceed25519_1_1base58_a9e1eded8fc634072114771f77046693a}{encode}} (const std\+::array$<$ unsigned char, N $>$ \&data)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceed25519_1_1base58_abd4c654a7eba31c01eef529e26a8c364}\label{namespaceed25519_1_1base58_abd4c654a7eba31c01eef529e26a8c364}} 
+\index{ed25519\+::base58@{ed25519\+::base58}!crc32@{crc32}}
+\index{crc32@{crc32}!ed25519\+::base58@{ed25519\+::base58}}
+\subsubsection{\texorpdfstring{crc32()}{crc32()}}
+{\footnotesize\ttfamily uint\+\_\+least32\+\_\+t ed25519\+::base58\+::crc32 (\begin{DoxyParamCaption}\item[{unsigned char $\ast$}]{buf,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceed25519_1_1base58_ac8132589f5098b8de74d2dfb72f7bf65}\label{namespaceed25519_1_1base58_ac8132589f5098b8de74d2dfb72f7bf65}} 
+\index{ed25519\+::base58@{ed25519\+::base58}!decode@{decode}}
+\index{decode@{decode}!ed25519\+::base58@{ed25519\+::base58}}
+\subsubsection{\texorpdfstring{decode()}{decode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool ed25519\+::base58\+::decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str,  }\item[{std\+::vector$<$ unsigned char $>$ \&}]{data }\end{DoxyParamCaption})}
+
+Decode base58-\/encoded string to binary data 
+\begin{DoxyParams}{Parameters}
+{\em str} & \\
+\hline
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if decoding is failed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceed25519_1_1base58_a97f34fe5ffdd0da677a4cef6be3a5a60}\label{namespaceed25519_1_1base58_a97f34fe5ffdd0da677a4cef6be3a5a60}} 
+\index{ed25519\+::base58@{ed25519\+::base58}!decode@{decode}}
+\index{decode@{decode}!ed25519\+::base58@{ed25519\+::base58}}
+\subsubsection{\texorpdfstring{decode()}{decode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
+bool ed25519\+::base58\+::decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base58,  }\item[{std\+::array$<$ unsigned char, N $>$ \&}]{data,  }\item[{const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&}]{error = {\ttfamily \mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}}} }\end{DoxyParamCaption})}
+
+Decode \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} string to binary format 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}}} & \\
+\hline
+{\em error} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+binary buffer 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceed25519_1_1base58_a857764be1561c5e59bab056d771f22a1}\label{namespaceed25519_1_1base58_a857764be1561c5e59bab056d771f22a1}} 
+\index{ed25519\+::base58@{ed25519\+::base58}!encode@{encode}}
+\index{encode@{encode}!ed25519\+::base58@{ed25519\+::base58}}
+\subsubsection{\texorpdfstring{encode()}{encode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::string ed25519\+::base58\+::encode (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ unsigned char $>$ \&}]{data }\end{DoxyParamCaption})}
+
+Encode binary data to \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} string 
+\begin{DoxyParams}{Parameters}
+{\em binary} & data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceed25519_1_1base58_a9e1eded8fc634072114771f77046693a}\label{namespaceed25519_1_1base58_a9e1eded8fc634072114771f77046693a}} 
+\index{ed25519\+::base58@{ed25519\+::base58}!encode@{encode}}
+\index{encode@{encode}!ed25519\+::base58@{ed25519\+::base58}}
+\subsubsection{\texorpdfstring{encode()}{encode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$size\+\_\+t N$>$ \\
+std\+::string ed25519\+::base58\+::encode (\begin{DoxyParamCaption}\item[{const std\+::array$<$ unsigned char, N $>$ \&}]{data }\end{DoxyParamCaption})}
+
+Encode binary data to \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} string 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em N} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceed25519_1_1base58_a2b3ccbfdccfbcc3125de0070e5b37e67}\label{namespaceed25519_1_1base58_a2b3ccbfdccfbcc3125de0070e5b37e67}} 
+\index{ed25519\+::base58@{ed25519\+::base58}!validate@{validate}}
+\index{validate@{validate}!ed25519\+::base58@{ed25519\+::base58}}
+\subsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily bool ed25519\+::base58\+::validate (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str }\end{DoxyParamCaption})}
+
+Validate base58-\/encoded string 
+\begin{DoxyParams}{Parameters}
+{\em str} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if decoding is failed 
+\end{DoxyReturn}

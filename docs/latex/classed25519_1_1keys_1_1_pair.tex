@@ -1,0 +1,101 @@
+\hypertarget{classed25519_1_1keys_1_1_pair}{}\section{ed25519\+:\+:keys\+:\+:Pair Class Reference}
+\label{classed25519_1_1keys_1_1_pair}\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+
+
+{\ttfamily \#include $<$ed25519.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{classed25519_1_1keys_1_1_public}{Public}} \& \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_aad6c01fdb3b75ce2b05e51dbc833ac72}{get\+\_\+public\+\_\+key}} () const
+\item 
+const \mbox{\hyperlink{classed25519_1_1keys_1_1_private}{Private}} \& \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_add9c9587c53dff8b1d5bc69a7a97f837}{get\+\_\+private\+\_\+key}} () const
+\item 
+void \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_ae803e41096e0f6edb030e48713515aa2}{clean}} ()
+\item 
+\mbox{\hyperlink{classed25519_1_1keys_1_1_pair_a23edc59bc943684eadbdae8ffd6c8a42}{$\sim$\+Pair}} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::optional$<$ \mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{Pair}} $>$ \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_a56deb8f1bf6d1a51313abebd5a41d6fc}{Random}} ()
+\item 
+static std\+::optional$<$ \mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{Pair}} $>$ \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_aa4b34f7823cbba1e4243b9fbf2745e1e}{From\+Private\+Key}} (const std\+::string \&private\+Key, const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&\mbox{\hyperlink{namespaceed25519_ac93d0b5156eaca22197055e902920bc4}{error}}=\mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}})
+\item 
+static std\+::optional$<$ \mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{Pair}} $>$ \mbox{\hyperlink{classed25519_1_1keys_1_1_pair_a3d7457b834d7e8091a61272f20132d01}{With\+Secret}} (const std\+::string \&phrase, const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&\mbox{\hyperlink{namespaceed25519_ac93d0b5156eaca22197055e902920bc4}{error}}=\mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{Pair}} key representation 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_a23edc59bc943684eadbdae8ffd6c8a42}\label{classed25519_1_1keys_1_1_pair_a23edc59bc943684eadbdae8ffd6c8a42}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!````~Pair@{$\sim$\+Pair}}
+\index{````~Pair@{$\sim$\+Pair}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{$\sim$\+Pair()}{~Pair()}}
+{\footnotesize\ttfamily ed25519\+::keys\+::\+Pair\+::$\sim$\+Pair (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_ae803e41096e0f6edb030e48713515aa2}\label{classed25519_1_1keys_1_1_pair_ae803e41096e0f6edb030e48713515aa2}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!clean@{clean}}
+\index{clean@{clean}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{clean()}{clean()}}
+{\footnotesize\ttfamily void ed25519\+::keys\+::\+Pair\+::clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Clean pair \mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_aa4b34f7823cbba1e4243b9fbf2745e1e}\label{classed25519_1_1keys_1_1_pair_aa4b34f7823cbba1e4243b9fbf2745e1e}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!From\+Private\+Key@{From\+Private\+Key}}
+\index{From\+Private\+Key@{From\+Private\+Key}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{From\+Private\+Key()}{FromPrivateKey()}}
+{\footnotesize\ttfamily static std\+::optional$<$\mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{Pair}}$>$ ed25519\+::keys\+::\+Pair\+::\+From\+Private\+Key (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{private\+Key,  }\item[{const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&}]{error = {\ttfamily \mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Create random pair \begin{DoxyReturn}{Returns}
+always exists private key 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_add9c9587c53dff8b1d5bc69a7a97f837}\label{classed25519_1_1keys_1_1_pair_add9c9587c53dff8b1d5bc69a7a97f837}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!get\+\_\+private\+\_\+key@{get\+\_\+private\+\_\+key}}
+\index{get\+\_\+private\+\_\+key@{get\+\_\+private\+\_\+key}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{get\+\_\+private\+\_\+key()}{get\_private\_key()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classed25519_1_1keys_1_1_private}{Private}}\& ed25519\+::keys\+::\+Pair\+::get\+\_\+private\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_aad6c01fdb3b75ce2b05e51dbc833ac72}\label{classed25519_1_1keys_1_1_pair_aad6c01fdb3b75ce2b05e51dbc833ac72}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!get\+\_\+public\+\_\+key@{get\+\_\+public\+\_\+key}}
+\index{get\+\_\+public\+\_\+key@{get\+\_\+public\+\_\+key}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{get\+\_\+public\+\_\+key()}{get\_public\_key()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classed25519_1_1keys_1_1_public}{Public}}\& ed25519\+::keys\+::\+Pair\+::get\+\_\+public\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get paired public key for the private \begin{DoxyReturn}{Returns}
+copy of public key 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_a56deb8f1bf6d1a51313abebd5a41d6fc}\label{classed25519_1_1keys_1_1_pair_a56deb8f1bf6d1a51313abebd5a41d6fc}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!Random@{Random}}
+\index{Random@{Random}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{Random()}{Random()}}
+{\footnotesize\ttfamily static std\+::optional$<$\mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{Pair}}$>$ ed25519\+::keys\+::\+Pair\+::\+Random (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Create random pair \begin{DoxyReturn}{Returns}
+always exists private key 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classed25519_1_1keys_1_1_pair_a3d7457b834d7e8091a61272f20132d01}\label{classed25519_1_1keys_1_1_pair_a3d7457b834d7e8091a61272f20132d01}} 
+\index{ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}!With\+Secret@{With\+Secret}}
+\index{With\+Secret@{With\+Secret}!ed25519\+::keys\+::\+Pair@{ed25519\+::keys\+::\+Pair}}
+\subsubsection{\texorpdfstring{With\+Secret()}{WithSecret()}}
+{\footnotesize\ttfamily static std\+::optional$<$\mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{Pair}}$>$ ed25519\+::keys\+::\+Pair\+::\+With\+Secret (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{phrase,  }\item[{const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&}]{error = {\ttfamily \mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Optional constructor from secret phrase 
+\begin{DoxyParams}{Parameters}
+{\em phrase} & \\
+\hline
+{\em error} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nullopt or private key 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/denn/\+Development/\+Dehancer/\+Dehancer-\/\+Services/ed25519cpp/include/\mbox{\hyperlink{ed25519_8hpp}{ed25519.\+hpp}}\end{DoxyCompactItemize}

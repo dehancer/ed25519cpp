@@ -1,0 +1,87 @@
+\hypertarget{ed25519_8hpp}{}\section{/\+Users/denn/\+Development/\+Dehancer/\+Dehancer-\/\+Services/ed25519cpp/include/ed25519.hpp File Reference}
+\label{ed25519_8hpp}\index{/\+Users/denn/\+Development/\+Dehancer/\+Dehancer-\/\+Services/ed25519cpp/include/ed25519.\+hpp@{/\+Users/denn/\+Development/\+Dehancer/\+Dehancer-\/\+Services/ed25519cpp/include/ed25519.\+hpp}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$optional$>$}\newline
+{\ttfamily \#include $<$cerrno$>$}\newline
+{\ttfamily \#include $<$system\+\_\+error$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classed25519_1_1error__category}{ed25519\+::error\+\_\+category}}
+\item 
+class \mbox{\hyperlink{classed25519_1_1_base58}{ed25519\+::\+Base58}}
+\item 
+class \mbox{\hyperlink{classed25519_1_1_data}{ed25519\+::\+Data$<$ N $>$}}
+\item 
+class \mbox{\hyperlink{classed25519_1_1keys_1_1_seed}{ed25519\+::keys\+::\+Seed}}
+\item 
+class \mbox{\hyperlink{classed25519_1_1keys_1_1_public}{ed25519\+::keys\+::\+Public}}
+\item 
+class \mbox{\hyperlink{classed25519_1_1keys_1_1_private}{ed25519\+::keys\+::\+Private}}
+\item 
+class \mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{ed25519\+::keys\+::\+Pair}}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceed25519}{ed25519}}
+\item 
+ \mbox{\hyperlink{namespaceed25519_1_1size}{ed25519\+::size}}
+\item 
+ \mbox{\hyperlink{namespaceed25519_1_1base58}{ed25519\+::base58}}
+\item 
+ \mbox{\hyperlink{namespaceed25519_1_1keys}{ed25519\+::keys}}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::function$<$ void(const std\+::error\+\_\+code \&code)$>$ \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{ed25519\+::\+Error\+Handler}}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespaceed25519_ac93d0b5156eaca22197055e902920bc4}{ed25519\+::error}} \+: int \{ \mbox{\hyperlink{namespaceed25519_ac93d0b5156eaca22197055e902920bc4a28729b5efcbf8605d4412dbb86c3963b}{ed25519\+::\+B\+A\+D\+F\+O\+R\+M\+AT}} = 1000, 
+\mbox{\hyperlink{namespaceed25519_ac93d0b5156eaca22197055e902920bc4a4a6895889f9590d64f64599b968a48b0}{ed25519\+::\+U\+N\+E\+X\+P\+E\+C\+T\+E\+D\+\_\+\+S\+I\+ZE}} = 1001, 
+\mbox{\hyperlink{namespaceed25519_ac93d0b5156eaca22197055e902920bc4ad16a8ea865652b7e7222111ab6f7ea36}{ed25519\+::\+E\+M\+P\+TY}} = 1002
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint\+\_\+least32\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1base58_abd4c654a7eba31c01eef529e26a8c364}{ed25519\+::base58\+::crc32}} (unsigned char $\ast$buf, size\+\_\+t len)
+\item 
+std\+::string \mbox{\hyperlink{namespaceed25519_1_1base58_a857764be1561c5e59bab056d771f22a1}{ed25519\+::base58\+::encode}} (const std\+::vector$<$ unsigned char $>$ \&data)
+\item 
+bool \mbox{\hyperlink{namespaceed25519_1_1base58_ac8132589f5098b8de74d2dfb72f7bf65}{ed25519\+::base58\+::decode}} (const std\+::string \&str, std\+::vector$<$ unsigned char $>$ \&data)
+\item 
+bool \mbox{\hyperlink{namespaceed25519_1_1base58_a2b3ccbfdccfbcc3125de0070e5b37e67}{ed25519\+::base58\+::validate}} (const std\+::string \&str)
+\item 
+{\footnotesize template$<$size\+\_\+t N$>$ }\\bool \mbox{\hyperlink{namespaceed25519_1_1base58_a97f34fe5ffdd0da677a4cef6be3a5a60}{ed25519\+::base58\+::decode}} (const std\+::string \&base58, std\+::array$<$ unsigned char, N $>$ \&data, const Error\+Handler \&error=default\+\_\+error\+\_\+handler)
+\item 
+{\footnotesize template$<$size\+\_\+t N$>$ }\\std\+::string \mbox{\hyperlink{namespaceed25519_1_1base58_a9e1eded8fc634072114771f77046693a}{ed25519\+::base58\+::encode}} (const std\+::array$<$ unsigned char, N $>$ \&data)
+\item 
+const std\+::string \mbox{\hyperlink{namespaceed25519_a908061c627d853b0d7ca46bdf0082310}{ed25519\+::\+String\+Format}} (const char $\ast$format,...)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static auto \mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{ed25519\+::default\+\_\+error\+\_\+handler}} = \mbox{[}$\,$\mbox{]}(const std\+::error\+\_\+code \&code) \{\}
+\item 
+constexpr const size\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1size_a0c20525cc9711076ec093177a8e36c25}{ed25519\+::size\+::hash}} = 32
+\item 
+constexpr const size\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1size_ac853f864bb12792f88647a998c3c030f}{ed25519\+::size\+::double\+\_\+hash}} = hash$\ast$2
+\item 
+constexpr const size\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1size_a8f8f1706b7e101ddc858ad26bdc010eb}{ed25519\+::size\+::public\+\_\+key}} = hash
+\item 
+constexpr const size\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1size_ab3443d829236034a3824204b295de4d0}{ed25519\+::size\+::digest}} = hash
+\item 
+constexpr const size\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1size_a25303466af2d7379e9ceb5955dd70b57}{ed25519\+::size\+::seed}} = hash
+\item 
+constexpr const size\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1size_a2e21f8a4af0331d49145f1893a441eed}{ed25519\+::size\+::private\+\_\+key}} = double\+\_\+hash
+\item 
+constexpr const size\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1size_adefacb85c80ee8d51c482044e6d79a26}{ed25519\+::size\+::signature}} = double\+\_\+hash
+\end{DoxyCompactItemize}

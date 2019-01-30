@@ -71,12 +71,19 @@ namespace ed25519 {
         std::string encode(const std::vector<unsigned char>& data);
 
         /**
-         * Decode base58 string to binary data
+         * Decode base58-encoded string to binary data
          * @param str
          * @param data
          * @return false if decoding is failed
          */
         bool decode(const std::string& str, std::vector<unsigned char>& data);
+
+        /**
+         * Validate base58-encoded string
+         * @param str
+         * @return false if decoding is failed
+         */
+        bool validate(const std::string &str);
 
         /**
          * Decode base58 string to binary format
@@ -90,7 +97,7 @@ namespace ed25519 {
                 std::array<unsigned char, N> &data,
                 const ErrorHandler &error = default_error_handler){
 
-             std::vector<unsigned char> v;
+            std::vector<unsigned char> v;
 
             if (!decode(base58.c_str(), v))
             {
@@ -144,8 +151,8 @@ namespace ed25519 {
     }
 
     /**
-         * Common keys protocol.
-         * */
+     * Common base58 encoding/decoding protocol
+     * */
     class Base58 {
     public:
 
@@ -169,6 +176,13 @@ namespace ed25519 {
          * @return true or false
          */
         virtual bool decode(const std::string &base58_string, const ErrorHandler &error = default_error_handler) = 0;
+
+        /**
+         * Validate base58 string without creating object instance
+         * @param base58 string
+         * @return true if string is base58 encoded
+         */
+        static bool validate(const std::string &base58);
     };
 
     /**
@@ -204,6 +218,10 @@ namespace ed25519 {
          */
         bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override{
             return base58::decode(base58, *this, error);
+        }
+
+        static bool validate(const std::string &check) {
+            return  base58::validate(check);
         }
     };
 
@@ -273,7 +291,7 @@ namespace ed25519 {
              * @return nullopt or private key
              */
             static std::optional<Pair> WithSecret(const std::string &phrase,
-                                                        const ErrorHandler &error = default_error_handler);
+                                                  const ErrorHandler &error = default_error_handler);
 
             /**
              * Clean pair

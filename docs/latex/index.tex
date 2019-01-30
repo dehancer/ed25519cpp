@@ -1,0 +1,58 @@
+This is a portable implementation of \href{http://ed25519.cr.yp.to/}{\tt Ed25519} based on the S\+U\+P\+E\+R\+C\+OP \char`\"{}ref10\char`\"{} implementation. The ed25519cpp wraps c-\/based implementing modern c++17 dialect. Additionally there is some extension which make easier the work with base58-\/encoded strings and pair of keys based on \mbox{\hyperlink{namespaceed25519}{ed25519}}.
+
+\subsection*{Home pages explains \mbox{\hyperlink{namespaceed25519}{ed25519}}}
+
+
+\begin{DoxyEnumerate}
+\item \href{https://ed25519.cr.yp.to/}{\tt https\+://ed25519.\+cr.\+yp.\+to/}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item \href{https://en.wikipedia.org/wiki/EdDSA}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Ed\+D\+SA}
+\end{DoxyEnumerate}
+
+\subsection*{Requirements}
+
+
+\begin{DoxyEnumerate}
+\item c++17
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item cmake
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item boost unitest installed includes ($>$=1.\+66, exclude 1.\+68!)
+\end{DoxyEnumerate}
+
+\subsection*{Build}
+
+\$ git clone \href{https://github.com/dnevera/ed25519cpp/}{\tt https\+://github.\+com/dnevera/ed25519cpp/} \$ cd ./ed25519cpp; mkdir build; cd ./build \$ cmake ..; make -\/j4 \$ make test
+
+\subsection*{Tested}
+
+
+\begin{DoxyEnumerate}
+\item Centos7 (gcc v7.\+0)
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Ubuntu 18.\+04
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item O\+SX 10.\+13, X\+Code10
+\end{DoxyEnumerate}
+
+\subsection*{\href{https://github.com/dnevera/ed25519cpp/docs/html/namespaces.html}{\tt A\+PI}}
+
+\subsection*{Examples}
+
+\subsubsection*{Random seed generator}
+
+
+\begin{DoxyCode}
+\{c++\}
+#include "ed25519.hpp"
+
+
+ed25519::keys::Seed seed;
+std::cout << "Seed base58 string: "<< seed.encode() << std::endl;
+\end{DoxyCode}
+ 

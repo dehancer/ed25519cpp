@@ -286,4 +286,11 @@ namespace ed25519::base58 {
     bool DecodeBase58Check(const string &str, vector<unsigned char> &vchRet) {
         return DecodeBase58Check(str.c_str(), vchRet);
     }
+
+    /// TODO:
+    /// . make more effective
+    bool Base58Check(const string &str) {
+        vector<unsigned char> vchRet;
+        return DecodeBase58Check(str.c_str(), vchRet);
+    }
 }

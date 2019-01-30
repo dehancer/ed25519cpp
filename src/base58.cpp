@@ -16,6 +16,10 @@ namespace ed25519{
         bool decode(const std::string &str, std::vector<unsigned char> &data) {
             return DecodeBase58Check(str, data);
         }
+
+        bool validate(const std::string &str) {
+            return Base58Check(str);
+        }
     }
 
     error_category::error_category(const std::string &message):mess_(message) {}

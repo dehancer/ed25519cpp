@@ -39,6 +39,14 @@ namespace ed25519::base58 {
  * vector (vchRet), return true if decoding is successful
  */
     bool DecodeBase58Check(const string &str, vector<unsigned char> &vchRet);
+
+    /**
+ * Check base58-encoded string
+ * @param str
+ * @return true if it is right
+ */
+    bool Base58Check(const string &str);
 }
+
 
 #endif // ED25512__BITCOIN_BASE58_H

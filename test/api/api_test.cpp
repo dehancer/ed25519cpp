@@ -5,11 +5,8 @@
 #define BOOST_TEST_MODULE api_test
 
 #include "ed25519.hpp"
-#include "ed25519.h"
 #include <boost/test/included/unit_test.hpp>
-#include <array>
 
-typedef  std::array<unsigned char, ed25519::size::seed> seed_data;
 
 auto error_handler = [](const std::error_code code){
     BOOST_TEST_MESSAGE("Test error: " + ed25519::StringFormat("code: %i, message: %s", code.value(), + code.message().c_str()));
@@ -17,16 +14,14 @@ auto error_handler = [](const std::error_code code){
 
 BOOST_AUTO_TEST_CASE( ed25519_api ){
 
-        seed_data seed;
-
-        BOOST_CHECK_EQUAL(0,ed25519_create_seed(seed.data()));
+        ed25519::keys::Seed seed;
 
         std::string ssed = ed25519::base58::encode(seed).c_str();
 
         BOOST_TEST_MESSAGE("Seed   : ");
         BOOST_TEST_MESSAGE(ssed.c_str());
 
-        seed_data data2;
+        ed25519::keys::Seed data2;
 
         BOOST_CHECK_EQUAL(true,ed25519::base58::decode(ssed, data2));
         BOOST_TEST_MESSAGE(ssed.c_str());
