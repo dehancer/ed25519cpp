@@ -4,6 +4,7 @@
 
 #include <string>
 #include <stdlib.h>
+#include <stdarg.h>
 #include "ed25519.hpp"
 
 namespace ed25519 {

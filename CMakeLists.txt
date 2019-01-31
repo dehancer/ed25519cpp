@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.8)
 
 set(PROJECT_LIB ed25919cpp)
 
@@ -29,8 +29,8 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 
     message(STATUS "Using gcc" )
 
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC -std=gnu11 -static-libgcc -static-libstdc++ ")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -W -Wall -Wextra -Wvariadic-macros -static-libgcc -static-libstdc++ ")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
     if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DX86_LINUX")

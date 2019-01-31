@@ -4,6 +4,7 @@
 
 #include "ed25519.hpp"
 #include "btc_base58.hpp"
+#include <memory>
 
 namespace ed25519{
 

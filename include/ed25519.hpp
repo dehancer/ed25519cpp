@@ -13,6 +13,9 @@
 #include <cerrno>
 #include <system_error>
 #include <variant>
+#include <memory>
+
+#define UNUSED(x) (void)(x)
 
 namespace ed25519 {
 
@@ -24,7 +27,7 @@ namespace ed25519 {
     /**
      * Default error handler
      */
-    static auto default_error_handler = [](const std::error_code &code) {};
+    static auto default_error_handler = [](const std::error_code &code) {UNUSED(code);};
 
     /**
      * Base58 string to/from encoding/decoding
