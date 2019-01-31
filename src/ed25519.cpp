@@ -7,6 +7,7 @@
 #include "sha3.hpp"
 #include "ed25519_ext.hpp"
 #include <iostream>
+#include <memory>
 
 namespace ed25519 {
 

@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE( siganture_rate ){
     int nc = 1000;
 
     for(auto i: tests ) {
-        for (int j = 0; j < i/size::seed; ++j) {
+        for (size_t j = 0; j < i/size::seed; ++j) {
             message.append(Seed().encode());
         }
 

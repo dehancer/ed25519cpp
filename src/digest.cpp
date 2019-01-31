@@ -7,6 +7,7 @@
 #include "sha3.hpp"
 #include "ed25519_ext.hpp"
 #include <iostream>
+#include <arpa/inet.h>
 
 namespace ed25519 {
 
@@ -16,7 +17,7 @@ namespace ed25519 {
         void set_endian(endian) override ;
         endian get_endian() override ;
 
-        CalculatorImpl(Digest *digest): digest_(digest), ctx_({}), endian_(little){
+        CalculatorImpl(Digest *digest): ctx_({}), digest_(digest), endian_(little){
 
             if ( htonl(47) == 47 ) {
                 endian_ = big;
