@@ -23,6 +23,22 @@ namespace ed25519 {
 
     namespace keys {
 
+        std::optional<Public> Public::Decode(const std::string &base58, const ErrorHandler &error){
+            auto s = Public();
+            if (s.decode(base58,error)){
+                return std::make_optional(s);
+            }
+            return std::nullopt;
+        }
+
+        std::optional<Private> Private::Decode(const std::string &base58, const ErrorHandler &error){
+            auto s = Private();
+            if (s.decode(base58,error)){
+                return std::make_optional(s);
+            }
+            return std::nullopt;
+        }
+
         Pair::Pair() {
             clean();
         }

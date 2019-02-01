@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE( signature ) {
 
     BOOST_TEST_MESSAGE("Signature: " + signature->encode());
 
-    auto pp = ed25519::keys::Public::Decode(secret_pair->get_public_key().encode());
+    std::optional<ed25519::keys::Public> pp = ed25519::keys::Public::Decode(secret_pair->get_public_key().encode());
 
     BOOST_TEST_MESSAGE("Signature 1 ppp : " + pp->encode());
 

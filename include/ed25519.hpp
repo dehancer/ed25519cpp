@@ -401,12 +401,17 @@ namespace ed25519 {
         /**
          * Public key representaion
          */
-        class Public: public Key<size::public_key>{};
+        class Public: public Key<size::public_key>{
+        public:
+            static  std::optional<Public> Decode(const std::string &base58, const ErrorHandler &error = default_error_handler);
+        };
 
         /**
          * Private key representation
          */
         class Private: public Key<size::private_key>{
+        public:
+            static  std::optional<Private> Decode(const std::string &base58, const ErrorHandler &error = default_error_handler);
         private:
             bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override {
                 return Data<size::signature>::decode(base58, error);
