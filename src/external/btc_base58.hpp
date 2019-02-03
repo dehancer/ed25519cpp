@@ -1,9 +1,9 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
-//
-//
+    // Copyright (c) 2009-2010 Satoshi Nakamoto
+    // Copyright (c) 2009-2015 The Bitcoin Core developers
+    // Distributed under the MIT software license, see the accompanying
+    // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+    //
+    //
 
 /**
  * Why base-58 instead of standard base-64 encoding?
@@ -28,23 +28,23 @@ using std::vector;
 using std::array;
 
 namespace ed25519::base58 {
-/**
- * Encode a byte vector as a base58-encoded string
- */
-    string EncodeBase58(const vector<unsigned char> &vch);
-
-
-/**
- * Decode a base58-encoded string (str) that includes a checksum into a byte
- * vector (vchRet), return true if decoding is successful
- */
-    bool DecodeBase58Check(const string &str, vector<unsigned char> &vchRet);
-
     /**
- * Check base58-encoded string
- * @param str
- * @return true if it is right
- */
+     * Encode a byte vector as a base58-encoded string
+     */
+    string EncodeBase58(const vector<unsigned char> &vch);
+    
+    
+    /**
+     * Decode a base58-encoded string (str) that includes a checksum into a byte
+     * vector (vchRet), return true if decoding is successful
+     */
+    bool DecodeBase58Check(const string &str, vector<unsigned char> &vchRet);
+    
+    /**
+     * Check base58-encoded string
+     * @param str - base58 encoded string
+     * @return true if it is right
+     */
     bool Base58Check(const string &str);
 }
 

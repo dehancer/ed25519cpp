@@ -19,7 +19,7 @@ namespace ed25519 {
 
         CalculatorImpl(Digest *digest): ctx_({}), digest_(digest), endian_(little){
 
-            if ( htonl(47) == 47 ) {
+            if ( htonl(47) == /* DISABLES CODE */ (47) ) {
                 endian_ = big;
             } else {
                 endian_ = little;

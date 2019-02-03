@@ -1,10 +1,10 @@
-\hypertarget{classed25519_1_1_base58}{}\section{ed25519\+:\+:Base58 Class Reference}
-\label{classed25519_1_1_base58}\index{ed25519\+::\+Base58@{ed25519\+::\+Base58}}
+\hypertarget{classed25519_1_1_base58}{}\section{ed25519\+::Base58 Class Reference}
+\label{classed25519_1_1_base58}\index{ed25519::Base58@{ed25519::Base58}}
 
 
 {\ttfamily \#include $<$ed25519.\+hpp$>$}
 
-Inheritance diagram for ed25519\+:\+:Base58\+:\begin{figure}[H]
+Inheritance diagram for ed25519\+::Base58\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.162162cm]{classed25519_1_1_base58}
@@ -26,8 +26,8 @@ Common \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} encoding/decoding p
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classed25519_1_1_base58_a3cb74be32923dcfb03a24b65015bee84}\label{classed25519_1_1_base58_a3cb74be32923dcfb03a24b65015bee84}} 
-\index{ed25519\+::\+Base58@{ed25519\+::\+Base58}!decode@{decode}}
-\index{decode@{decode}!ed25519\+::\+Base58@{ed25519\+::\+Base58}}
+\index{ed25519::Base58@{ed25519::Base58}!decode@{decode}}
+\index{decode@{decode}!ed25519::Base58@{ed25519::Base58}}
 \subsubsection{\texorpdfstring{decode()}{decode()}}
 {\footnotesize\ttfamily virtual bool ed25519\+::\+Base58\+::decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base58\+\_\+string,  }\item[{const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&}]{error = {\ttfamily \mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
@@ -48,8 +48,8 @@ true or false
 Implemented in \mbox{\hyperlink{classed25519_1_1_protected_data_a708852546126e7d19229e247b92a98f6}{ed25519\+::\+Protected\+Data$<$ N $>$}}, \mbox{\hyperlink{classed25519_1_1_protected_data_a708852546126e7d19229e247b92a98f6}{ed25519\+::\+Protected\+Data$<$ size\+::signature $>$}}, \mbox{\hyperlink{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}{ed25519\+::\+Data$<$ N $>$}}, \mbox{\hyperlink{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}{ed25519\+::\+Data$<$ size\+::seed $>$}}, and \mbox{\hyperlink{classed25519_1_1_data_a281d932d3c3fe7fd40ce86ea7eff559b}{ed25519\+::\+Data$<$ size\+::digest $>$}}.
 
 \mbox{\Hypertarget{classed25519_1_1_base58_a1b52a018a5215e2dcf2aa388b0fe06bf}\label{classed25519_1_1_base58_a1b52a018a5215e2dcf2aa388b0fe06bf}} 
-\index{ed25519\+::\+Base58@{ed25519\+::\+Base58}!encode@{encode}}
-\index{encode@{encode}!ed25519\+::\+Base58@{ed25519\+::\+Base58}}
+\index{ed25519::Base58@{ed25519::Base58}!encode@{encode}}
+\index{encode@{encode}!ed25519::Base58@{ed25519::Base58}}
 \subsubsection{\texorpdfstring{encode()}{encode()}}
 {\footnotesize\ttfamily virtual const std\+::string ed25519\+::\+Base58\+::encode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
@@ -61,17 +61,12 @@ encoded \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} string
 Implemented in \mbox{\hyperlink{classed25519_1_1_data_a2dc2e23b950a10b168d7509a63ffca53}{ed25519\+::\+Data$<$ N $>$}}, \mbox{\hyperlink{classed25519_1_1_data_a2dc2e23b950a10b168d7509a63ffca53}{ed25519\+::\+Data$<$ size\+::seed $>$}}, and \mbox{\hyperlink{classed25519_1_1_data_a2dc2e23b950a10b168d7509a63ffca53}{ed25519\+::\+Data$<$ size\+::digest $>$}}.
 
 \mbox{\Hypertarget{classed25519_1_1_base58_addfdb1d6d0f7e7f0cd0cf5dd2ee193bb}\label{classed25519_1_1_base58_addfdb1d6d0f7e7f0cd0cf5dd2ee193bb}} 
-\index{ed25519\+::\+Base58@{ed25519\+::\+Base58}!validate@{validate}}
-\index{validate@{validate}!ed25519\+::\+Base58@{ed25519\+::\+Base58}}
+\index{ed25519::Base58@{ed25519::Base58}!validate@{validate}}
+\index{validate@{validate}!ed25519::Base58@{ed25519::Base58}}
 \subsubsection{\texorpdfstring{validate()}{validate()}}
 {\footnotesize\ttfamily virtual bool ed25519\+::\+Base58\+::validate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
-Validate \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} string without creating object instance 
-\begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}}} & string \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
+Validate \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} string without creating object instance \begin{DoxyReturn}{Returns}
 true if string is \mbox{\hyperlink{namespaceed25519_1_1base58}{base58}} encoded 
 \end{DoxyReturn}
 

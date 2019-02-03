@@ -1,10 +1,10 @@
-\hypertarget{classed25519_1_1_signature}{}\section{ed25519\+:\+:Signature Class Reference}
-\label{classed25519_1_1_signature}\index{ed25519\+::\+Signature@{ed25519\+::\+Signature}}
+\hypertarget{classed25519_1_1_signature}{}\section{ed25519\+::Signature Class Reference}
+\label{classed25519_1_1_signature}\index{ed25519::Signature@{ed25519::Signature}}
 
 
 {\ttfamily \#include $<$ed25519.\+hpp$>$}
 
-Inheritance diagram for ed25519\+:\+:Signature\+:\begin{figure}[H]
+Inheritance diagram for ed25519\+::Signature\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.000000cm]{classed25519_1_1_signature}
@@ -41,8 +41,8 @@ Sigature hash class
 
 \subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classed25519_1_1_signature_a49f8ae05dc538ace14141ae2468b0d8c}\label{classed25519_1_1_signature_a49f8ae05dc538ace14141ae2468b0d8c}} 
-\index{ed25519\+::\+Signature@{ed25519\+::\+Signature}!Signature@{Signature}}
-\index{Signature@{Signature}!ed25519\+::\+Signature@{ed25519\+::\+Signature}}
+\index{ed25519::Signature@{ed25519::Signature}!Signature@{Signature}}
+\index{Signature@{Signature}!ed25519::Signature@{ed25519::Signature}}
 \subsubsection{\texorpdfstring{Signature()}{Signature()}}
 {\footnotesize\ttfamily ed25519\+::\+Signature\+::\+Signature (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
@@ -50,8 +50,8 @@ Sigature hash class
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classed25519_1_1_signature_ab25f6998f84d92166a03612587420f2f}\label{classed25519_1_1_signature_ab25f6998f84d92166a03612587420f2f}} 
-\index{ed25519\+::\+Signature@{ed25519\+::\+Signature}!Decode@{Decode}}
-\index{Decode@{Decode}!ed25519\+::\+Signature@{ed25519\+::\+Signature}}
+\index{ed25519::Signature@{ed25519::Signature}!Decode@{Decode}}
+\index{Decode@{Decode}!ed25519::Signature@{ed25519::Signature}}
 \subsubsection{\texorpdfstring{Decode()}{Decode()}}
 {\footnotesize\ttfamily static std\+::optional$<$\mbox{\hyperlink{classed25519_1_1_signature}{Signature}}$>$ ed25519\+::\+Signature\+::\+Decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base58,  }\item[{const \mbox{\hyperlink{namespaceed25519_a6ba572942b3c18591fc869d52a6b16e6}{Error\+Handler}} \&}]{error = {\ttfamily \mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{default\+\_\+error\+\_\+handler}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
@@ -66,8 +66,8 @@ Restore signature from base58-\/encoded string
 nullopt or new signature hash object 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classed25519_1_1_signature_aca2ff60a3e305730cd62e7005b92cfef}\label{classed25519_1_1_signature_aca2ff60a3e305730cd62e7005b92cfef}} 
-\index{ed25519\+::\+Signature@{ed25519\+::\+Signature}!verify@{verify}}
-\index{verify@{verify}!ed25519\+::\+Signature@{ed25519\+::\+Signature}}
+\index{ed25519::Signature@{ed25519::Signature}!verify@{verify}}
+\index{verify@{verify}!ed25519::Signature@{ed25519::Signature}}
 \subsubsection{\texorpdfstring{verify()}{verify()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily bool ed25519\+::\+Signature\+::verify (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ unsigned char $>$ \&}]{message,  }\item[{const \mbox{\hyperlink{classed25519_1_1keys_1_1_public}{keys\+::\+Public}} \&}]{key }\end{DoxyParamCaption}) const}
 
@@ -82,8 +82,8 @@ Verify message with public key
 true if message was signed by private key of the pair 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classed25519_1_1_signature_a365b186127ea5150dd233c9c89ac4faf}\label{classed25519_1_1_signature_a365b186127ea5150dd233c9c89ac4faf}} 
-\index{ed25519\+::\+Signature@{ed25519\+::\+Signature}!verify@{verify}}
-\index{verify@{verify}!ed25519\+::\+Signature@{ed25519\+::\+Signature}}
+\index{ed25519::Signature@{ed25519::Signature}!verify@{verify}}
+\index{verify@{verify}!ed25519::Signature@{ed25519::Signature}}
 \subsubsection{\texorpdfstring{verify()}{verify()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily bool ed25519\+::\+Signature\+::verify (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message,  }\item[{const \mbox{\hyperlink{classed25519_1_1keys_1_1_public}{keys\+::\+Public}} \&}]{key }\end{DoxyParamCaption}) const}
 
@@ -98,8 +98,8 @@ Verify message with public key
 true if message was signed by private key of the pair 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classed25519_1_1_signature_a906ffca7764e7879438a9c60d96ff207}\label{classed25519_1_1_signature_a906ffca7764e7879438a9c60d96ff207}} 
-\index{ed25519\+::\+Signature@{ed25519\+::\+Signature}!verify@{verify}}
-\index{verify@{verify}!ed25519\+::\+Signature@{ed25519\+::\+Signature}}
+\index{ed25519::Signature@{ed25519::Signature}!verify@{verify}}
+\index{verify@{verify}!ed25519::Signature@{ed25519::Signature}}
 \subsubsection{\texorpdfstring{verify()}{verify()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily bool ed25519\+::\+Signature\+::verify (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classed25519_1_1_digest}{Digest}} \&}]{digest,  }\item[{const \mbox{\hyperlink{classed25519_1_1keys_1_1_public}{keys\+::\+Public}} \&}]{key }\end{DoxyParamCaption}) const}
 
@@ -117,9 +117,9 @@ true if message was signed by private key of the pair
 
 \subsection{Friends And Related Function Documentation}
 \mbox{\Hypertarget{classed25519_1_1_signature_ad89670fe663c8c8526b69b1bc6a87c19}\label{classed25519_1_1_signature_ad89670fe663c8c8526b69b1bc6a87c19}} 
-\index{ed25519\+::\+Signature@{ed25519\+::\+Signature}!keys\+::\+Pair@{keys\+::\+Pair}}
-\index{keys\+::\+Pair@{keys\+::\+Pair}!ed25519\+::\+Signature@{ed25519\+::\+Signature}}
-\subsubsection{\texorpdfstring{keys\+::\+Pair}{keys::Pair}}
+\index{ed25519::Signature@{ed25519::Signature}!keys::Pair@{keys::Pair}}
+\index{keys::Pair@{keys::Pair}!ed25519::Signature@{ed25519::Signature}}
+\subsubsection{\texorpdfstring{keys::Pair}{keys::Pair}}
 {\footnotesize\ttfamily friend class \mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{keys\+::\+Pair}}\hspace{0.3cm}{\ttfamily [friend]}}
 
 

@@ -69,30 +69,30 @@ namespace ed25519 {
 
         /**
          * Encode binary data to base58 string
-         * @param binary data
+         * @param data - encode data
          * @return base58 string
          */
         std::string encode(const std::vector<unsigned char>& data);
 
         /**
          * Decode base58-encoded string to binary data
-         * @param str
-         * @param data
+         * @param str encoded string
+         * @param data binary crypted data
          * @return false if decoding is failed
          */
         bool decode(const std::string& str, std::vector<unsigned char>& data);
 
         /**
          * Validate base58-encoded string
-         * @param str
+         * @param str encoded string
          * @return false if decoding is failed
          */
         bool validate(const std::string &str);
 
         /**
          * Decode base58 string to binary format
-         * @param base58
-         * @param error
+         * @param base58 -encoded string
+         * @param error error handler
          * @return binary buffer
          */
         template<size_t N>
@@ -128,9 +128,9 @@ namespace ed25519 {
 
         /**
          * Encode binary data to base58 string
-         * @tparam N
-         * @param data
-         * @return
+         * @tparam N - size of data
+         * @param data decoded data
+         * @return base58-encoded string
          */
         template<size_t N>
         std::string encode(
@@ -177,7 +177,6 @@ namespace ed25519 {
 
         /**
          * Validate base58 string without creating object instance
-         * @param base58 string
          * @return true if string is base58 encoded
          */
         virtual bool validate() const = 0;
@@ -192,7 +191,7 @@ namespace ed25519 {
 
     /**
      * Base58 binary data structure
-     * @tparam N
+     * @tparam N - size of encoded data
      */
     template <size_t N>
     class Data: public std::array<unsigned char, N>, public Base58 {
@@ -255,7 +254,7 @@ namespace ed25519 {
 
         /**
          * Validate string before create encoded data.
-         * @param string
+         * @param string base58-encoded string
          * @return validation result
          */
         static bool validate(const std::string &string) {
@@ -384,7 +383,7 @@ namespace ed25519 {
 
         /**
          * Create seed from secret phrase
-         * @param phrase
+         * @param phrase secret phrase string
          */
         Seed(const std::string &phrase);
 
@@ -446,8 +445,8 @@ namespace ed25519 {
 
             /**
              * Optional constructor from secret phrase
-             * @param phrase
-             * @param error
+             * @param phrase secret phrase string
+             * @param error error handler
              * @return nullopt or private key
              */
             static std::optional<Pair> WithSecret(const std::string &phrase,
