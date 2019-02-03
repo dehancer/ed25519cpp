@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ed25519"
-  s.version      = "1.1.2"
+  s.version      = "0.5.0"
   s.summary      = "ed25519 is a public-key signature system framework for swift"
   s.description  = "ed25519 features: Fast single-signature verification; fast batch verification; very fast signing; high security level; small size of keys and signatures"
 
