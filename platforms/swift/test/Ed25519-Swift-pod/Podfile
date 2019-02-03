@@ -1,0 +1,16 @@
+use_frameworks!
+platform :osx, '10.14'
+
+pre_install do |installer|
+    # workaround for #3289
+    Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+end
+
+target 'Ed25519-Swift-pod' do
+    pod 'ed25519', :path => '../../../../'
+    
+    #
+    # Uncomment in your app:
+    #
+    # pod 'MileCsaLight', :git => 'https://github.com/mile-core/mile-csa-api'
+end

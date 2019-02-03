@@ -112,7 +112,7 @@ namespace ed25519 {
 
         std::unique_ptr<Signature> Pair::sign(const std::string &message){
             std::vector<unsigned char> v(message.begin(), message.end());
-            return std::move(sign(v));
+            return sign(v);
         }
 
         std::unique_ptr<Signature> Pair::sign(const Digest& digest){

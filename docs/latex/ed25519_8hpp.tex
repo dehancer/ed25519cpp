@@ -1,5 +1,5 @@
 \hypertarget{ed25519_8hpp}{}\section{/\+Users/denn/\+Development/\+Dehancer/\+Dehancer-\/\+Services/ed25519cpp/include/ed25519.hpp File Reference}
-\label{ed25519_8hpp}\index{/\+Users/denn/\+Development/\+Dehancer/\+Dehancer-\/\+Services/ed25519cpp/include/ed25519.\+hpp@{/\+Users/denn/\+Development/\+Dehancer/\+Dehancer-\/\+Services/ed25519cpp/include/ed25519.\+hpp}}
+\label{ed25519_8hpp}\index{/Users/denn/Development/Dehancer/Dehancer-\/Services/ed25519cpp/include/ed25519.hpp@{/Users/denn/Development/Dehancer/Dehancer-\/Services/ed25519cpp/include/ed25519.hpp}}
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$array$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
@@ -9,6 +9,7 @@
 {\ttfamily \#include $<$cerrno$>$}\newline
 {\ttfamily \#include $<$system\+\_\+error$>$}\newline
 {\ttfamily \#include $<$variant$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -47,6 +48,11 @@ class \mbox{\hyperlink{classed25519_1_1keys_1_1_pair}{ed25519\+::keys\+::\+Pair}
 \item 
  \mbox{\hyperlink{namespaceed25519_1_1keys}{ed25519\+::keys}}
 \end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ed25519_8hpp_a86d500a34c624c2cae56bc25a31b12f3}{U\+N\+U\+S\+ED}}(x)~(void)(x)
+\end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -80,7 +86,7 @@ const std\+::string \mbox{\hyperlink{namespaceed25519_a908061c627d853b0d7ca46bdf
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-static auto \mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{ed25519\+::default\+\_\+error\+\_\+handler}} = \mbox{[}$\,$\mbox{]}(const std\+::error\+\_\+code \&code) \{\}
+static auto \mbox{\hyperlink{namespaceed25519_a7c7bb6ed17541162959c33ed3e3b15fb}{ed25519\+::default\+\_\+error\+\_\+handler}} = \mbox{[}$\,$\mbox{]}(const std\+::error\+\_\+code \&code) \{\mbox{\hyperlink{ed25519_8hpp_a86d500a34c624c2cae56bc25a31b12f3}{U\+N\+U\+S\+ED}}(code);\}
 \item 
 constexpr const size\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1size_a0c20525cc9711076ec093177a8e36c25}{ed25519\+::size\+::hash}} = 32
 \item 
@@ -96,3 +102,12 @@ constexpr const size\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1size_a2e21f8a4a
 \item 
 constexpr const size\+\_\+t \mbox{\hyperlink{namespaceed25519_1_1size_adefacb85c80ee8d51c482044e6d79a26}{ed25519\+::size\+::signature}} = double\+\_\+hash
 \end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ed25519_8hpp_a86d500a34c624c2cae56bc25a31b12f3}\label{ed25519_8hpp_a86d500a34c624c2cae56bc25a31b12f3}} 
+\index{ed25519.hpp@{ed25519.hpp}!UNUSED@{UNUSED}}
+\index{UNUSED@{UNUSED}!ed25519.hpp@{ed25519.hpp}}
+\subsubsection{\texorpdfstring{UNUSED}{UNUSED}}
+{\footnotesize\ttfamily \#define U\+N\+U\+S\+ED(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(void)(x)}
+

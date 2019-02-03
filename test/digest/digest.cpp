@@ -49,9 +49,11 @@ BOOST_AUTO_TEST_CASE( digest_calculator ) {
 
     auto siganture = pair->sign(digest);
 
+    BOOST_TEST_MESSAGE("Digest signature: " + siganture->encode() );
+
     auto digest_restored = Digest::Decode(digest.encode(), error_handler);
 
-    if (digest_restored && siganture->verify(*digest_restored, pair->get_public_key())) {
-        BOOST_TEST_MESSAGE("Digest signature: " + siganture->encode() );
-    }
+    std::optional<ed25519::keys::Public> pk = ed25519::keys::Public::Decode(pair->get_public_key().encode(), default_error_handler);
+
+    BOOST_CHECK(siganture->verify(*digest_restored, *pk));
 }

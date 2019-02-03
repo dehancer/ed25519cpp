@@ -1,13 +1,13 @@
-This is a portable implementation of \href{http://ed25519.cr.yp.to/}{\tt Ed25519} based on the S\+U\+P\+E\+R\+C\+OP \char`\"{}ref10\char`\"{} implementation. The ed25519cpp wraps c-\/based implementing modern c++17 dialect. Additionally there is some extension which make easier the work with base58-\/encoded strings and pair of keys based on \mbox{\hyperlink{namespaceed25519}{ed25519}}.
+This is a portable implementation of \href{http://ed25519.cr.yp.to/}{\texttt{ Ed25519}} based on the S\+U\+P\+E\+R\+C\+OP \char`\"{}ref10\char`\"{} implementation. The ed25519cpp wraps c-\/based implementing modern c++17 dialect. Additionally there is some extension which make easier the work with base58-\/encoded strings and pair of keys based on \mbox{\hyperlink{namespaceed25519}{ed25519}}.
 
 \subsection*{Home pages explains \mbox{\hyperlink{namespaceed25519}{ed25519}}}
 
 
 \begin{DoxyEnumerate}
-\item \href{https://ed25519.cr.yp.to/}{\tt https\+://ed25519.\+cr.\+yp.\+to/}
+\item \href{https://ed25519.cr.yp.to/}{\texttt{ https\+://ed25519.\+cr.\+yp.\+to/}}
 \end{DoxyEnumerate}
 \begin{DoxyEnumerate}
-\item \href{https://en.wikipedia.org/wiki/EdDSA}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Ed\+D\+SA}
+\item \href{https://en.wikipedia.org/wiki/EdDSA}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+Ed\+D\+SA}}
 \end{DoxyEnumerate}
 
 \subsection*{Requirements}
@@ -25,7 +25,7 @@ This is a portable implementation of \href{http://ed25519.cr.yp.to/}{\tt Ed25519
 
 \subsection*{Build}
 
-\$ git clone \href{https://github.com/dnevera/ed25519cpp/}{\tt https\+://github.\+com/dnevera/ed25519cpp/} \$ cd ./ed25519cpp; mkdir build; cd ./build \$ cmake ..; make -\/j4 \$ make test
+\$ git clone \href{https://github.com/dnevera/ed25519cpp/}{\texttt{ https\+://github.\+com/dnevera/ed25519cpp/}} \$ cd ./ed25519cpp; mkdir build; cd ./build \$ cmake ..; make -\/j4 \$ make test
 
 \subsection*{Tested}
 
@@ -40,176 +40,171 @@ This is a portable implementation of \href{http://ed25519.cr.yp.to/}{\tt Ed25519
 \item O\+SX 10.\+13, X\+Code10
 \end{DoxyEnumerate}
 
-\subsection*{\href{https://htmlpreview.github.io/?https://github.com/dnevera/ed25519cpp/blob/master/docs/html/namespaces.html}{\tt A\+PI}}
+\subsection*{\href{https://htmlpreview.github.io/?https://github.com/dnevera/ed25519cpp/blob/master/docs/html/namespaces.html}{\texttt{ A\+PI}}}
 
 \subsection*{Examples}
 
 \subsubsection*{Random seed generator}
 
 
-\begin{DoxyCode}
-\{c++\}
-#include "ed25519.hpp"
-
-
-ed25519::Seed seed;
-std::cout << "Seed base58 string: "<< seed.encode() << std::endl;
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\#include "ed25519.hpp"}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ed25519::Seed seed;}
+\DoxyCodeLine{std::cout << "Seed base58 string: "<< seed.encode() << std::endl;}
 \end{DoxyCode}
 
 
 \subsubsection*{Create random keys pair}
 
 
-\begin{DoxyCode}
-\{c++\}
-#include "ed25519.hpp"
-
-if (auto pair = ed25519::keys::Pair::Random())\{
-    std::cout << "ed25519 random keys pair: "<< pair->get\_public\_key.encode() << "/" << 
-       pair->get\_private\_key().encode() << std::endl;
-\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\#include "ed25519.hpp"}
+\DoxyCodeLine{}
+\DoxyCodeLine{if (auto pair = ed25519::keys::Pair::Random())\{}
+\DoxyCodeLine{    std::cout << "ed25519 random keys pair: "<< pair->get\_public\_key.encode() << "/" <<  pair->get\_private\_key().encode() << std::endl;}
+\DoxyCodeLine{\}}
 \end{DoxyCode}
 
 
 \subsubsection*{Create keys pair from private key}
 
 
-\begin{DoxyCode}
-\{c++\}
-#include "ed25519.hpp"
-
-auto error\_handler = [](const std::error\_code code)\{
-    BOOST\_TEST\_MESSAGE("Test error: " + ed25519::StringFormat("code: %i, message: %s", code.value(), +
-       code.message().c\_str()));
-\};
-
-if (auto pair = ed25519::keys::Pair::FromPrivateKey(secret\_pair->get\_private\_key().encode(),
-       error\_handler))\{
-    std::cout << "ed25519 random keys pair: "<< pair->get\_public\_key.encode() << "/" << 
-       pair->get\_private\_key().encode() << std::endl;
-\}
-else\{
-    // handling error
-\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\#include "ed25519.hpp"}
+\DoxyCodeLine{}
+\DoxyCodeLine{auto error\_handler = [](const std::error\_code code)\{}
+\DoxyCodeLine{    BOOST\_TEST\_MESSAGE("Test error: " + ed25519::StringFormat("code: \%i, message: \%s", code.value(), + code.message().c\_str()));}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{if (auto pair = ed25519::keys::Pair::FromPrivateKey(secret\_pair->get\_private\_key().encode(), error\_handler))\{}
+\DoxyCodeLine{    std::cout << "ed25519 random keys pair: "<< pair->get\_public\_key.encode() << "/" <<  pair->get\_private\_key().encode() << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{else\{}
+\DoxyCodeLine{    // handling error}
+\DoxyCodeLine{\}}
 \end{DoxyCode}
 
 
 \subsubsection*{Create keys pair with secret phrase}
 
 
-\begin{DoxyCode}
-\{c++\}
-#include "ed25519.hpp"
-
-
-if (auto pair = ed25519::keys::Pair::WithSecret("some secret phrase", error\_handler))\{
-    std::cout << "ed25519 random keys pair: "<< pair->get\_public\_key.encode() << "/" << 
-       pair->get\_private\_key().encode() << std::endl;
-\}
-else\{
-    // handling error
-\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\#include "ed25519.hpp"}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{if (auto pair = ed25519::keys::Pair::WithSecret("some secret phrase", error\_handler))\{}
+\DoxyCodeLine{    std::cout << "ed25519 random keys pair: "<< pair->get\_public\_key.encode() << "/" <<  pair->get\_private\_key().encode() << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{else\{}
+\DoxyCodeLine{    // handling error}
+\DoxyCodeLine{\}}
 \end{DoxyCode}
 
 
 \subsubsection*{Sign message}
 
 
-\begin{DoxyCode}
-\{c++\}
-#include "ed25519.hpp"
-
-// create pair
-auto pair           = ed25519::keys::Pair::WithSecret("some secret phrase");
-
-// some message 
-std::string message = "some message or token string";
-
-// sign message return uniq\_ptr siganture
-auto signature      = pair->sign(message);
-
-if (signature->verify(message, pair->get\_public\_key())) \{
-   // handle verified
-\}
-
-//
-// It is not available to create empty signature:
-// auto signature = ed25519::keys::Pair::Siganture()
-// only copy operations or restore from base58-encoded string 
-//
-auto another\_signature = ed25519::Signature::Decode(signature->encode());
-
-//
-// Handle errors when restoration
-//
-
-if (auto signature = ed25519::Signature::Decode("...some wrong encoded string ...", error\_handler))\{
-    // handle verified
-\}
-else \{
-    // handle error
-\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\#include "ed25519.hpp"}
+\DoxyCodeLine{}
+\DoxyCodeLine{// create pair}
+\DoxyCodeLine{auto pair           = ed25519::keys::Pair::WithSecret("some secret phrase");}
+\DoxyCodeLine{}
+\DoxyCodeLine{// some message }
+\DoxyCodeLine{std::string message = "some message or token string";}
+\DoxyCodeLine{}
+\DoxyCodeLine{// sign message return uniq\_ptr siganture}
+\DoxyCodeLine{auto signature      = pair->sign(message);}
+\DoxyCodeLine{}
+\DoxyCodeLine{if (signature->verify(message, pair->get\_public\_key())) \{}
+\DoxyCodeLine{   // handle verified}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{//}
+\DoxyCodeLine{// It is not available to create empty signature:}
+\DoxyCodeLine{// auto signature = ed25519::keys::Pair::Siganture()}
+\DoxyCodeLine{// only copy operations or restore from base58-encoded string }
+\DoxyCodeLine{//}
+\DoxyCodeLine{auto another\_signature = ed25519::Signature::Decode(signature->encode());}
+\DoxyCodeLine{}
+\DoxyCodeLine{//}
+\DoxyCodeLine{// Handle errors when restoration}
+\DoxyCodeLine{//}
+\DoxyCodeLine{}
+\DoxyCodeLine{if (auto signature = ed25519::Signature::Decode("...some wrong encoded string ...", error\_handler))\{}
+\DoxyCodeLine{    // handle verified}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{else \{}
+\DoxyCodeLine{    // handle error}
+\DoxyCodeLine{\}}
 \end{DoxyCode}
 
 
 \subsubsection*{Create digest hash from variant types}
 
 
-\begin{DoxyCode}
-\{c++\}
-
-auto digest = Digest([pair](auto &calculator) \{
-
-        //
-        // set big endian 
-        // little endian is default
-        //
-
-        calculator.set\_endian(Digest::Calculator::endian::big);
-
-        std::cout << "Calculator endian: " << calculator.get\_endian() << std::endl;
-
-        calculator.append(true);
-
-        calculator.append(1);
-
-        calculator.append((int)(1.12f * 100));
-
-        std::string title = "123";
-
-        calculator.append(title);
-
-        std::vector<unsigned char> v(title.begin(), title.end());
-
-        calculator.append(v);
-
-    \});
-
-//
-// Encode to base58
-//
-auto base58 = digest.encode();
-
-//
-// Sign digest
-//
-auto siganture = pair->sign(digest);
-
-if (siganture->verify(digest, pair->get\_public\_key())) \{
-    //
-    // handle verified digest
-    //
-\}
-
-//
-// Restore from base58-encded string
-//
-auto digest\_restored = Digest::Decode(digest.encode(), error\_handler);
-
-if (digest\_restored && siganture->verify(*digest\_restored, pair->get\_public\_key())) \{
-    //
-    // handle restored and verified
-    //     
-\}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{auto digest = Digest([pair](auto \&calculator) \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{        //}
+\DoxyCodeLine{        // set big endian }
+\DoxyCodeLine{        // little endian is default}
+\DoxyCodeLine{        //}
+\DoxyCodeLine{        }
+\DoxyCodeLine{        calculator.set\_endian(Digest::Calculator::endian::big);}
+\DoxyCodeLine{        }
+\DoxyCodeLine{        std::cout << "Calculator endian: " << calculator.get\_endian() << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        calculator.append(true);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        calculator.append(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        calculator.append((int)(1.12f * 100));}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::string title = "123";}
+\DoxyCodeLine{}
+\DoxyCodeLine{        calculator.append(title);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::vector<unsigned char> v(title.begin(), title.end());}
+\DoxyCodeLine{}
+\DoxyCodeLine{        calculator.append(v);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{//}
+\DoxyCodeLine{// Encode to base58}
+\DoxyCodeLine{//}
+\DoxyCodeLine{auto base58 = digest.encode();}
+\DoxyCodeLine{}
+\DoxyCodeLine{//}
+\DoxyCodeLine{// Sign digest}
+\DoxyCodeLine{//}
+\DoxyCodeLine{auto siganture = pair->sign(digest);}
+\DoxyCodeLine{}
+\DoxyCodeLine{if (siganture->verify(digest, pair->get\_public\_key())) \{}
+\DoxyCodeLine{    //}
+\DoxyCodeLine{    // handle verified digest}
+\DoxyCodeLine{    //}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{//}
+\DoxyCodeLine{// Restore from base58-encded string}
+\DoxyCodeLine{//}
+\DoxyCodeLine{auto digest\_restored = Digest::Decode(digest.encode(), error\_handler);}
+\DoxyCodeLine{}
+\DoxyCodeLine{if (digest\_restored \&\& siganture->verify(*digest\_restored, pair->get\_public\_key())) \{}
+\DoxyCodeLine{    //}
+\DoxyCodeLine{    // handle restored and verified}
+\DoxyCodeLine{    //     }
+\DoxyCodeLine{\}}
 \end{DoxyCode}
  
