@@ -266,7 +266,7 @@ inline NSError *error2NSError(const std::error_code &code){
 }
 
 - (instancetype) appendString:(NSString*)string {
-    calculator->append([string UTF8String]);
+    calculator->append(std::string([string UTF8String]));
     return self;
 }
 
