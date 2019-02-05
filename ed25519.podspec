@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
  
   s.swift_version = "4.2"
 
-  s.source       = { :git => "https://bitbucket.org/mile-core/mile-cpp-api", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/dnevera/ed25519cpp", :tag => "#{s.version}" }
 
   s.source_files  = "platforms/swift/sdk/Classes/*.{h,m,mm}",
                     "src/*.cpp",
