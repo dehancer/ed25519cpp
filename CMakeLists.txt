@@ -2,22 +2,17 @@ cmake_minimum_required(VERSION 3.8)
 
 set(PROJECT_LIB ed25919cpp)
 
-project(${PROJECT_LIB} VERSION 1.0.0)
+project(${PROJECT_LIB} VERSION 1.0.1)
 
 set(CMAKE_CXX_STANDARD 17)
+
+option(BUILD_TESTING "Enable creation of Eigen tests." OFF)
 
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif(CCACHE_FOUND)
-
-set (Boost_USE_STATIC_LIBS ON)
-set (Boost_USE_MULTITHREADED OFF)
-
-set (BOOST_COMPONENTS)
-find_package (Boost  REQUIRED COMPONENTS ${BOOST_COMPONENTS})
-include_directories(${Boost_INCLUDE_DIRS})
 
 message(STATUS ${CMAKE_CURRENT_SOURCE_DIR} )
 
@@ -77,5 +72,15 @@ else (DOXYGEN_FOUND)
 endif (DOXYGEN_FOUND)
 
 add_subdirectory(lib)
-add_subdirectory(test)
-enable_testing ()
+
+if (BUILD_TESTING)
+    set (Boost_USE_STATIC_LIBS ON)
+    set (Boost_USE_MULTITHREADED OFF)
+
+    set (BOOST_COMPONENTS)
+    find_package (Boost  REQUIRED COMPONENTS ${BOOST_COMPONENTS})
+    include_directories(${Boost_INCLUDE_DIRS})
+
+    add_subdirectory(test)
+    enable_testing ()
+endif ()
