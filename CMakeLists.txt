@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.8)
 
-set(PROJECT_LIB ed25919cpp)
+set(PROJECT_LIB ed25519cpp)
 
-project(${PROJECT_LIB} VERSION 1.0.1)
+project(${PROJECT_LIB} VERSION 1.0.2)
 
 set(CMAKE_CXX_STANDARD 17)
 
