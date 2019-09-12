@@ -11,6 +11,7 @@
 
 namespace ed25519 {
 
+
     struct CalculatorImpl: public Digest::Calculator{
 
         void append(const variant_t &value) override;
@@ -65,7 +66,7 @@ namespace ed25519 {
 
     void CalculatorImpl::append(const Digest::Calculator::variant_t &value) {
 
-        std::visit([&](auto&& arg) {
+        ed25519::visit([&](auto&& arg) {
 
             using T = std::decay_t<decltype(arg)>;
 

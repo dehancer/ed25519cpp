@@ -15,9 +15,13 @@
 #include <variant>
 #include <memory>
 
+#include "ed25519/c++17/variant.hpp"
+
 #define UNUSED(x) (void)(x)
 
 namespace ed25519 {
+
+    using namespace mpark;
 
     /**
     * Common error handling closure.
@@ -101,29 +105,29 @@ namespace ed25519 {
                 std::array<unsigned char, N> &data,
                 const ErrorHandler &error = default_error_handler){
 
-            std::vector<unsigned char> v;
+          std::vector<unsigned char> v;
 
-            if (!decode(base58.c_str(), v))
-            {
-                std::error_code ec(static_cast<int>(error::BADFORMAT),error_category());
-                error(ec);
+          if (!decode(base58.c_str(), v))
+          {
+            std::error_code ec(static_cast<int>(error::BADFORMAT),error_category());
+            error(ec);
 
-                return false;
-            }
+            return false;
+          }
 
-            if (v.size() != N)
-            {
-                std::stringstream errorMessage;
-                errorMessage << "size of decoded vector is not equal to expected size: " << v.size() << " <> " << N;
-                std::error_code ec(static_cast<int>(error::UNEXPECTED_SIZE),error_category(errorMessage.str()));
-                error(ec);
+          if (v.size() != N)
+          {
+            std::stringstream errorMessage;
+            errorMessage << "size of decoded vector is not equal to expected size: " << v.size() << " <> " << N;
+            std::error_code ec(static_cast<int>(error::UNEXPECTED_SIZE),error_category(errorMessage.str()));
+            error(ec);
 
-                return false;
-            }
+            return false;
+          }
 
-            std::copy_n(v.begin(), N, data.begin());
+          std::copy_n(v.begin(), N, data.begin());
 
-            return true;
+          return true;
         }
 
         /**
@@ -136,20 +140,20 @@ namespace ed25519 {
         std::string encode(
                 const std::array<unsigned char, N> &data) {
 
-            // add 4-byte hash check to the end
+          // add 4-byte hash check to the end
 
-            std::vector<unsigned char> vch;
-            vch.assign(data.begin(), data.end());
+          std::vector<unsigned char> vch;
+          vch.assign(data.begin(), data.end());
 
-            uint_least32_t crc32_ = crc32(&vch[0], vch.size());
+          uint_least32_t crc32_ = crc32(&vch[0], vch.size());
 
-            // little endian
-            vch.push_back(static_cast<unsigned char>(crc32_ & 0xff));
-            vch.push_back(static_cast<unsigned char>((crc32_ >> 8) & 0xff));
-            vch.push_back(static_cast<unsigned char>((crc32_ >> 16) & 0xff));
-            vch.push_back(static_cast<unsigned char>((crc32_ >> 24) & 0xff));
+          // little endian
+          vch.push_back(static_cast<unsigned char>(crc32_ & 0xff));
+          vch.push_back(static_cast<unsigned char>((crc32_ >> 8) & 0xff));
+          vch.push_back(static_cast<unsigned char>((crc32_ >> 16) & 0xff));
+          vch.push_back(static_cast<unsigned char>((crc32_ >> 24) & 0xff));
 
-            return encode(vch);
+          return encode(vch);
         }
     }
 
@@ -207,11 +211,11 @@ namespace ed25519 {
         * @return nullopt or new data hash object
         */
         inline static  std::optional<Data<N>> Decode(const std::string &base58, const ErrorHandler &error = default_error_handler) {
-            auto s = Data<N>();
-            if (s.decode(base58,error)){
-                return std::make_optional(s);
-            }
-            return std::nullopt;
+          auto s = Data<N>();
+          if (s.decode(base58,error)){
+            return std::make_optional(s);
+          }
+          return std::nullopt;
         }
 
         Data():binary_data() { clean(); }
@@ -226,7 +230,7 @@ namespace ed25519 {
          * @return encoded string
          */
         const std::string encode() const override {
-            return base58::encode(*this);
+          return base58::encode(*this);
         }
 
         /**
@@ -236,20 +240,20 @@ namespace ed25519 {
          * @return false if decoding is failed
          */
         bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override {
-            return base58::decode(base58, *this, error);
+          return base58::decode(base58, *this, error);
         }
 
         bool validate() const override {
-            if (N == this->size()) {
+          if (N == this->size()) {
 
-                if (encode().empty())
-                    return  false;
+            if (encode().empty())
+              return  false;
 
-                return base58::validate(encode());
-            }
-            else {
-                return false;
-            }
+            return base58::validate(encode());
+          }
+          else {
+            return false;
+          }
         }
 
         /**
@@ -258,19 +262,19 @@ namespace ed25519 {
          * @return validation result
          */
         static bool validate(const std::string &string) {
-            return base58::validate(string);
+          return base58::validate(string);
         }
     };
 
 
     template <size_t N>
     class ProtectedData: public Data<N> {
-        public:
+    public:
         inline const unsigned char* data() const { return Data<N>::data();};
     protected:
         inline unsigned char* data() { return Data<N>::data();};
         bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override {
-            return Data<N>::decode(base58, error);
+          return Data<N>::decode(base58, error);
         }
         friend class keys::Pair;
     };
@@ -288,7 +292,7 @@ namespace ed25519 {
                 big = 1
             };
 
-            typedef std::variant<
+            typedef variant<
                     bool,
                     unsigned char,
                     short int,
@@ -297,7 +301,7 @@ namespace ed25519 {
                     std::vector<unsigned char>,
                     Data<size::hash>,
                     Data<size::double_hash>
-                    > variant_t;
+            > variant_t;
 
             virtual void append(const variant_t &value) = 0;
             virtual void set_endian(endian) = 0;
@@ -413,7 +417,7 @@ namespace ed25519 {
             static  std::optional<Private> Decode(const std::string &base58, const ErrorHandler &error = default_error_handler);
         private:
             bool decode(const std::string &base58, const ErrorHandler &error = default_error_handler) override {
-                return Data<size::signature>::decode(base58, error);
+              return Data<size::signature>::decode(base58, error);
             }
             friend class keys::Pair;
         };
@@ -485,7 +489,7 @@ namespace ed25519 {
             std::unique_ptr<Signature> sign(const Digest& digest);
 
             ~Pair() {
-                clean();
+              clean();
             }
 
         private:
