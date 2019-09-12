@@ -12,6 +12,10 @@ FILE(GLOB PUBLIC_INCLUDE_FILES
         ../include/*.hpp
         )
 
+FILE(GLOB PUBLIC_INCLUDE_CPP17_FILES
+        ../include/ed25519/c++17/*.hpp
+        )
+
 FILE(GLOB INCLUDE_FILES
         ${PUBLIC_INCLUDE_FILES}
         )
@@ -58,5 +62,6 @@ configure_package_config_file(
 
 install(TARGETS ${PROJECT_LIB}   DESTINATION lib)
 install(FILES   ${PUBLIC_INCLUDE_FILES} DESTINATION include)
+install(FILES   ${PUBLIC_INCLUDE_CPP17_FILES} DESTINATION include/ed25519/c++17)
 install(FILES   ${project_config} ${version_config} DESTINATION lib/cmake/${PROJECT_LIB})
 install(FILES   cmake/${PROJECT_LIB}.cmake DESTINATION lib/cmake/${PROJECT_LIB})
