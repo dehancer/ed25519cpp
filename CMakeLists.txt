@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 3.8)
-
 set(PROJECT_LIB ed25519cpp)
-
 project(${PROJECT_LIB} VERSION 1.1.0)
 
 set(CMAKE_CXX_STANDARD 17)
-
+set (EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
 option(BUILD_TESTING "Enable creation of Eigen tests." OFF)
+# first we can indicate the documentation build as an option and set it to ON by default
+option(BUILD_DOC "Build documentation" OFF)
+
+include(ExternalProject)
 
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
@@ -47,40 +49,47 @@ elseif (CMAKE_COMPILER_IS_GNUCXX)
     add_definitions (-Wall -pedantic)
 endif ()
 
-# first we can indicate the documentation build as an option and set it to ON by default
-option(BUILD_DOC "Build documentation" ON)
-
 # check if Doxygen is installed
-find_package(Doxygen)
-if (DOXYGEN_FOUND)
-    # set input and output files
-    set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in)
-    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+if(BUILD_DOC)
+    find_package(Doxygen)
+    if (DOXYGEN_FOUND)
+        # set input and output files
+        set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in)
+        set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
-    # request to configure the file
-    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
-    message("Doxygen build started")
+        # request to configure the file
+        configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+        message("Doxygen build started")
 
-    # note the option ALL which allows to build the docs together with the application
-    add_custom_target( doc_doxygen ALL
-            COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            COMMENT "Generating API documentation with Doxygen"
-            VERBATIM )
-else (DOXYGEN_FOUND)
-    message("Doxygen need to be installed to generate the doxygen documentation")
-endif (DOXYGEN_FOUND)
+        # note the option ALL which allows to build the docs together with the application
+        add_custom_target( doc_doxygen ALL
+                COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                COMMENT "Generating API documentation with Doxygen"
+                VERBATIM )
+    else (DOXYGEN_FOUND)
+        message("Doxygen need to be installed to generate the doxygen documentation")
+    endif (DOXYGEN_FOUND)
+endif()
+
+#
+# Google TEST
+#
+find_package(GTest)
+if (NOT GTEST_FOUND)
+    ExternalProject_Add(googletest
+            GIT_REPOSITORY https://github.com/google/googletest
+            CMAKE_ARGS
+            -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
+            -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
+            -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+            )
+    set(COMMON_DEPENDECIES ${COMMON_DEPENDECIES};googletest)
+endif()
 
 add_subdirectory(lib)
 
 if (BUILD_TESTING)
-    set (Boost_USE_STATIC_LIBS ON)
-    set (Boost_USE_MULTITHREADED OFF)
-
-    set (BOOST_COMPONENTS)
-    find_package (Boost  REQUIRED COMPONENTS ${BOOST_COMPONENTS})
-    include_directories(${Boost_INCLUDE_DIRS})
-
     add_subdirectory(test)
     enable_testing ()
 endif ()

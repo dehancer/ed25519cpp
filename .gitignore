@@ -36,7 +36,7 @@ CMakeCache.txt
 CMakeFiles
 CMakeScripts
 CTestTestfile.cmake
-build*
+*build*
 cmake-build-*
 .idea
 .idea/*

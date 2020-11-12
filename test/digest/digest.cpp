@@ -3,57 +3,55 @@
 //
 
 
-#define BOOST_TEST_MODULE digest_test
-
 #include "ed25519.hpp"
-#include <boost/test/included/unit_test.hpp>
-#include <boost/chrono.hpp>
-#include <boost/date_time.hpp>
 #include <string>
 #include <iostream>
 
+#include "gtest/gtest.h"
+#define GTEST_COUT std::cerr << "[          ] [ INFO ]"
+
 using namespace ed25519;
 
-auto error_handler = [](const std::error_code code){
-    BOOST_TEST_MESSAGE("Test error: " + ed25519::StringFormat("code: %i, message: %s", code.value(), + code.message().c_str()));
+auto error_handler = [](const std::error_code& code){
+    GTEST_COUT << "Test error: " << ed25519::StringFormat("code: %i, message: %s", code.value(), + code.message().c_str()) << std::endl;
 };
 
-BOOST_AUTO_TEST_CASE( digest_calculator ) {
-    auto pair = keys::Pair::WithSecret("some secret phrase");
+TEST(TEST, digest_calculator) {
+  auto pair = keys::Pair::WithSecret("some secret phrase");
 
-    auto digest = Digest([pair](auto &calculator) {
+  auto digest = Digest([pair](auto &calculator) {
 
-        BOOST_TEST_MESSAGE("Calculator ..." + StringFormat(" endian: %i", calculator.get_endian()));
+      GTEST_COUT <<"Calculator ..." + StringFormat(" endian: %i", calculator.get_endian()) << std::endl;
 
-        calculator.append(true);
+      calculator.append(true);
 
-        calculator.append(1);
+      calculator.append(1);
 
-        calculator.append((int)(1.12f * 100));
+      calculator.append((int)(1.12f * 100));
 
-        std::string title = "123";
+      std::string title = "123";
 
-        calculator.append(title);
+      calculator.append(title);
 
-        std::vector<unsigned char> v(title.begin(), title.end());
+      std::vector<unsigned char> v(title.begin(), title.end());
 
-        calculator.append(v);
+      calculator.append(v);
 
-        calculator.append(pair->get_public_key());
+      calculator.append(pair->get_public_key());
 
-        calculator.append(pair->get_private_key());
+      calculator.append(pair->get_private_key());
 
-    });
+  });
 
-    BOOST_TEST_MESSAGE("Digest: " + digest.encode() );
+  GTEST_COUT << "Digest: " + digest.encode()  << std::endl;
 
-    auto siganture = pair->sign(digest);
+  auto siganture = pair->sign(digest);
 
-    BOOST_TEST_MESSAGE("Digest signature: " + siganture->encode() );
+  GTEST_COUT << "Digest signature: " + siganture->encode()  << std::endl;
 
-    auto digest_restored = Digest::Decode(digest.encode(), error_handler);
+  auto digest_restored = Digest::Decode(digest.encode(), error_handler);
 
-    std::optional<ed25519::keys::Public> pk = ed25519::keys::Public::Decode(pair->get_public_key().encode(), default_error_handler);
+  std::optional<ed25519::keys::Public> pk = ed25519::keys::Public::Decode(pair->get_public_key().encode(), default_error_handler);
 
-    BOOST_CHECK(siganture->verify(*digest_restored, *pk));
+  GTEST_COUT << siganture->verify(*digest_restored, *pk) << std::endl;
 }
