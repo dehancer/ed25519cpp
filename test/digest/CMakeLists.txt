@@ -18,6 +18,7 @@ set (TEST digest_${PROJECT_LIB})
 
 add_executable(${TEST} ${TESTS_SOURCES})
 
+
 target_link_libraries (
         ${TEST}
         ${PROJECT_LIB}
