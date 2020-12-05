@@ -2,16 +2,16 @@ cmake_minimum_required(VERSION 3.8)
 set(PROJECT_LIB ed25519cpp)
 project(${PROJECT_LIB} VERSION 1.1.0)
 
-option(DEHACNER_TARGET_ARCH "")
+option(DEHANCER_TARGET_ARCH "")
 
-if (DEHACNER_TARGET_ARCH)
+if (DEHANCER_TARGET_ARCH)
     #
     # x86_64-apple-macos10.13
     # or
     # arm64-apple-macos11
     #
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target ${DEHACNER_TARGET_ARCH}")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target ${DEHACNER_TARGET_ARCH}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target ${DEHANCER_TARGET_ARCH}")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target ${DEHANCER_TARGET_ARCH}")
 endif ()
 
 set(CMAKE_CXX_STANDARD 17)
