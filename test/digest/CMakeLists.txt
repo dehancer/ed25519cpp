@@ -19,6 +19,14 @@ set (TEST digest_${PROJECT_LIB})
 add_executable(${TEST} ${TESTS_SOURCES})
 
 
+if (COMMON_DEPENDENCIES)
+    message(STATUS "${TEST} DEPENDENCIES: ${COMMON_DEPENDENCIES}")
+    add_dependencies(
+            ${TEST}
+            ${COMMON_DEPENDENCIES}
+    )
+endif ()
+
 target_link_libraries (
         ${TEST}
         ${PROJECT_LIB}
