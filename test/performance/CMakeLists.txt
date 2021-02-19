@@ -20,5 +20,13 @@ target_link_libraries (
         ${TEST_LIBRARIES}
 )
 
+if (COMMON_DEPENDENCIES)
+    message(STATUS "${TEST} DEPENDENCIES: ${COMMON_DEPENDENCIES}")
+    add_dependencies(
+            ${TEST}
+            ${COMMON_DEPENDENCIES}
+    )
+endif ()
+
 add_test (test ${TEST})
 enable_testing ()

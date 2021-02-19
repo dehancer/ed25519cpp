@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 set(PROJECT_LIB ed25519cpp)
-project(${PROJECT_LIB} VERSION 1.1.0)
+project(${PROJECT_LIB} VERSION 1.3.2)
 
 option(DEHANCER_TARGET_ARCH "")
 
@@ -95,8 +95,22 @@ if (NOT GTEST_FOUND)
             -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
             -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
             -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
+            -DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}
+            -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
             )
-    set(COMMON_DEPENDECIES ${COMMON_DEPENDECIES};googletest)
+    set(COMMON_DEPENDENCIES ${COMMON_DEPENDENCIES};googletest)
+
+    include_directories(
+            ./
+            ../include
+            ${CMAKE_BINARY_DIR}/external/include
+    )
+
+    link_directories(
+            ${CMAKE_BINARY_DIR}/external/lib
+    )
+
 endif()
 
 add_subdirectory(lib)
