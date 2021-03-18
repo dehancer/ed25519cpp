@@ -108,7 +108,7 @@ if (NOT GTEST_FOUND)
     )
 
     link_directories(
-            ${CMAKE_BINARY_DIR}/external/lib
+            ${CMAKE_BINARY_DIR}/external/lib/
     )
 
 endif()

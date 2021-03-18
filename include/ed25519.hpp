@@ -318,7 +318,7 @@ namespace ed25519 {
          * Create new digest from variant types
          * @param handler - calculator handler
          */
-        Digest(context handler);
+        Digest(const context& handler);
 
         Digest();
 
