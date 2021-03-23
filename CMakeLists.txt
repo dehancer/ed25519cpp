@@ -14,6 +14,18 @@ if (DEHANCER_TARGET_ARCH)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target ${DEHANCER_TARGET_ARCH}")
 endif ()
 
+if (WIN32)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -EHsc -Wno-deprecated-declarations")
+    add_definitions(/MT /DWIN32=1 /D_ITERATOR_DEBUG_LEVEL=0)
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -rdynamic")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-command-line-argument")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast -ffast-math")
+endif ()
+
+
 set(CMAKE_CXX_STANDARD 17)
 set (EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
 option(BUILD_TESTING "Enable creation of Eigen tests." OFF)
@@ -55,12 +67,6 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 
 endif()
 
-if (MSVC)
-    add_definitions (/W4)
-elseif (CMAKE_COMPILER_IS_GNUCXX)
-    add_definitions (-Wall -pedantic)
-endif ()
-
 # check if Doxygen is installed
 if(BUILD_DOC)
     find_package(Doxygen)
@@ -84,33 +90,36 @@ if(BUILD_DOC)
     endif (DOXYGEN_FOUND)
 endif()
 
-#
-# Google TEST
-#
-find_package(GTest)
-if (NOT GTEST_FOUND)
-    ExternalProject_Add(googletest
-            GIT_REPOSITORY https://github.com/google/googletest
-            CMAKE_ARGS
-            -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
-            -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
-            -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
-            -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
-            -DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}
-            -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
-            )
-    set(COMMON_DEPENDENCIES ${COMMON_DEPENDENCIES};googletest)
+if(BUILD_TESTING)
+    #
+    # Google TEST
+    #
+    find_package(GTest)
+    if (NOT GTEST_FOUND)
+        ExternalProject_Add(googletest
+                GIT_REPOSITORY https://github.com/google/googletest
+                CMAKE_ARGS
+                -DCMAKE_BUILD_TYPE=Release
+                -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
+                -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
+                -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+                -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
+                -DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}
+                -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
+                )
+        set(COMMON_DEPENDENCIES ${COMMON_DEPENDENCIES};googletest)
 
-    include_directories(
-            ./
-            ../include
-            ${CMAKE_BINARY_DIR}/external/include
-    )
+        include_directories(
+                ./
+                ../include
+                ${CMAKE_BINARY_DIR}/external/include
+        )
 
-    link_directories(
-            ${CMAKE_BINARY_DIR}/external/lib/
-    )
+        link_directories(
+                ${CMAKE_BINARY_DIR}/external/lib/
+        )
 
+    endif()
 endif()
 
 add_subdirectory(lib)
