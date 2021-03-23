@@ -1,18 +1,8 @@
 cmake_minimum_required(VERSION 3.8)
 set(PROJECT_LIB ed25519cpp)
-project(${PROJECT_LIB} VERSION 1.3.3)
+project(${PROJECT_LIB} VERSION 1.3.4)
 
 option(DEHANCER_TARGET_ARCH "")
-
-option(DEHANCER_COMMON_DIR  "")
-if (NOT DEHANCER_COMMON_DIR)
-    set(DEHANCER_COMMON_DIR ${CMAKE_BINARY_DIR}/tmp)
-endif ()
-
-option(EXTERNAL_INSTALL_LOCATION  "")
-if (NOT EXTERNAL_INSTALL_LOCATION)
-    set (EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
-endif ()
 
 if (DEHANCER_TARGET_ARCH)
     #
@@ -25,6 +15,7 @@ if (DEHANCER_TARGET_ARCH)
 endif ()
 
 set(CMAKE_CXX_STANDARD 17)
+set (EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
 option(BUILD_TESTING "Enable creation of Eigen tests." OFF)
 # first we can indicate the documentation build as an option and set it to ON by default
 option(BUILD_DOC "Build documentation" OFF)
@@ -113,11 +104,11 @@ if (NOT GTEST_FOUND)
     include_directories(
             ./
             ../include
-            ${EXTERNAL_INSTALL_LOCATION}/include
+            ${CMAKE_BINARY_DIR}/external/include
     )
 
     link_directories(
-            ${EXTERNAL_INSTALL_LOCATION}/lib/
+            ${CMAKE_BINARY_DIR}/external/lib/
     )
 
 endif()
