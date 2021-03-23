@@ -1,3 +1,4 @@
+
 # ed25519cpp - Ed25519 C++17 implementation
 
 This is a portable implementation of [Ed25519](http://ed25519.cr.yp.to/) based
@@ -186,3 +187,20 @@ if (digest_restored && siganture->verify(*digest_restored, pair->get_public_key(
     //     
 }
 ```
+
+
+### Windows
+    # Requrements: 
+    # Visual Studio, English Language Pack!
+    # https://vcpkg.info/
+    # GitBash
+
+    cd C:
+    git clone https://github.com/microsoft/vcpkg
+    cd /c/vcpkg/
+    ./bootstrap-vcpkg.sh
+    /c/vcpkg/vcpkg integrate install
+    /c/vcpkg/vcpkg install gtest
+
+    # cmake integration
+    -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake

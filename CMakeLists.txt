@@ -16,7 +16,7 @@ endif ()
 
 set(CMAKE_CXX_STANDARD 17)
 set (EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
-option(BUILD_TESTING "Enable creation of Eigen tests." OFF)
+option(BUILD_TESTING "Enable creation of Eigen tests." ON)
 # first we can indicate the documentation build as an option and set it to ON by default
 option(BUILD_DOC "Build documentation" OFF)
 
@@ -51,14 +51,19 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 
-    message( FATAL_ERROR "The project does not support MSVC compiler" )
+    #message( FATAL_ERROR "The project does not support MSVC compiler" )
 
 endif()
 
 if (MSVC)
-    add_definitions (/W4)
+    #add_definitions (/W4)
 elseif (CMAKE_COMPILER_IS_GNUCXX)
     add_definitions (-Wall -pedantic)
+endif ()
+
+if (WIN32)
+    #add_definitions(/MD /MT) # /D_ITERATOR_DEBUG_LEVEL=0)
+    #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_ITERATOR_DEBUG_LEVEL=0")
 endif ()
 
 # check if Doxygen is installed
@@ -94,7 +99,8 @@ if (NOT GTEST_FOUND)
             CMAKE_ARGS
             -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
             -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
-            -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+            -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+            -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
             -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
             -DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}
             -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}

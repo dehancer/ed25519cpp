@@ -167,7 +167,7 @@ namespace ed25519 {
          * Encode key data to base58 string
          * @return encoded base58 string
          */
-        virtual const std::string encode() const = 0;
+        virtual std::string encode() const = 0;
 
         /**
          *
@@ -184,6 +184,8 @@ namespace ed25519 {
          * @return true if string is base58 encoded
          */
         virtual bool validate() const = 0;
+    
+        virtual ~Base58() = default;
     };
 
     namespace keys {
@@ -229,7 +231,7 @@ namespace ed25519 {
          * Encode from binary to base58 encoded string
          * @return encoded string
          */
-        const std::string encode() const override {
+        [[nodiscard]] std::string encode() const override {
           return base58::encode(*this);
         }
 
@@ -312,13 +314,13 @@ namespace ed25519 {
 
         typedef std::function<void(Calculator &)> context;
 
-        friend class Digest::Calculator;
+        friend struct Digest::Calculator;
         friend class keys::Public;
         /**
          * Create new digest from variant types
          * @param handler - calculator handler
          */
-        Digest(const context& handler);
+        explicit Digest(const context& handler);
 
         Digest();
 
@@ -352,7 +354,7 @@ namespace ed25519 {
          * @param key public key
          * @return true if message was signed by private key of the pair
          */
-        bool verify(const std::vector<unsigned char>& message, const keys::Public& key) const ;
+        [[nodiscard]] bool verify(const std::vector<unsigned char>& message, const keys::Public& key) const ;
 
         /**
          * Verify message with public key
@@ -360,7 +362,7 @@ namespace ed25519 {
          * @param key public key
          * @return true if message was signed by private key of the pair
          */
-        bool verify(const std::string& message, const keys::Public& key) const ;
+        [[nodiscard]] bool verify(const std::string& message, const keys::Public& key) const ;
 
         /**
          * Verify message with public key
@@ -368,7 +370,7 @@ namespace ed25519 {
          * @param key public key
          * @return true if message was signed by private key of the pair
          */
-        bool verify(const Digest& digest, const keys::Public& key) const ;
+        [[nodiscard]] bool verify(const Digest& digest, const keys::Public& key) const ;
 
     protected:
         Signature():ProtectedData<size::signature>(){};
@@ -389,7 +391,7 @@ namespace ed25519 {
          * Create seed from secret phrase
          * @param phrase secret phrase string
          */
-        Seed(const std::string &phrase);
+        explicit Seed(const std::string &phrase);
 
         /**
          * Create random seed
@@ -432,8 +434,8 @@ namespace ed25519 {
              * Get paired public key for the private
              * @return copy of public key
              */
-            const Public  &get_public_key() const { return publicKey_; };
-            const Private &get_private_key() const { return privateKey_; };
+            [[nodiscard]] const Public  &get_public_key() const { return publicKey_; };
+            [[nodiscard]] const Private &get_private_key() const { return privateKey_; };
 
             /**
              * Create random pair
@@ -499,5 +501,5 @@ namespace ed25519 {
         };
     }
 
-    const std::string StringFormat(const char* format, ...);
+    std::string StringFormat(const char* format, ...);
 }
