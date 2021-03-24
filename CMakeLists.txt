@@ -17,6 +17,10 @@ endif ()
 if (WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -EHsc -Wno-deprecated-declarations")
     add_definitions(/MT /DWIN32=1 /D_ITERATOR_DEBUG_LEVEL=0)
+    string(TOLOWER  ${CMAKE_BUILD_TYPE} BUILD_TYPE)
+    if (${BUILD_TYPE} STREQUAL "debug")
+        add_definitions(/MTd)
+    endif()
 else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -rdynamic")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
@@ -96,16 +100,18 @@ if(BUILD_TESTING)
     #
     find_package(GTest)
     if (NOT GTEST_FOUND)
+        string(STRIP "${CMAKE_C_FLAGS} -D_ITERATOR_DEBUG_LEVEL=0" C_FLAGS)
+        string(STRIP "${CMAKE_CXX_FLAGS} -D_ITERATOR_DEBUG_LEVEL=0" CXX_FLAGS)
         ExternalProject_Add(googletest
                 GIT_REPOSITORY https://github.com/google/googletest
                 CMAKE_ARGS
-                -DCMAKE_BUILD_TYPE=Release
+                -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                 -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
                 -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
                 -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
                 -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
-                -DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}
-                -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
+                -DCMAKE_C_FLAGS=${C_FLAGS}
+                -DCMAKE_CXX_FLAGS=${CXX_FLAGS}
                 )
         set(COMMON_DEPENDENCIES ${COMMON_DEPENDENCIES};googletest)
 
