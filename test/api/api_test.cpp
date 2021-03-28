@@ -3,7 +3,10 @@
 //
 
 #include "ed25519.hpp"
+#include <iostream>
 #include "gtest/gtest.h"
+
+#define ALL_TESTS 1
 
 #define GOUT(STREAM) \
     do \
@@ -14,6 +17,13 @@
 auto error_handler = [](const std::error_code code){
     GOUT("Test error: " + ed25519::StringFormat("code: %i, message: %s", code.value(), + code.message().c_str()));
 };
+
+
+TEST(TEST_API, ed25519_api_initial ){
+    std::cout << "ed25519_api_initial" << std::endl;
+}
+
+#if ALL_TESTS
 
 TEST(TEST_API, ed25519_api ){
 
@@ -173,3 +183,5 @@ TEST(TEST_API, signature ) {
 
   }
 }
+
+#endif

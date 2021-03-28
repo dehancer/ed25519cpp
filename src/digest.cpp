@@ -7,7 +7,18 @@
 #include "sha3.hpp"
 #include "ed25519_ext.hpp"
 #include <iostream>
-#include <arpa/inet.h>
+
+#include <algorithm>
+
+template <typename T>
+constexpr T htonT (T value) noexcept
+{
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+  char* ptr = reinterpret_cast<char*>(&value);
+  std::reverse(ptr, ptr + sizeof(T));
+#endif
+  return value;
+}
 
 namespace ed25519 {
 
@@ -18,9 +29,9 @@ namespace ed25519 {
         void set_endian(endian) override ;
         endian get_endian() override ;
 
-        CalculatorImpl(Digest *digest): ctx_({}), digest_(digest), endian_(little){
+        explicit CalculatorImpl(Digest *digest): ctx_({}), digest_(digest), endian_(little){
 
-            if ( htonl(47) == /* DISABLES CODE */ (47) ) {
+            if ( htonT(47) == /* DISABLES CODE */ (47) ) {
                 endian_ = big;
             } else {
                 endian_ = little;
@@ -41,7 +52,7 @@ namespace ed25519 {
     };
 
 
-    Digest::Digest(context handler):Data<size::digest>() {
+    Digest::Digest(const context& handler):Data<size::digest>() {
         CalculatorImpl calculator(this);
         handler(calculator);
     }
@@ -135,5 +146,4 @@ namespace ed25519 {
         }, value);
 
     }
-
 }

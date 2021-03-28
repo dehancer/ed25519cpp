@@ -1,14 +1,13 @@
 //
 // Created by denn on 2019-01-29.
 //
-
 #include <string>
-#include <stdlib.h>
-#include <stdarg.h>
+#include <cstdlib>
+#include <cstdarg>
 #include "ed25519.hpp"
 
 namespace ed25519 {
-    const std::string StringFormat(const char* format, ...)
+    std::string StringFormat(const char* format, ...)
     {
         char buffer[1024] = {};
         va_list ap = {};
