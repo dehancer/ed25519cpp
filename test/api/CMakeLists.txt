@@ -10,7 +10,12 @@ else()
         message("Googletest ${TEST} RELEASE MODE: ${CMAKE_BUILD_TYPE}")
         set(TEST_LIBRARIES gtest;gtest_main)
     endif()
+
 endif()
+
+if (NOT WIN32)
+    set(TEST_LIBRARIES ${TEST_LIBRARIES};pthread)
+endif ()
 
 message("TEST_LIBRARIES ${TEST_LIBRARIES}")
 

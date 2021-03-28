@@ -372,6 +372,8 @@ namespace ed25519 {
          */
         [[nodiscard]] bool verify(const Digest& digest, const keys::Public& key) const ;
 
+        virtual ~Signature() = default;
+        
     protected:
         Signature():ProtectedData<size::signature>(){};
         friend class keys::Pair;
