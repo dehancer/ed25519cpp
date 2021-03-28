@@ -312,7 +312,7 @@ namespace ed25519 {
 
         typedef std::function<void(Calculator &)> context;
 
-        friend class Digest::Calculator;
+        friend struct Digest::Calculator;
         friend class keys::Public;
         /**
          * Create new digest from variant types
@@ -352,7 +352,7 @@ namespace ed25519 {
          * @param key public key
          * @return true if message was signed by private key of the pair
          */
-        bool verify(const std::vector<unsigned char>& message, const keys::Public& key) const ;
+        [[nodiscard]] bool verify(const std::vector<unsigned char>& message, const keys::Public& key) const ;
 
         /**
          * Verify message with public key
@@ -360,7 +360,7 @@ namespace ed25519 {
          * @param key public key
          * @return true if message was signed by private key of the pair
          */
-        bool verify(const std::string& message, const keys::Public& key) const ;
+        [[nodiscard]] bool verify(const std::string& message, const keys::Public& key) const ;
 
         /**
          * Verify message with public key
@@ -368,8 +368,10 @@ namespace ed25519 {
          * @param key public key
          * @return true if message was signed by private key of the pair
          */
-        bool verify(const Digest& digest, const keys::Public& key) const ;
+        [[nodiscard]] bool verify(const Digest& digest, const keys::Public& key) const ;
 
+        virtual ~Signature() = default;
+        
     protected:
         Signature():ProtectedData<size::signature>(){};
         friend class keys::Pair;

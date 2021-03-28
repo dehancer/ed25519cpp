@@ -33,6 +33,8 @@ message(STATUS ${CMAKE_CURRENT_SOURCE_DIR} )
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
     message(STATUS "Using Clang" )
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -W -Wall -Wextra")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 
