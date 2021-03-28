@@ -13,6 +13,11 @@ else()
     endif()
 endif()
 
+if (NOT WIN32)
+    set(TEST_LIBRARIES ${TEST_LIBRARIES};pthread)
+endif ()
+
+
 file (GLOB TESTS_SOURCES ${TESTS_SOURCES}
         ./*.cpp
         )
