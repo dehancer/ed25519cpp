@@ -25,6 +25,7 @@ if (WIN32)
     endif()
 else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -rdynamic")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC -rdynamic")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-command-line-argument")
@@ -50,10 +51,6 @@ message(STATUS ${CMAKE_CURRENT_SOURCE_DIR} )
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
     message(STATUS "Using Clang" )
-
-    if (NOT WIN32)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -rdynamic")
-    endif ()
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 
