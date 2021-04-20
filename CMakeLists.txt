@@ -4,6 +4,8 @@ project(${PROJECT_LIB} VERSION 1.3.4)
 
 option(DEHANCER_TARGET_ARCH "")
 
+set(CMAKE_CXX_STANDARD 17)
+
 if (DEHANCER_TARGET_ARCH)
     #
     # x86_64-apple-macos10.13
@@ -30,7 +32,6 @@ else()
 endif ()
 
 
-set(CMAKE_CXX_STANDARD 17)
 set (EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
 option(BUILD_TESTING "Enable creation of Eigen tests." OFF)
 # first we can indicate the documentation build as an option and set it to ON by default
@@ -49,8 +50,6 @@ message(STATUS ${CMAKE_CURRENT_SOURCE_DIR} )
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
     message(STATUS "Using Clang" )
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -W -Wall -Wextra")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 
@@ -96,39 +95,45 @@ if(BUILD_DOC)
     endif (DOXYGEN_FOUND)
 endif()
 
-if(BUILD_TESTING)
-    #
-    # Google TEST
-    #
+#
+# Google Test
+#
+if (BUILD_TESTING)
     find_package(GTest)
     if (NOT GTEST_FOUND)
+
         string(STRIP "${CMAKE_C_FLAGS} -D_ITERATOR_DEBUG_LEVEL=0" C_FLAGS)
         string(STRIP "${CMAKE_CXX_FLAGS} -D_ITERATOR_DEBUG_LEVEL=0" CXX_FLAGS)
+
         ExternalProject_Add(googletest
                 GIT_REPOSITORY https://github.com/google/googletest
                 CMAKE_ARGS
                 -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-                -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
                 -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
-                -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
-                -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
+                -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+                -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+                -DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES}
                 -DCMAKE_C_FLAGS=${C_FLAGS}
                 -DCMAKE_CXX_FLAGS=${CXX_FLAGS}
+                PREFIX ${DEHANCER_COMMON_DIR}
                 )
         set(COMMON_DEPENDENCIES ${COMMON_DEPENDENCIES};googletest)
+    endif ()
+endif ()
 
-        include_directories(
-                ./
-                ../include
-                ${CMAKE_BINARY_DIR}/external/include
-        )
+#
+# Details
+#
+include_directories(
+        ${EXTERNAL_INSTALL_LOCATION}/include
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/external
+        ${SQLITE3_INCLUDE_DIRS}
+)
 
-        link_directories(
-                ${CMAKE_BINARY_DIR}/external/lib/
-        )
-
-    endif()
-endif()
+link_directories(
+        ${EXTERNAL_INSTALL_LOCATION}/lib
+)
 
 add_subdirectory(lib)
 
