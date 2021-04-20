@@ -51,6 +51,10 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
     message(STATUS "Using Clang" )
 
+    if (NOT WIN32)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -rdynamic")
+    endif ()
+
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 
     message(STATUS "Using gcc" )
