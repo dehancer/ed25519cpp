@@ -25,6 +25,8 @@ on the SUPERCOP "ref10" implementation. The ed25519cpp wraps c-based implementin
     make test
 
 ## Build ios
+    # https://blog.tomtasche.at/2019/05/how-to-include-cmake-project-in-xcode.html
+
     git clone https://github.com/dehancer/ios-cmake
     cmake -G Xcode -DCMAKE_TOOLCHAIN_FILE=~/Develop/Dehancer/Dehancer-Plugins/ios-cmake/ios.toolchain.cmake\
     -DPLATFORM=OS64COMBINED -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX=~/Develop/local/ios
