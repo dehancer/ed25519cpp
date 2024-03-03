@@ -1,5 +1,3 @@
-set(CMAKE_INSTALL_PREFIX /usr/local/${PROJECT_LIB})
-
 include_directories(
         ../include
         ../external/ed25519/include
@@ -11,6 +9,9 @@ include_directories(
 FILE(GLOB PUBLIC_INCLUDE_FILES
         ../include/*.hpp
         )
+
+list(FILTER ${PUBLIC_INCLUDE_FILES} EXCLUDE REGEX "gtest")
+
 
 FILE(GLOB PUBLIC_INCLUDE_CPP17_FILES
         ../include/ed25519/c++17/*.hpp
@@ -60,8 +61,12 @@ configure_package_config_file(
         INSTALL_DESTINATION "${config_install_dir}"
 )
 
-install(TARGETS ${PROJECT_LIB}   DESTINATION lib)
-install(FILES   ${PUBLIC_INCLUDE_FILES} DESTINATION include)
+install(TARGETS ${PROJECT_LIB}
+        DESTINATION lib
+)
+install(FILES   ${PUBLIC_INCLUDE_FILES}
+        DESTINATION include
+)
 install(FILES   ${PUBLIC_INCLUDE_CPP17_FILES} DESTINATION include/ed25519/c++17)
 install(FILES   ${project_config} ${version_config} DESTINATION lib/cmake/${PROJECT_LIB})
 install(FILES   cmake/${PROJECT_LIB}.cmake DESTINATION lib/cmake/${PROJECT_LIB})

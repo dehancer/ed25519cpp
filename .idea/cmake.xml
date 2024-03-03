@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CMakeSharedSettings">
     <configurations>
-      <configuration PROFILE_NAME="Debug-macos-universal" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="-G &quot;Unix Makefiles&quot; -DBUILD_TESTING=ON -DCMAKE_OSX_ARCHITECTURES=arm64;x86_64 -DCMAKE_OSX_SYSROOT=macosx -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 -DGTest_ROOT=~/Develop/local/universal/dummy" />
+      <configuration PROFILE_NAME="Debug-macos-universal" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="-G &quot;Unix Makefiles&quot; -DBUILD_TESTING=ON -DCMAKE_OSX_ARCHITECTURES=arm64;x86_64 -DCMAKE_OSX_SYSROOT=macosx -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 -DGTest_ROOT=~/Develop/local/universal/dummy -DCMAKE_INSTALL_PREFIX=~/Develop/local/universal/dehancer" />
     </configurations>
   </component>
 </project>

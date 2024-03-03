@@ -115,9 +115,18 @@ if (BUILD_TESTING)
                 GIT_REPOSITORY https://github.com/google/googletest.git
                 GIT_TAG      v1.14.0
                 SOURCE_DIR "${CMAKE_BINARY_DIR}/googletest-src"
+                BINARY_DIR "${CMAKE_BINARY_DIR}/googletest-build"
+                INSTALL_COMMAND
+                OVERRIDE_FIND_PACKAGE
         )
 
-        FetchContent_MakeAvailable(googletest)
+        FetchContent_GetProperties(googletest)
+
+        if(NOT googletest_POPULATED)
+            FetchContent_Populate(googletest)
+            add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR} EXCLUDE_FROM_ALL)
+        endif()
+
     endif ()
 
 endif ()
@@ -130,10 +139,6 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}/external
         ${SQLITE3_INCLUDE_DIRS}
-)
-
-link_directories(
-        ${EXTERNAL_INSTALL_LOCATION}/lib
 )
 
 add_subdirectory(lib)
