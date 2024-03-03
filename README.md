@@ -16,13 +16,15 @@ on the SUPERCOP "ref10" implementation. The ed25519cpp wraps c-based implementin
 ## Build
     git clone https://github.com/dnevera/ed25519cpp/
     cd ./ed25519cpp; mkdir build; cd ./build
+    git clone https://github.com/dnevera/base64cpp
+    cd ./base64cpp; mkdir build; cd ./build
     # mac os M1 
-    cmake -DDEHANCER_TARGET_ARCH=arm64-apple-macos11 -DBUILD_TESTING=ON ..; make -j4
+    cmake -DCMAKE_OSX_ARCHITECTURES=arm64;x86_64 ..
+    cmake --build . && cmake --build . --target=install 
     # or mac os Intel
-    cmake -DDEHANCER_TARGET_ARCH=x86_64-apple-macos10.13 -DBUILD_TESTING=ON ..; make -j4
-    # or Linux Intel
-    cmake -DBUILD_TESTING=ON ..; make -j4
-    make test
+    cmake -DCMAKE_OSX_ARCHITECTURES=x86_64 ..
+    cmake --build . && cmake --build . --target=install 
+    ctest -C Debug -V
 
 ## Build ios
     # https://blog.tomtasche.at/2019/05/how-to-include-cmake-project-in-xcode.html

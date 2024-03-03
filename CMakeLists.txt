@@ -1,28 +1,25 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.22)
+
 set(PROJECT_LIB ed25519cpp)
+
 project(${PROJECT_LIB} VERSION 1.3.8)
-
-option(DEHANCER_TARGET_ARCH "")
-
 set(CMAKE_CXX_STANDARD 17)
 
-if (DEHANCER_TARGET_ARCH)
-    #
-    # x86_64-apple-macos10.13
-    # or
-    # arm64-apple-macos11
-    #
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target ${DEHANCER_TARGET_ARCH}")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target ${DEHANCER_TARGET_ARCH}")
-endif ()
+option(DEHANCER_TARGET_ARCH "")
+option(BUILD_TESTING "Enable creation of Eigen tests." OFF)
+# first we can indicate the documentation build as an option and set it to ON by default
+option(BUILD_DOC "Build documentation" OFF)
+
 
 if (WIN32)
+
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -EHsc -Wno-deprecated-declarations")
     add_definitions(/MT /DWIN32=1 /D_ITERATOR_DEBUG_LEVEL=0)
     string(TOLOWER  ${CMAKE_BUILD_TYPE} BUILD_TYPE)
     if (${BUILD_TYPE} STREQUAL "debug")
         add_definitions(/MTd)
     endif()
+
 else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
@@ -34,13 +31,13 @@ endif ()
 
 
 set (EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
-option(BUILD_TESTING "Enable creation of Eigen tests." OFF)
-# first we can indicate the documentation build as an option and set it to ON by default
-option(BUILD_DOC "Build documentation" OFF)
 
-include(ExternalProject)
-
+#
+# Packages
+#
+find_package(PkgConfig REQUIRED)
 find_program(CCACHE_FOUND ccache)
+
 if(CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
@@ -96,6 +93,7 @@ if(BUILD_DOC)
     endif (DOXYGEN_FOUND)
 endif()
 
+
 #
 # Google Test
 #
@@ -103,28 +101,25 @@ if (BUILD_TESTING)
 
     find_package(GTest)
 
-    if (NOT GTEST_FOUND)
+    if (NOT GTest_FOUND)
 
         string(STRIP "${CMAKE_C_FLAGS} -D_ITERATOR_DEBUG_LEVEL=0" C_FLAGS)
         string(STRIP "${CMAKE_CXX_FLAGS} -D_ITERATOR_DEBUG_LEVEL=0" CXX_FLAGS)
 
-        ExternalProject_Add(googletest
-                GIT_REPOSITORY https://github.com/google/googletest
-                GIT_TAG release-1.11.0
-                CMAKE_ARGS
-                -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-                -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
-                -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
-                -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
-                -DCMAKE_C_FLAGS=${C_FLAGS}
-                -DCMAKE_CXX_FLAGS=${CXX_FLAGS}
-                -DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES}
-                -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
-                -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
-                PREFIX ${DEHANCER_COMMON_DIR}
-                )
-        set(COMMON_DEPENDENCIES ${COMMON_DEPENDENCIES};googletest)
+        set(CMAKE_OSX_ARCHITECTURES "${CMAKE_OSX_ARCHITECTURES}" CACHE STRING "" FORCE)
+
+        include(FetchContent)
+
+        FetchContent_Declare(
+                googletest
+                GIT_REPOSITORY https://github.com/google/googletest.git
+                GIT_TAG      v1.14.0
+                SOURCE_DIR "${CMAKE_BINARY_DIR}/googletest-src"
+        )
+
+        FetchContent_MakeAvailable(googletest)
     endif ()
+
 endif ()
 
 #
