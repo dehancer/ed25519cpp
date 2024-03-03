@@ -162,7 +162,7 @@ set(exec_prefix "\${prefix}")
 set(libdir "\${exec_prefix}/${CMAKE_INSTALL_LIBDIR}")
 set(includedir "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
 
-configure_file(${CMAKE_SOURCE_DIR}/ed25519cpp.pc.in ${CMAKE_CURRENT_BINARY_DIR}/ed25519cpp.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ed25519cpp.pc.in ${CMAKE_CURRENT_BINARY_DIR}/ed25519cpp.pc @ONLY)
 
 install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/ed25519cpp.pc
