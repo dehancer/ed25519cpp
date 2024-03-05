@@ -141,7 +141,7 @@ include_directories(
         ${SQLITE3_INCLUDE_DIRS}
 )
 
-add_subdirectory(lib)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 if (BUILD_TESTING)
     add_subdirectory(test)
