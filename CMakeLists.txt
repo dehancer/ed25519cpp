@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22)
 
 set(PROJECT_LIB ed25519cpp)
 
-project(${PROJECT_LIB} VERSION 1.3.8)
+project(${PROJECT_LIB} VERSION 1.4.0)
 set(CMAKE_CXX_STANDARD 17)
 
 option(DEHANCER_TARGET_ARCH "")
