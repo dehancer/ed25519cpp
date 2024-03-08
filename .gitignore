@@ -1,3 +1,6 @@
+.idea/*
+!.idea/cmake.xml
+
 # Prerequisites
 *.d
 
@@ -38,8 +41,6 @@ CMakeScripts
 CTestTestfile.cmake
 *build*
 cmake-build-*
-.idea
-.idea/*
 Index
 Build
 Pods
