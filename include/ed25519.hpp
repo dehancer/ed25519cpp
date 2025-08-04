@@ -14,6 +14,7 @@
 #include <system_error>
 #include <variant>
 #include <memory>
+#include <algorithm>
 
 #include "ed25519/c++17/variant.hpp"
 
