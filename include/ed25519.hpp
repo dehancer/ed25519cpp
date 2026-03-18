@@ -15,8 +15,11 @@
 #include <variant>
 #include <memory>
 #include <algorithm>
+#include <cstdint>
 
 #include "ed25519/c++17/variant.hpp"
+
+using std::uint_least32_t;
 
 #define UNUSED(x) (void)(x)
 
