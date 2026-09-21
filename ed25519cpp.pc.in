@@ -4,9 +4,9 @@ libdir=@libdir@
 includedir=@includedir@
 
 Name: ed25519cpp
-Description: ED25519 Curve CPP Wrapper
+Description: Dehancer ED25519 Curve CPP Wrapper
 Version: @PROJECT_VERSION@
-URL: https://github.com/dnevera/ed25519cpp
+URL: https://github.com/dehancer/ed25519cpp
 Requires.private: @requires_private@
 Libs: -L${libdir} -led25519cpp
 Libs.private: @libs_private@

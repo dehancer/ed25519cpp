@@ -1,72 +1,53 @@
-include_directories(
-        ../include
-        ../external/ed25519/include
-        ../
-        ../src/
-        ../src/external
+add_library(ed25519cpp
+    ../src/base58.cpp
+    ../src/digest.cpp
+    ../src/ed25519.cpp
+    ../src/utils.cpp
+    ../src/external/btc_base58.cpp
+    ../src/external/ed25519_ext.cpp
+    ../src/external/sha3.cpp
+    ../external/ed25519/src/add_scalar.c
+    ../external/ed25519/src/fe.c
+    ../external/ed25519/src/ge.c
+    ../external/ed25519/src/key_exchange.c
+    ../external/ed25519/src/keypair.c
+    ../external/ed25519/src/sc.c
+    ../external/ed25519/src/seed.c
+    ../external/ed25519/src/sha512.c
+    ../external/ed25519/src/sign.c
+    ../external/ed25519/src/verify.c
+)
+add_library(ed25519cpp::ed25519cpp ALIAS ed25519cpp)
+
+target_compile_features(ed25519cpp PUBLIC cxx_std_17)
+
+target_sources(ed25519cpp PUBLIC
+    FILE_SET HEADERS
+    BASE_DIRS ../include
+    FILES
+        ../include/ed25519.hpp
+        ../include/ed25519/c++17/variant.hpp
 )
 
-FILE(GLOB PUBLIC_INCLUDE_FILES
-        ../include/*.hpp
-        )
-
-list(FILTER ${PUBLIC_INCLUDE_FILES} EXCLUDE REGEX "gtest")
-
-
-FILE(GLOB PUBLIC_INCLUDE_CPP17_FILES
-        ../include/ed25519/c++17/*.hpp
-        )
-
-FILE(GLOB INCLUDE_FILES
-        ${PUBLIC_INCLUDE_FILES}
-        )
-
-FILE(GLOB SOURCES
-        ../src/*.cpp
-        ../src/external/*.cpp
-        ../external/ed25519/src/*.c
-        )
-
-add_library(${PROJECT_LIB}  ${SOURCES})
-
-target_link_libraries (
-        ${PROJECT_LIB}  PUBLIC
-        ${Boost_LIBRARIES}
+target_include_directories(ed25519cpp PRIVATE
+    ../external/ed25519/include
+    ../src/external
 )
 
-target_include_directories(
-        ${PROJECT_LIB}
-        PUBLIC
-        ../include
+set_target_properties(ed25519cpp PROPERTIES
+    CXX_EXTENSIONS OFF
+    POSITION_INDEPENDENT_CODE ON
+    WINDOWS_EXPORT_ALL_SYMBOLS ON
 )
 
-set(config_install_dir "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
-set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
+if(WIN32)
+    target_link_libraries(ed25519cpp PRIVATE advapi32)
+endif()
 
-# Configuration
-set(version_config "${generated_dir}/${PROJECT_NAME}ConfigVersion.cmake")
-set(project_config "${generated_dir}/${PROJECT_NAME}Config.cmake")
-set(TARGETS_EXPORT_NAME "${PROJECT_NAME}")
-set(namespace "${PROJECT_NAME}::")
-
-include(CMakePackageConfigHelpers)
-
-write_basic_package_version_file(
-        "${version_config}" COMPATIBILITY SameMajorVersion
+install(TARGETS ed25519cpp
+    EXPORT ed25519cppTargets
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+    FILE_SET HEADERS DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
-
-configure_package_config_file(
-        "cmake/Config.cmake.in"
-        "${project_config}"
-        INSTALL_DESTINATION "${config_install_dir}"
-)
-
-install(TARGETS ${PROJECT_LIB}
-        DESTINATION lib
-)
-install(FILES   ${PUBLIC_INCLUDE_FILES}
-        DESTINATION include
-)
-install(FILES   ${PUBLIC_INCLUDE_CPP17_FILES} DESTINATION include/ed25519/c++17)
-install(FILES   ${project_config} ${version_config} DESTINATION lib/cmake/${PROJECT_LIB})
-install(FILES   cmake/${PROJECT_LIB}.cmake DESTINATION lib/cmake/${PROJECT_LIB})

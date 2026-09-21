@@ -1,221 +1,205 @@
+# ed25519cpp
 
-# ed25519cpp - Ed25519 C++17 implementation
+C++17 wrapper around the bundled Ed25519 C implementation, based on SUPERCOP
+ref10. Provides key generation, signing and verification, Base58 serialization,
+and SHA3-256 digests.
 
-This is a portable implementation of [Ed25519](http://ed25519.cr.yp.to/) based
-on the SUPERCOP "ref10" implementation. The ed25519cpp wraps c-based implementing modern c++17 dialect. Additionally there is some extension which make easier the work with base58-encoded strings and pair of keys based on ed25519.
+## Build and install
 
-## Home pages explains ed25519
-1. https://ed25519.cr.yp.to/
-1. https://en.wikipedia.org/wiki/EdDSA 
+Requires CMake 4.2+ and C/C++ compilers with C++17 support. No external packages
+are required for the library. Tests require GoogleTest. Windows links the system
+Advapi32 library.
 
-## Requirements
-1. c++17
-1. cmake
-1. boost unitest installed includes (>=1.66, exclude 1.68!)
+From the project directory:
 
-## Build
-    git clone https://github.com/dnevera/ed25519cpp/
-    cd ./ed25519cpp; mkdir build; cd ./build
-    git clone https://github.com/dnevera/base64cpp
-    cd ./base64cpp; mkdir build; cd ./build
-    
-    # mac os M1 universal bin
-    cmake -DCMAKE_OSX_ARCHITECTURES=arm64;x86_64 ..
-    cmake --build . && cmake --build . --target=install 
-
-    # or mac os Intel
-    cmake -DCMAKE_OSX_ARCHITECTURES=x86_64 ..
-    cmake --build . && cmake --build . --target=install 
-    ctest -C Debug -V
-
-## Build ios
-    # https://blog.tomtasche.at/2019/05/how-to-include-cmake-project-in-xcode.html
-
-    git clone https://github.com/dehancer/ios-cmake
-    cmake -G Xcode \
-    -DCMAKE_TOOLCHAIN_FILE=~/Develop/Dehancer/Dehancer-Plugins/ios-cmake/ios.toolchain.cmake\
-    -DENABLE_BITCODE=ON
-    -DPLATFORM=OS64COMBINED -DBUILD_TESTING=OFF \
-    -DCMAKE_INSTALL_PREFIX=~/Develop/local/ios/dehancer
-    cmake --build . --config Release && cmake --install . --config Release
-
-## Tested
-1. Centos7 (gcc v7.0)
-1. Ubuntu 18.04
-1. OSX 10.13, XCode10
-
-## [API](https://htmlpreview.github.io/?https://github.com/dnevera/ed25519cpp/blob/master/docs/html/namespaces.html)
-
-
-## Examples
-### Random seed generator
-
-```c++
-#include "ed25519.hpp"
-
-
-ed25519::Seed seed;
-std::cout << "Seed base58 string: "<< seed.encode() << std::endl;
-
+```sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/local-dehancer"
+cmake --build build --config Release --parallel $(nproc)
+cmake --install build --config Release
 ```
 
-### Create random keys pair
+The default build produces a static library. Use `-DBUILD_SHARED_LIBS=ON` for a shared library.
 
-```c++
-#include "ed25519.hpp"
+Override install directories with `CMAKE_INSTALL_LIBDIR`,
+`CMAKE_INSTALL_INCLUDEDIR`, or `CMAKE_INSTALL_BINDIR`. Relative directories
+support `cmake --install build --prefix /another/prefix` and relocating the
+installed tree. Absolute directory overrides remain fixed.
 
-if (auto pair = ed25519::keys::Pair::Random()){
-    std::cout << "ed25519 random keys pair: "<< pair->get_public_key.encode() << "/" <<  pair->get_private_key().encode() << std::endl;
+## CMake integration
+
+Installed package:
+
+```cmake
+find_package(ed25519cpp CONFIG REQUIRED)
+target_link_libraries(my_app PRIVATE ed25519cpp::ed25519cpp)
+```
+
+Configure your application with `-DCMAKE_PREFIX_PATH="$HOME/local-dehancer"`.
+
+Source checkout:
+
+```cmake
+add_subdirectory(path/to/ed25519cpp)
+target_link_libraries(my_app PRIVATE ed25519cpp::ed25519cpp)
+```
+
+FetchContent with an existing checkout:
+
+```cmake
+include(FetchContent)
+FetchContent_Declare(ed25519cpp
+    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor/ed25519cpp"
+)
+FetchContent_MakeAvailable(ed25519cpp)
+target_link_libraries(my_app PRIVATE ed25519cpp::ed25519cpp)
+```
+
+## Optional pkg-config metadata
+
+Set `-DCREATE_PKG_CONFIG=ON` to generate and install `ed25519cpp.pc`. Add the
+installed `lib/pkgconfig` (or overridden library directory) to `PKG_CONFIG_PATH`.
+Relative install directories keep metadata relocatable. An absolute library
+directory fixes the metadata's prefix to the configured installation root.
+
+## Sign and verify
+
+```cpp
+#include <ed25519.hpp>
+#include <iostream>
+#include <string>
+
+int main() {
+    auto pair = ed25519::keys::Pair::Random();
+    if (!pair) {
+        return 1;
+    }
+
+    const std::string message = "Hello, Ed25519";
+    auto signature = pair->sign(message);
+    if (!signature->verify(message, pair->get_public_key())) {
+        return 1;
+    }
+
+    std::cout << "Public key: " << pair->get_public_key().encode() << '\n';
+    std::cout << "Signature: " << signature->encode() << '\n';
+
+    auto public_key = ed25519::keys::Public::Decode(pair->get_public_key().encode());
+    auto restored_signature = ed25519::Signature::Decode(signature->encode());
+    if (!public_key || !restored_signature) {
+        return 1;
+    }
+
+    return restored_signature->verify(message, *public_key) ? 0 : 1;
 }
-
-
 ```
 
-### Create keys pair from private key
+`sign()` returns `std::unique_ptr<ed25519::Signature>`. Signing and verification
+accept `std::string`, `std::vector<unsigned char>`, or `ed25519::Digest`.
+Verification returns `bool`.
 
-```c++
-#include "ed25519.hpp"
+## Keys and serialization
 
-auto error_handler = [](const std::error_code code){
-    BOOST_TEST_MESSAGE("Test error: " + ed25519::StringFormat("code: %i, message: %s", code.value(), + code.message().c_str()));
+| API | Result |
+| --- | --- |
+| `keys::Pair::Random()` | Random key pair |
+| `keys::Pair::WithSecret(phrase)` | Deterministic key pair from a SHA3-256 seed derived from the phrase |
+| `keys::Pair::FromPrivateKey(encoded)` | Key pair restored from its Base58 private key |
+| `Seed()` | Random 32-byte seed |
+| `Seed(phrase)` | SHA3-256 hash of the phrase |
+
+These types live in the `ed25519` namespace. Pair factories and `Decode()`
+methods return `std::optional`; check the result before accessing it.
+`WithSecret()` hashes the phrase directly, without salt or password stretching.
+
+Keys, seeds, signatures, and digests expose `encode()` for Base58 serialization.
+Restore public keys, private keys, signatures, and digests with their static
+`Decode()` methods. Restore a seed with its `decode()` method.
+
+| Value | Raw size |
+| --- | --- |
+| Seed, public key, digest | 32 bytes |
+| Private key, signature | 64 bytes |
+
+Encoded values include a four-byte, little-endian CRC32 checksum. This format
+differs from Bitcoin Base58Check. Private keys contain the expanded SHA-512
+seed hash with its scalar clamped; they are neither raw seeds nor seed/public-key
+concatenations.
+
+### Restore a key pair
+
+Inside the example above, after creating `pair`:
+
+```cpp
+const auto encoded_private_key = pair->get_private_key().encode();
+auto restored_pair = ed25519::keys::Pair::FromPrivateKey(encoded_private_key);
+if (!restored_pair) {
+    return 1;
+}
+```
+
+### Handle errors
+
+Decoding and key restoration accept an optional `ed25519::ErrorHandler`.
+The default handler ignores errors; failure is still reported by the return
+value. Error codes are `BADFORMAT`, `UNEXPECTED_SIZE`, and `EMPTY`.
+
+```cpp
+const auto on_error = [](const std::error_code& error) {
+    std::cerr << "Decode failed: " << error.value() << '\n';
 };
 
-if (auto pair = ed25519::keys::Pair::FromPrivateKey(secret_pair->get_private_key().encode(), error_handler)){
-    std::cout << "ed25519 random keys pair: "<< pair->get_public_key.encode() << "/" <<  pair->get_private_key().encode() << std::endl;
-}
-else{
-    // handling error
-}
-
-
-```
-
-### Create keys pair with secret phrase
-
-```c++
-#include "ed25519.hpp"
-
-
-if (auto pair = ed25519::keys::Pair::WithSecret("some secret phrase", error_handler)){
-    std::cout << "ed25519 random keys pair: "<< pair->get_public_key.encode() << "/" <<  pair->get_private_key().encode() << std::endl;
-}
-else{
-    // handling error
-}
-
-
-```
-
-### Sign message
-
-```c++
-#include "ed25519.hpp"
-
-// create pair
-auto pair           = ed25519::keys::Pair::WithSecret("some secret phrase");
-
-// some message 
-std::string message = "some message or token string";
-
-// sign message return uniq_ptr siganture
-auto signature      = pair->sign(message);
-
-if (signature->verify(message, pair->get_public_key())) {
-   // handle verified
-}
-
-//
-// It is not available to create empty signature:
-// auto signature = ed25519::keys::Pair::Siganture()
-// only copy operations or restore from base58-encoded string 
-//
-auto another_signature = ed25519::Signature::Decode(signature->encode());
-
-//
-// Handle errors when restoration
-//
-
-if (auto signature = ed25519::Signature::Decode("...some wrong encoded string ...", error_handler)){
-    // handle verified
-}
-else {
-    // handle error
-}
-
-```
-
-### Create digest hash from variant types 
-
-```c++
-
-auto digest = Digest([pair](auto &calculator) {
-
-        //
-        // set big endian 
-        // little endian is default
-        //
-        
-        calculator.set_endian(Digest::Calculator::endian::big);
-        
-        std::cout << "Calculator endian: " << calculator.get_endian() << std::endl;
-
-        calculator.append(true);
-
-        calculator.append(1);
-
-        calculator.append((int)(1.12f * 100));
-
-        std::string title = "123";
-
-        calculator.append(title);
-
-        std::vector<unsigned char> v(title.begin(), title.end());
-
-        calculator.append(v);
-
-    });
-
-//
-// Encode to base58
-//
-auto base58 = digest.encode();
-
-//
-// Sign digest
-//
-auto siganture = pair->sign(digest);
-
-if (siganture->verify(digest, pair->get_public_key())) {
-    //
-    // handle verified digest
-    //
-}
-
-//
-// Restore from base58-encded string
-//
-auto digest_restored = Digest::Decode(digest.encode(), error_handler);
-
-if (digest_restored && siganture->verify(*digest_restored, pair->get_public_key())) {
-    //
-    // handle restored and verified
-    //     
+auto public_key = ed25519::keys::Public::Decode("invalid key", on_error);
+if (!public_key) {
+    return 1;
 }
 ```
 
+## Digests
 
-### Windows
-    # Requrements: 
-    # Visual Studio, English Language Pack!
-    # https://vcpkg.info/
-    # GitBash
+`Digest` computes SHA3-256 over appended values. The calculator accepts `bool`,
+`unsigned char`, `short int`, `int`, `std::string`, byte vectors, and 32- or
+64-byte `Data` values. Set integer byte order explicitly for a stable format.
+Values are concatenated without type tags or length prefixes.
 
-    cd C:
-    git clone https://github.com/microsoft/vcpkg
-    cd /c/vcpkg/
-    ./bootstrap-vcpkg.sh
-    /c/vcpkg/vcpkg integrate install
-    /c/vcpkg/vcpkg install gtest
+With `pair` from the signing example:
 
-    # cmake integration
-    -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+```cpp
+ed25519::Digest digest([](ed25519::Digest::Calculator& calculator) {
+    calculator.set_endian(ed25519::Digest::Calculator::endian::big);
+    calculator.append(true);
+    calculator.append(42);
+    calculator.append(std::string("example"));
+});
+
+auto digest_signature = pair->sign(digest);
+auto restored_digest = ed25519::Digest::Decode(digest.encode());
+if (!restored_digest ||
+    !digest_signature->verify(*restored_digest, pair->get_public_key())) {
+    return 1;
+}
+```
+
+Signing a digest signs its 32 bytes as an Ed25519 message.
+
+## Tests and API documentation
+
+With GoogleTest installed:
+
+```sh
+cmake -S . -B build-tests -DBUILD_TESTING=ON
+cmake --build build-tests --config Release --parallel $(nproc)
+ctest --test-dir build-tests -C Release --output-on-failure
+```
+
+With Doxygen installed:
+
+```sh
+cmake -S . -B build-docs -DBUILD_DOC=ON
+cmake --build build-docs --target doc_doxygen
+```
+
+The public API is declared in [include/ed25519.hpp](include/ed25519.hpp).
+
+## License
+
+[MIT](LICENSE).
