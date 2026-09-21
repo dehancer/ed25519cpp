@@ -42,7 +42,8 @@ CTestTestfile.cmake
 *build*
 cmake-build-*
 Index
-Build
+build
+ci-build
 Pods
 Podfile.lock
 *.xcworkspacedata
