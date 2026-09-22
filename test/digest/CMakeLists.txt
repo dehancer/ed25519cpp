@@ -10,11 +10,9 @@ if (NOT WIN32)
     set(TEST_LIBRARIES ${TEST_LIBRARIES};pthread)
 endif ()
 
-
 file (GLOB TESTS_SOURCES ${TESTS_SOURCES}
         ./*.cpp
 )
-
 
 file (GLOB TESTS_SOURCES ${TESTS_SOURCES}
         ./*.cpp
@@ -23,7 +21,6 @@ file (GLOB TESTS_SOURCES ${TESTS_SOURCES}
 set (TEST digest_${PROJECT_LIB})
 
 add_executable(${TEST} ${TESTS_SOURCES})
-
 
 if (COMMON_DEPENDENCIES)
     message(STATUS "${TEST} DEPENDENCIES: ${COMMON_DEPENDENCIES}")

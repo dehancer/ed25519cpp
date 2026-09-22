@@ -1,4 +1,3 @@
-
 if (GTEST_FOUND)
     include_directories(${GTEST_INCLUDE_DIRS})
     set(TEST_LIBRARIES ${GTEST_BOTH_LIBRARIES})
@@ -10,7 +9,6 @@ endif()
 if (NOT WIN32)
     set(TEST_LIBRARIES ${TEST_LIBRARIES};pthread)
 endif ()
-
 
 file (GLOB TESTS_SOURCES ${TESTS_SOURCES}
         ./*.cpp
