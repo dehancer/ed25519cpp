@@ -32,12 +32,4 @@ target_link_libraries (
         #GTest::gtest GTest::gtest_main
 )
 
-if (COMMON_DEPENDENCIES)
-    message(STATUS "${TEST} DEPENDENCIES: ${COMMON_DEPENDENCIES}")
-    add_dependencies(
-            ${TEST}
-            ${COMMON_DEPENDENCIES}
-    )
-endif ()
-
 add_test (test ${TEST})
