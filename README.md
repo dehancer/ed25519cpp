@@ -191,13 +191,6 @@ cmake --build build-tests --config Release --parallel $(nproc)
 ctest --test-dir build-tests -C Release --output-on-failure
 ```
 
-With Doxygen installed:
-
-```sh
-cmake -S . -B build-docs -DBUILD_DOC=ON
-cmake --build build-docs --target doc_doxygen
-```
-
 The public API is declared in [include/ed25519.hpp](include/ed25519.hpp).
 
 ## License

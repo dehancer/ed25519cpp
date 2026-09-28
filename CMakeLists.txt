@@ -8,7 +8,6 @@ include(CMakePackageConfigHelpers)
 option(BUILD_TESTING "Build tests" OFF)
 option(ED25519CPP_BUILD_TESTING "Build ed25519cpp tests" OFF)
 
-option(BUILD_DOC "Build documentation" OFF)
 option(CREATE_PKG_CONFIG "Generate and install pkg-config metadata" OFF)
 
 add_subdirectory(lib)
@@ -60,16 +59,6 @@ if(CREATE_PKG_CONFIG)
     configure_file(ed25519cpp.pc.in ed25519cpp.pc @ONLY)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/ed25519cpp.pc"
         DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig"
-    )
-endif()
-
-if(BUILD_DOC)
-    find_package(Doxygen REQUIRED)
-    configure_file(docs/Doxyfile.in Doxyfile @ONLY)
-    add_custom_target(doc_doxygen ALL
-        COMMAND Doxygen::doxygen "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
-        WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
-        VERBATIM
     )
 endif()
 
