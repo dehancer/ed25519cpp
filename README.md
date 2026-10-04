@@ -6,26 +6,19 @@ and SHA3-256 digests.
 
 ## Build and install
 
-Requires CMake 4.2+ and C/C++ compilers with C++17 support. No external packages
-are required for the library. Tests require GoogleTest. Windows links the system
-Advapi32 library.
-
-From the project directory:
-
 ```sh
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$HOME/local-dehancer"
-cmake --build build --config Release --parallel $(nproc)
-cmake --install build --config Release
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel $(nproc)
+cmake --install build --parallel $(nproc)
 ```
 
-The default build produces a static library. Use `-DBUILD_SHARED_LIBS=ON` for a shared library.
+Make sure to set proper `CMAKE_PREFIX_PATH` and `CMAKE_INSTALL_PREFIX` to discover dependencies and install.
 
-Override install directories with `CMAKE_INSTALL_LIBDIR`,
-`CMAKE_INSTALL_INCLUDEDIR`, or `CMAKE_INSTALL_BINDIR`. Relative directories
-support `cmake --install build --prefix /another/prefix` and relocating the
-installed tree. Absolute directory overrides remain fixed.
+Use `-DBUILD_SHARED_LIBS=ON` for a shared library; the default is static.
 
-## CMake integration
+`CMAKE_POSITION_INDEPENDENT_CODE` is set to `ON`.
+
+## Usage in CMake
 
 Installed package:
 
@@ -34,32 +27,27 @@ find_package(ed25519cpp CONFIG REQUIRED)
 target_link_libraries(my_app PRIVATE ed25519cpp::ed25519cpp)
 ```
 
-Configure your application with `-DCMAKE_PREFIX_PATH="$HOME/local-dehancer"`.
+## Usage with pkg-config
 
-Source checkout:
+Disabled by default. Configure with `-DCREATE_PKG_CONFIG=ON` to generate and
+install `ed25519cpp.pc`.
 
-```cmake
-add_subdirectory(path/to/ed25519cpp)
-target_link_libraries(my_app PRIVATE ed25519cpp::ed25519cpp)
+```sh
+export PKG_CONFIG_PATH="$HOME/local-dehancer/lib/pkgconfig"
+pkg-config --cflags --libs ed25519cpp
 ```
 
-FetchContent with an existing checkout:
+## Tests
 
-```cmake
-include(FetchContent)
-FetchContent_Declare(ed25519cpp
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor/ed25519cpp"
-)
-FetchContent_MakeAvailable(ed25519cpp)
-target_link_libraries(my_app PRIVATE ed25519cpp::ed25519cpp)
+Install GoogleTest, then:
+
+```sh
+cmake -B build -DBUILD_TESTING=ON
+cmake --build build --parallel $(nproc)
+ctest --test-dir build --output-on-failure
 ```
 
-## Optional pkg-config metadata
-
-Set `-DCREATE_PKG_CONFIG=ON` to generate and install `ed25519cpp.pc`. Add the
-installed `lib/pkgconfig` (or overridden library directory) to `PKG_CONFIG_PATH`.
-Relative install directories keep metadata relocatable. An absolute library
-directory fixes the metadata's prefix to the configured installation root.
+# Usage
 
 ## Sign and verify
 
@@ -181,18 +169,6 @@ if (!restored_digest ||
 
 Signing a digest signs its 32 bytes as an Ed25519 message.
 
-## Tests and API documentation
-
-With GoogleTest installed:
-
-```sh
-cmake -S . -B build-tests -DBUILD_TESTING=ON
-cmake --build build-tests --config Release --parallel $(nproc)
-ctest --test-dir build-tests -C Release --output-on-failure
-```
-
-The public API is declared in [include/ed25519.hpp](include/ed25519.hpp).
-
-## License
+# License
 
 [MIT](LICENSE).

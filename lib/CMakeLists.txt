@@ -36,7 +36,6 @@ target_include_directories(ed25519cpp PRIVATE
 
 set_target_properties(ed25519cpp PROPERTIES
     CXX_EXTENSIONS OFF
-    POSITION_INDEPENDENT_CODE ON
     WINDOWS_EXPORT_ALL_SYMBOLS ON
 )
 

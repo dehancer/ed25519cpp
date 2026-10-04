@@ -6,9 +6,9 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
 option(BUILD_TESTING "Build tests" OFF)
-option(ED25519CPP_BUILD_TESTING "Build ed25519cpp tests" OFF)
-
 option(CREATE_PKG_CONFIG "Generate and install pkg-config metadata" OFF)
+
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 add_subdirectory(lib)
 
