@@ -12,11 +12,34 @@ cmake --build build --parallel $(nproc)
 cmake --install build --parallel $(nproc)
 ```
 
-Make sure to set proper `CMAKE_PREFIX_PATH` and `CMAKE_INSTALL_PREFIX` to discover dependencies and install.
+Make sure to set proper `CMAKE_PREFIX_PATH` and `CMAKE_INSTALL_PREFIX`
+to discover dependencies and install.
 
 Use `-DBUILD_SHARED_LIBS=ON` for a shared library; the default is static.
 
 `CMAKE_POSITION_INDEPENDENT_CODE` is set to `ON`.
+
+## Windows build
+
+We build in [Git Bash](https://gitforwindows.org) with `clang-cl`
+and we add a magic string to CMake to select runtime.
+
+Use Ninja as a make file generator.
+
+Set `PATH` to include `clang-cl.exe` from VS.
+
+```sh
+export PATH="$PATH:/c/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/Llvm/x64/bin"
+```
+
+Add this to cmake configuration:
+
+```
+-G Ninja \
+-DCMAKE_C_COMPILER=clang-cl \
+-DCMAKE_CXX_COMPILER=clang-cl \
+-DCMAKE_MSVC_RUNTIME_LIBRARY='MultiThreaded$<$<CONFIG:Debug>:Debug>'
+```
 
 ## Usage in CMake
 
