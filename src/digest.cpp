@@ -1,149 +1,131 @@
-//
-// Created by denn on 2019-01-30.
-//
+#include <algorithm>
+#include <iostream>
 
 #include "ed25519.h"
 #include "ed25519.hpp"
-#include "sha3.hpp"
 #include "ed25519_ext.hpp"
-#include <iostream>
-
-#include <algorithm>
+#include "sha3.hpp"
 
 template <typename T>
-constexpr T htonT (T value) noexcept
-{
+constexpr T htonT(T value) noexcept {
 #if __BYTE_ORDER == __LITTLE_ENDIAN
-  char* ptr = reinterpret_cast<char*>(&value);
-  std::reverse(ptr, ptr + sizeof(T));
+	char* ptr = reinterpret_cast<char*>(&value);
+	std::reverse(ptr, ptr + sizeof(T));
 #endif
-  return value;
+	return value;
 }
 
 namespace ed25519 {
 
+struct CalculatorImpl : public Digest::Calculator {
+	void append(const variant_t& value) override;
+	void set_endian(endian) override;
+	endian get_endian() override;
 
-    struct CalculatorImpl: public Digest::Calculator{
+	explicit CalculatorImpl(Digest* digest) : ctx_({}), digest_(digest), endian_(little) {
+		if (htonT(47) == /* DISABLES CODE */ (47)) {
+			endian_ = big;
+		} else {
+			endian_ = little;
+		}
 
-        void append(const variant_t &value) override;
-        void set_endian(endian) override ;
-        endian get_endian() override ;
+		sha3_Init256(&ctx_);
+	}
 
-        explicit CalculatorImpl(Digest *digest): ctx_({}), digest_(digest), endian_(little){
+	~CalculatorImpl() {
+		sha3_Finalize(&ctx_, digest_->data());
+	}
 
-            if ( htonT(47) == /* DISABLES CODE */ (47) ) {
-                endian_ = big;
-            } else {
-                endian_ = little;
-            }
+private:
+	sha3_context ctx_;
+	Digest* digest_;
+	Digest::Calculator::endian endian_;
+};
 
-            sha3_Init256(&ctx_);
-        }
-
-        ~CalculatorImpl() {
-            sha3_Finalize(&ctx_, digest_->data());
-        }
-
-    private:
-        sha3_context ctx_;
-        Digest *digest_;
-        Digest::Calculator::endian endian_;
-
-    };
-
-
-    Digest::Digest(const context& handler):Data<size::digest>() {
-        CalculatorImpl calculator(this);
-        handler(calculator);
-    }
-
-    Digest::Digest():Data<size::digest>() {}
-
-    std::optional<Digest> Digest::Decode(const std::string &base58, const ed25519::ErrorHandler &error) {
-        auto s = Digest();
-        if (s.decode(base58,error)){
-            return std::make_optional(s);
-        }
-        return std::nullopt;
-    }
-
-    void CalculatorImpl::set_endian(Digest::Calculator::endian e) {
-        endian_ = e;
-    }
-
-    Digest::Calculator::endian CalculatorImpl::get_endian() {
-        return endian_;
-    }
-
-    void CalculatorImpl::append(const Digest::Calculator::variant_t &value) {
-
-        ed25519::visit([&](auto&& arg) {
-
-            using T = std::decay_t<decltype(arg)>;
-
-            if constexpr (std::is_same_v<T, bool>){
-                unsigned char data = arg ? 1 : 0;
-                sha3_Update((void *)&ctx_, &data, 1);
-            }
-
-            else if constexpr (std::is_same_v<T, unsigned char>){
-                unsigned char data = arg;
-                sha3_Update((void *)&ctx_, &data, 1);
-            }
-
-            else if constexpr (std::is_same_v<T, short int>){
-                std::vector<unsigned char> message;
-                if (endian_ == little)
-                {
-                    message.push_back(static_cast<unsigned char>(arg & 0xff));
-                    message.push_back(static_cast<unsigned char>((arg >> 8) & 0xff));
-                }
-                else
-                {
-                    message.push_back(static_cast<unsigned char>((arg >> 8) & 0xff));
-                    message.push_back(static_cast<unsigned char>(arg & 0xff));
-                }
-                sha3_Update(&ctx_, message.data(), message.size());
-            }
-
-            else if constexpr (std::is_same_v<T, int>){
-                std::vector<unsigned char> message;
-
-                if (endian_ == little)
-                {
-                    message.push_back(static_cast<unsigned char>(arg & 0xff));
-                    message.push_back(static_cast<unsigned char>((arg >> 8) & 0xff));
-                    message.push_back(static_cast<unsigned char>((arg >> 16) & 0xff));
-                    message.push_back(static_cast<unsigned char>((arg >> 24) & 0xff));
-                }
-                else
-                {
-                    message.push_back(static_cast<unsigned char>((arg >> 24) & 0xff));
-                    message.push_back(static_cast<unsigned char>((arg >> 16) & 0xff));
-                    message.push_back(static_cast<unsigned char>((arg >> 8) & 0xff));
-                    message.push_back(static_cast<unsigned char>(arg & 0xff));
-                }
-                sha3_Update(&ctx_, message.data(), message.size());
-            }
-
-            else if constexpr (std::is_same_v<T, std::string>){
-                sha3_Update(&ctx_, arg.data(), arg.size());
-            }
-
-            else if constexpr (std::is_same_v<T, std::vector<unsigned char>>){
-                sha3_Update(&ctx_, arg.data(), arg.size());
-            }
-
-            else if constexpr (std::is_same_v<T, Data<size::hash>>){
-                sha3_Update(&ctx_, arg.data(), arg.size());
-            }
-
-            else if constexpr (std::is_same_v<T, Data<size::double_hash>>){
-                sha3_Update(&ctx_, arg.data(), arg.size());
-            }
-
-
-        }, value);
-
-    }
+Digest::Digest(const context& handler) : Data<size::digest>() {
+	CalculatorImpl calculator(this);
+	handler(calculator);
 }
+
+Digest::Digest() : Data<size::digest>() {}
+
+std::optional<Digest> Digest::Decode(const std::string& base58,
+                                     const ed25519::ErrorHandler& error) {
+	auto s = Digest();
+	if (s.decode(base58, error)) {
+		return std::make_optional(s);
+	}
+	return std::nullopt;
+}
+
+void CalculatorImpl::set_endian(Digest::Calculator::endian e) {
+	endian_ = e;
+}
+
+Digest::Calculator::endian CalculatorImpl::get_endian() {
+	return endian_;
+}
+
+void CalculatorImpl::append(const Digest::Calculator::variant_t& value) {
+	ed25519::visit(
+	    [&](auto&& arg) {
+		    using T = std::decay_t<decltype(arg)>;
+
+		    if constexpr (std::is_same_v<T, bool>) {
+			    unsigned char data = arg ? 1 : 0;
+			    sha3_Update((void*)&ctx_, &data, 1);
+		    }
+
+		    else if constexpr (std::is_same_v<T, unsigned char>) {
+			    unsigned char data = arg;
+			    sha3_Update((void*)&ctx_, &data, 1);
+		    }
+
+		    else if constexpr (std::is_same_v<T, short int>) {
+			    std::vector<unsigned char> message;
+			    if (endian_ == little) {
+				    message.push_back(static_cast<unsigned char>(arg & 0xff));
+				    message.push_back(static_cast<unsigned char>((arg >> 8) & 0xff));
+			    } else {
+				    message.push_back(static_cast<unsigned char>((arg >> 8) & 0xff));
+				    message.push_back(static_cast<unsigned char>(arg & 0xff));
+			    }
+			    sha3_Update(&ctx_, message.data(), message.size());
+		    }
+
+		    else if constexpr (std::is_same_v<T, int>) {
+			    std::vector<unsigned char> message;
+
+			    if (endian_ == little) {
+				    message.push_back(static_cast<unsigned char>(arg & 0xff));
+				    message.push_back(static_cast<unsigned char>((arg >> 8) & 0xff));
+				    message.push_back(static_cast<unsigned char>((arg >> 16) & 0xff));
+				    message.push_back(static_cast<unsigned char>((arg >> 24) & 0xff));
+			    } else {
+				    message.push_back(static_cast<unsigned char>((arg >> 24) & 0xff));
+				    message.push_back(static_cast<unsigned char>((arg >> 16) & 0xff));
+				    message.push_back(static_cast<unsigned char>((arg >> 8) & 0xff));
+				    message.push_back(static_cast<unsigned char>(arg & 0xff));
+			    }
+			    sha3_Update(&ctx_, message.data(), message.size());
+		    }
+
+		    else if constexpr (std::is_same_v<T, std::string>) {
+			    sha3_Update(&ctx_, arg.data(), arg.size());
+		    }
+
+		    else if constexpr (std::is_same_v<T, std::vector<unsigned char>>) {
+			    sha3_Update(&ctx_, arg.data(), arg.size());
+		    }
+
+		    else if constexpr (std::is_same_v<T, Data<size::hash>>) {
+			    sha3_Update(&ctx_, arg.data(), arg.size());
+		    }
+
+		    else if constexpr (std::is_same_v<T, Data<size::double_hash>>) {
+			    sha3_Update(&ctx_, arg.data(), arg.size());
+		    }
+	    },
+	    value);
+}
+}  // namespace ed25519

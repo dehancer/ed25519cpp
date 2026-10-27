@@ -2,7 +2,7 @@
 #include "ge.h"
 #include "ed25519_ext.hpp"
 
-void ed25519_restore_from_private_key(unsigned char *public_key, const unsigned char *private_key) 
+void ed25519_restore_from_private_key(unsigned char *public_key, const unsigned char *private_key)
 {
     ge_p3 A;
 

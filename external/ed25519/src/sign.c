@@ -3,13 +3,11 @@
 #include "../include/ge.h"
 #include "../include/sc.h"
 
-
 void ed25519_sign(unsigned char *signature, const unsigned char *message, size_t message_len, const unsigned char *public_key, const unsigned char *private_key) {
     sha512_context hash;
     unsigned char hram[64];
     unsigned char r[64];
     ge_p3 R;
-
 
     sha512_init(&hash);
     sha512_update(&hash, private_key + 32, 32);

@@ -1,7 +1,6 @@
 #include "../include/fixedint.h"
 #include "../include/fe.h"
 
-
 /*
     helper functions
 */
@@ -22,11 +21,9 @@ static uint64_t load_4(const unsigned char *in) {
     result |= ((uint64_t) in[1]) << 8;
     result |= ((uint64_t) in[2]) << 16;
     result |= ((uint64_t) in[3]) << 24;
-    
+
     return result;
 }
-
-
 
 /*
     h = 0
@@ -45,8 +42,6 @@ void fe_0(fe h) {
     h[9] = 0;
 }
 
-
-
 /*
     h = 1
 */
@@ -63,8 +58,6 @@ void fe_1(fe h) {
     h[8] = 0;
     h[9] = 0;
 }
-
-
 
 /*
     h = f + g
@@ -109,7 +102,7 @@ void fe_add(fe h, const fe f, const fe g) {
     int32_t h7 = f7 + g7;
     int32_t h8 = f8 + g8;
     int32_t h9 = f9 + g9;
-    
+
     h[0] = h0;
     h[1] = h1;
     h[2] = h2;
@@ -121,8 +114,6 @@ void fe_add(fe h, const fe f, const fe g) {
     h[8] = h8;
     h[9] = h9;
 }
-
-
 
 /*
     Replace (f,g) with (g,g) if b == 1;
@@ -174,7 +165,7 @@ void fe_cmov(fe f, const fe g, unsigned int b) {
     x7 &= b;
     x8 &= b;
     x9 &= b;
-    
+
     f[0] = f0 ^ x0;
     f[1] = f1 ^ x1;
     f[2] = f2 ^ x2;
@@ -258,8 +249,6 @@ void fe_cswap(fe f,fe g,unsigned int b) {
     g[9] = g9 ^ x9;
 }
 
-
-
 /*
     h = f
 */
@@ -275,7 +264,7 @@ void fe_copy(fe h, const fe f) {
     int32_t f7 = f[7];
     int32_t f8 = f[8];
     int32_t f9 = f[9];
-    
+
     h[0] = f0;
     h[1] = f1;
     h[2] = f2;
@@ -287,8 +276,6 @@ void fe_copy(fe h, const fe f) {
     h[8] = f8;
     h[9] = f9;
 }
-
-
 
 /*
     Ignores top bit of h.
@@ -358,8 +345,6 @@ void fe_frombytes(fe h, const unsigned char *s) {
     h[8] = (int32_t) h8;
     h[9] = (int32_t) h9;
 }
-
-
 
 void fe_invert(fe out, const fe z) {
     fe t0;
@@ -447,8 +432,6 @@ void fe_invert(fe out, const fe z) {
     fe_mul(out, t1, t0);
 }
 
-
-
 /*
     return 1 if f is in {1,3,5,...,q-2}
     return 0 if f is in {0,2,4,...,q-1}
@@ -461,11 +444,9 @@ int fe_isnegative(const fe f) {
     unsigned char s[32];
 
     fe_tobytes(s, f);
-    
+
     return s[0] & 1;
 }
-
-
 
 /*
     return 1 if f == 0
@@ -518,8 +499,6 @@ int fe_isnonzero(const fe f) {
 
     return r != 0;
 }
-
-
 
 /*
     h = f * g
@@ -764,7 +743,6 @@ void fe_mul(fe h, const fe f, const fe g) {
     h[9] = (int32_t) h9;
 }
 
-
 /*
 h = f * 121666
 Can overlap h with f.
@@ -832,7 +810,6 @@ void fe_mul121666(fe h, fe f) {
     h[9] = (int32_t) h9;
 }
 
-
 /*
 h = -f
 
@@ -876,7 +853,6 @@ void fe_neg(fe h, const fe f) {
     h[8] = h8;
     h[9] = h9;
 }
-
 
 void fe_pow22523(fe out, const fe z) {
     fe t0;
@@ -962,7 +938,6 @@ void fe_pow22523(fe out, const fe z) {
     fe_mul(out, t0, z);
     return;
 }
-
 
 /*
 h = f * f
@@ -1125,7 +1100,6 @@ void fe_sq(fe h, const fe f) {
     h[8] = (int32_t) h8;
     h[9] = (int32_t) h9;
 }
-
 
 /*
 h = 2 * f * f
@@ -1299,7 +1273,6 @@ void fe_sq2(fe h, const fe f) {
     h[9] = (int32_t) h9;
 }
 
-
 /*
 h = f - g
 Can overlap h with f or g.
@@ -1355,8 +1328,6 @@ void fe_sub(fe h, const fe f, const fe g) {
     h[8] = h8;
     h[9] = h9;
 }
-
-
 
 /*
 Preconditions:

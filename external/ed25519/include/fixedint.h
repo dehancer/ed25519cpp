@@ -14,10 +14,9 @@
     #endif
 #endif
 
-
 #ifndef FIXEDINT_H_INCLUDED
     #define FIXEDINT_H_INCLUDED
-    
+
     #include <limits.h>
 
     /* (u)int32_t */
@@ -31,7 +30,6 @@
         #endif
     #endif
 
-
     #ifndef int32_t
         #if (LONG_MAX == 0x7fffffffL)
             typedef signed long int32_t;
@@ -41,7 +39,6 @@
             typedef signed short int32_t;
         #endif
     #endif
-
 
     /* (u)int64_t */
     #if (defined(__STDC__) && defined(__STDC_VERSION__) && __STDC__ && __STDC_VERSION__ >= 199901L)

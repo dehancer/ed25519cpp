@@ -18,7 +18,6 @@
 
 /* 'Words' here refers to uint64_t */
 
-
 #ifndef SHA3_ROTL64
 #define SHA3_ROTL64(x, y) \
 (((x) << (y)) | ((x) >> ((sizeof(uint64_t)*8) - (y))))

@@ -13,7 +13,6 @@ Windows, `/dev/urandom` on nix). If you wish to be entirely portable define
 application requires key generation you must supply your own seeding function
 (which is simply a 256 bit (32 byte) cryptographic random number generator).
 
-
 Performance
 -----------
 
@@ -30,7 +29,6 @@ speeds (running on only one a single core):
 The speeds on other machines may vary. Sign/verify times will be higher with
 longer messages. The implementation significantly benefits from 64 bit
 architectures, if possible compile as 64 bit.
-
 
 Usage
 -----
@@ -104,7 +102,6 @@ passing in `NULL` for the key you don't know. This is useful for enforcing
 randomness on a key Pair by a third party while only knowing the public key,
 among other things.  Warning: the last bit of the scalar is ignored - if
 comparing scalars make sure to clear it with `scalar[31] &= 127`.
-
 
 ```c
 void ed25519_key_exchange(unsigned char *shared_secret,

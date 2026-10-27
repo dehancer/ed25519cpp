@@ -1,11 +1,6 @@
-//
-// Created by denn on 2019-01-29.
-//
-
 // Copyright (c) 2014-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-
 
 #include "btc_base58.hpp"
 
@@ -22,7 +17,6 @@ using std::uint_least32_t;
 static const char* pszBase58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
 namespace ed25519::base58 {
-
 
     string BinToHex(const vector<unsigned char> &data) {
         // note: optimize

@@ -32,14 +32,13 @@ namespace ed25519::base58 {
      * Encode a byte vector as a base58-encoded string
      */
     string EncodeBase58(const vector<unsigned char> &vch);
-    
-    
+
     /**
      * Decode a base58-encoded string (str) that includes a checksum into a byte
      * vector (vchRet), return true if decoding is successful
      */
     bool DecodeBase58Check(const string &str, vector<unsigned char> &vchRet);
-    
+
     /**
      * Check base58-encoded string
      * @param str - base58 encoded string
@@ -47,6 +46,5 @@ namespace ed25519::base58 {
      */
     bool Base58Check(const string &str);
 }
-
 
 #endif // ED25512__BITCOIN_BASE58_H

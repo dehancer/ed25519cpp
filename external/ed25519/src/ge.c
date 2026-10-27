@@ -1,7 +1,6 @@
 #include "../include/ge.h"
 #include "../include/precomp_data.h"
 
-
 /*
 r = p + q
 */
@@ -20,7 +19,6 @@ void ge_add(ge_p1p1 *r, const ge_p3 *p, const ge_cached *q) {
     fe_add(r->Z, t0, r->T);
     fe_sub(r->T, t0, r->T);
 }
-
 
 static void slide(signed char *r, const unsigned char *a) {
     int i;
@@ -129,7 +127,6 @@ void ge_double_scalarmult_vartime(ge_p2 *r, const unsigned char *a, const ge_p3 
     }
 }
 
-
 static const fe d = {
     -10913610, 13857413, -15372611, 6949391, 114729, -8787816, -6275908, -3247719, -18696448, -12055116
 };
@@ -180,7 +177,6 @@ int ge_frombytes_negate_vartime(ge_p3 *h, const unsigned char *s) {
     return 0;
 }
 
-
 /*
 r = p + q
 */
@@ -198,7 +194,6 @@ void ge_madd(ge_p1p1 *r, const ge_p3 *p, const ge_precomp *q) {
     fe_add(r->Z, t0, r->T);
     fe_sub(r->T, t0, r->T);
 }
-
 
 /*
 r = p - q
@@ -219,7 +214,6 @@ void ge_msub(ge_p1p1 *r, const ge_p3 *p, const ge_precomp *q) {
     fe_add(r->T, t0, r->T);
 }
 
-
 /*
 r = p
 */
@@ -229,8 +223,6 @@ void ge_p1p1_to_p2(ge_p2 *r, const ge_p1p1 *p) {
     fe_mul(r->Y, p->Y, p->Z);
     fe_mul(r->Z, p->Z, p->T);
 }
-
-
 
 /*
 r = p
@@ -243,14 +235,11 @@ void ge_p1p1_to_p3(ge_p3 *r, const ge_p1p1 *p) {
     fe_mul(r->T, p->X, p->Y);
 }
 
-
 void ge_p2_0(ge_p2 *h) {
     fe_0(h->X);
     fe_1(h->Y);
     fe_1(h->Z);
 }
-
-
 
 /*
 r = 2 * p
@@ -270,14 +259,12 @@ void ge_p2_dbl(ge_p1p1 *r, const ge_p2 *p) {
     fe_sub(r->T, r->T, r->Z);
 }
 
-
 void ge_p3_0(ge_p3 *h) {
     fe_0(h->X);
     fe_1(h->Y);
     fe_1(h->Z);
     fe_0(h->T);
 }
-
 
 /*
 r = 2 * p
@@ -288,8 +275,6 @@ void ge_p3_dbl(ge_p1p1 *r, const ge_p3 *p) {
     ge_p3_to_p2(&q, p);
     ge_p2_dbl(r, &q);
 }
-
-
 
 /*
 r = p
@@ -306,7 +291,6 @@ void ge_p3_to_cached(ge_cached *r, const ge_p3 *p) {
     fe_mul(r->T2d, p->T, d2);
 }
 
-
 /*
 r = p
 */
@@ -316,7 +300,6 @@ void ge_p3_to_p2(ge_p2 *r, const ge_p3 *p) {
     fe_copy(r->Y, p->Y);
     fe_copy(r->Z, p->Z);
 }
-
 
 void ge_p3_tobytes(unsigned char *s, const ge_p3 *h) {
     fe recip;
@@ -328,7 +311,6 @@ void ge_p3_tobytes(unsigned char *s, const ge_p3 *h) {
     fe_tobytes(s, y);
     s[31] ^= fe_isnegative(x) << 7;
 }
-
 
 static unsigned char equal(signed char b, signed char c) {
     unsigned char ub = b;
@@ -351,7 +333,6 @@ static void cmov(ge_precomp *t, const ge_precomp *u, unsigned char b) {
     fe_cmov(t->yminusx, u->yminusx, b);
     fe_cmov(t->xy2d, u->xy2d, b);
 }
-
 
 static void select(ge_precomp *t, int pos, signed char b) {
     ge_precomp minust;
@@ -433,14 +414,13 @@ void ge_scalarmult_base(ge_p3 *h, const unsigned char *a) {
     }
 }
 
-
 /*
 r = p - q
 */
 
 void ge_sub(ge_p1p1 *r, const ge_p3 *p, const ge_cached *q) {
     fe t0;
-    
+
     fe_add(r->X, p->Y, p->X);
     fe_sub(r->Y, p->Y, p->X);
     fe_mul(r->Z, r->X, q->YminusX);
@@ -453,7 +433,6 @@ void ge_sub(ge_p1p1 *r, const ge_p3 *p, const ge_cached *q) {
     fe_sub(r->Z, t0, r->T);
     fe_add(r->T, t0, r->T);
 }
-
 
 void ge_tobytes(unsigned char *s, const ge_p2 *h) {
     fe recip;
